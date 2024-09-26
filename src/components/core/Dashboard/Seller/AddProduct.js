@@ -47,7 +47,7 @@ const AddProduct = () => {
           cache: 'no-store',
         }); */
   
-        let response=await fetch('http://localhost:5000/api/product/getCategories',{
+        let response=await fetch('https://ecomm-backend-1.onrender.com/api/product/getCategories',{
           headers:{
             'Content-Type':'application/json',
             Authorization:`berear ${token}`,
