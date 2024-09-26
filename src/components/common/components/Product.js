@@ -4,9 +4,9 @@ import { NavLink } from 'react-router-dom';
 const Product = ({id,name,desc,price,thumbnail}) => {
  
   return (
-    <NavLink to={`product/${id}`} className='my-2 border max-md:w-32 border-slate-700  flex flex-col w-44  hover:h-full items-center shadow-md overflow-hidden   transition-all group' >
+    <NavLink to={`product/${id}`} className='my-2 border max-md:w-36 border-slate-800  flex flex-col w-44  hover:h-full items-center shadow-md overflow-hidden   transition-all group' >
       <div className=' w-full  pb-3 '>
-      <div className=' h-48 max-md:h-40  mb-2  overflow-hidden'>
+      <div className=' h-48 max-md:h-44  mb-2  overflow-hidden'>
         {/* <img src='https://image01.realme.net/general/20230512/1683873836923.png?width=1440&height=1440&size=544990' alt='img'
           className=' w-full'/> */}
           <img src={thumbnail} alt='img'
