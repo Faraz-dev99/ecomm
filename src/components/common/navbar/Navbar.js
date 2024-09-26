@@ -62,7 +62,7 @@ const Navbar = () => {
   }
   return (
     <>{/* bg-gradient-to-r from-blue-700 to-sky-500 */}
-    <div className='   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-3 px-2 text-xl font-semibold max-sm:flex-col gap-3'>
+    <div className='   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-3 pb-6 px-2 text-xl font-semibold max-sm:flex-col gap-3'>
       <div className=' flex gap-2'>
       <div className=' md:hidden' onClick={()=>menuToggle?SetMenuToggle(false):SetMenuToggle(true)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
       <div >E-Bazar</div>
@@ -85,7 +85,7 @@ const Navbar = () => {
       
       <ul className='flex z-40 gap-4 mr-4 max-md:shadow-lg py-3 max-md:shadow-stone-5
                 00 font-semibold  w-full
-       max-md:flex-col text-slate-300 max-md:bg-slate-900  max-md:items-center max-md:absolute max-md:top-0 max-md:left-0 transition-all duration-300' style={{top:menuToggle?'-300px':'0px'}}>
+       max-md:flex-col text-slate-300 max-md:bg-slate-950  max-md:items-center max-md:absolute max-md:top-0 max-md:left-0 transition-all duration-300' style={{top:menuToggle?'-300px':'0px'}}>
         <li><NavLink to='/' style={({ isActive }) => {
           return isActive ? { color: "#45bdf8" } : {};
         }}>Home</NavLink></li>

@@ -37,9 +37,9 @@ const Home = () => {
     <div>
      { /* <div onClick={notify}>toast</div>*/ }
       <Slider />
-      <div className=' my-10 px-10'>
+      <div className='flex flex-col justify-center my-10 px-4'>
         <h1 className=' md:text-xl text-slate-200 font-bold max-md:text-lg mb-5'>All Products</h1>
-        <div className=' flex mt-3 mb-7 flex-wrap gap-4 w-full max-md:justify-center '>
+        <div className=' inline-flex mt-3 mb-7 flex-wrap gap-4 justify-center'>
           {
             products.map((e,i)=>{
               return <Product key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url}/>

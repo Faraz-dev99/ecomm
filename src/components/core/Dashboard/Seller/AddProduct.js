@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct } from '../../../../oprations/productApi'
 import ProductDetails from '../../../../pages/ProductDetails';
+import { apiConnect } from '../../../../oprations/apiConnect';
+import axios from 'axios';
 const AddProduct = () => {
+  const [categories,setCategories]=useState([]);
   const [productInformation, setProductInformation] = useState({
     name: "",
     description: "",
@@ -15,16 +18,69 @@ const AddProduct = () => {
     image2: [],
     image3: [],
     image4: [],
-    category: "66f3a3f7cce5649f953d3678",
+    category: "",
     stock: "",
   })
   const [selectedColor, setSelectedColor] = useState('red');
+
   const { token } = useSelector((state) => state.auth)
 
   const [isrequired, setIsrequired] = useState(false);
 
   const dispatch = useDispatch()
 
+  useEffect(()=>{
+    const fetchCategory=async()=>{
+      try{
+
+       /*  let posting = await fetch('http://localhost:5000/api/product/createCategory', {
+          method: 'POST',
+          body: JSON.stringify({ // Ensure the body is stringified
+            name: "laptop"
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `berear ${token}`, // Fixed the spelling from 'berear' to 'Bearer'
+            'Cache-Control': 'no-cache',
+          },
+          
+          cache: 'no-store',
+        }); */
+  
+        let response=await fetch('http://localhost:5000/api/product/getCategories',{
+          headers:{
+            'Content-Type':'application/json',
+            Authorization:`berear ${token}`,
+            'Cache-Control': 'no-cache',
+          },
+          cache: 'no-store', 
+        });
+        response=await response.json();
+        if(!response.success){
+          console.log("failed")
+          return
+        }
+        
+        let categoryId=response.categories.map((e)=>{
+          return e._id
+        })
+        console.log(categoryId)
+        setCategories(response.categories)
+        setProductInformation((prev)=>{
+          return {
+            ...prev,
+            category:response.categories[0]._id
+          }
+        })
+        console.log("checking ",productInformation.category)
+       
+      }
+      catch(err){
+        console.log("err",err.response)
+      }
+    }
+    fetchCategory();
+  },[])
 
   const handleSelectColor = (e) => {
     setSelectedColor(e.target.value);
@@ -33,6 +89,7 @@ const AddProduct = () => {
   const handleFormData = (e) => {
     let name = e.name;
     let value = e.value;
+    console.log("value is ",value)
     const file = e.files ? e.files[0] : null;
     if (file) {
       let preview = URL.createObjectURL(file);
@@ -148,8 +205,10 @@ const AddProduct = () => {
 
               <select className=' outline-none py-2 px-2 bg-transparent border border-slate-700 focus:border-sky-500 rounded-lg w-full' name='category' value={productInformation.category} onChange={(e) => handleFormData(e.target)}>
                 <option disabled>select category</option>
-                <option >mobile</option>
-                <option >laptop</option>
+                {categories.map((e,i)=>{
+                   return <option key={i} value={e._id}>{e.name}</option>
+                })}
+               
               </select>
 
               <div className=' flex flex-col gap-2'>
@@ -177,9 +236,9 @@ const AddProduct = () => {
             </div>
           </div>
           <div className=' flex flex-col gap-2'>
-            <div className='grid grid-cols-2 max-sm:grid-cols-1  gap-3'>
+            <div className='grid grid-cols-2 max-sm:grid-cols-1  gap-3 place-items-center'>
 
-              <div>
+              <div className=' w-full max-w-64'>
                 <div className=' mb-2'>thunmbnail</div>
                 <div className=' relative rounded-md overflow-hidden'>
                   <label htmlFor={!productInformation.image1[1] ? 'image1' : null} className='flex justify-center items-center bg-slate-700 h-60 w-full rounded-md'>
@@ -190,14 +249,14 @@ const AddProduct = () => {
                       </>
                     )}
                   </label>
-                  {productInformation.image1[1] && <div className=' absolute top-0 right-0 z-50 cursor-pointer' onClick={() => closeImage('image1')}><IoMdClose className=' text-white' /></div>}
+                  {productInformation.image1[1] && <div className=' absolute top-0 right-0 z-50 cursor-pointer' onClick={() => closeImage('image1')}><IoMdClose className=' text-white text-3xl' /></div>}
                   <input type='file' id='image1' name='image1' onChange={(e) => !productInformation.image1[1] ? handleFormData(e.target) : null} className=' hidden' />
                   {isrequired && !productInformation.image1[0] ? <div className=' mt-1 text-red-600 text-xs'>*product thumbnail is required</div> : null}
                 </div>
               </div>
 
 
-              <div>
+              <div className=' w-full max-w-64'>
                 <div className=' mb-2'>back image</div>
                 <div className=' relative rounded-md overflow-hidden'>
                   <label htmlFor={!productInformation.image2[1] ? 'image2' : null} className='flex justify-center items-center bg-slate-700 h-60 w-full rounded-md'>
@@ -208,14 +267,14 @@ const AddProduct = () => {
                       </>
                     )}
                   </label>
-                  {productInformation.image2[1] && (<div className=' absolute top-0 right-0 z-50 cursor-pointer' onClick={() => closeImage('image2')}><IoMdClose className=' text-white' /></div>)}
+                  {productInformation.image2[1] && (<div className=' absolute top-0 right-0 z-50 cursor-pointer' onClick={() => closeImage('image2')}><IoMdClose className=' text-white text-3xl' /></div>)}
                   <input type='file' id='image2' name='image2' onChange={(e) => !productInformation.image2[1] ? handleFormData(e.target) : null} className=' hidden' />
                   {isrequired && !productInformation.image2[0] ? <div className=' mt-1 text-red-600 text-xs'>*product back image is required</div> : null}
                 </div>
               </div>
 
 
-              <div>
+              <div className=' w-full max-w-64'>
                 <div className=' mb-2'>side1</div>
                 <div className=' relative rounded-md overflow-hidden'>
                   <label htmlFor={!productInformation.image3[1] ? 'image3' : null} className='flex justify-center items-center bg-slate-700 h-60 w-full rounded-md'>
@@ -226,13 +285,13 @@ const AddProduct = () => {
                       </>
                     )}
                   </label>
-                  {productInformation.image3[1] && <div className=' absolute top-0 right-0 z-50 cursor-pointer' onClick={() => closeImage('image3')}><IoMdClose className=' text-white' /></div>}
+                  {productInformation.image3[1] && <div className=' absolute top-0 right-0 z-50 cursor-pointer' onClick={() => closeImage('image3')}><IoMdClose className=' text-white text-3xl' /></div>}
                   <input type='file' id='image3' name='image3' onChange={(e) => !productInformation.image3[1] ? handleFormData(e.target) : null} className=' hidden' />
                   {isrequired && !productInformation.image3[0] ? <div className=' mt-1 text-red-600 text-xs'>*product side1 is required</div> : null}
                 </div>
               </div>
 
-              <div>
+              <div className=' w-full max-w-64'>
                 <div className=' mb-2'>side2</div>
                 <div className=' relative rounded-md overflow-hidden'>
                   <label htmlFor={!productInformation.image4[1] ? 'image4' : null} className='flex justify-center items-center bg-slate-700 h-60 w-full rounded-md'>
@@ -243,7 +302,7 @@ const AddProduct = () => {
                       </>
                     )}
                   </label>
-                  {productInformation.image4[1] && <div className=' absolute top-0 right-0 z-50 cursor-pointer' onClick={() => closeImage('image4')}><IoMdClose className=' text-white' /></div>}
+                  {productInformation.image4[1] && <div className=' absolute top-0 right-0 z-50 cursor-pointer' onClick={() => closeImage('image4')}><IoMdClose className=' text-white text-3xl' /></div>}
                   <input type='file' id='image4' name='image4' onChange={(e) => !productInformation.image4[1] ? handleFormData(e.target) : null} className=' hidden' />
                   {isrequired && !productInformation.image4[0] ? <div className=' mt-1 text-red-600 text-xs'>*product side2 is required</div> : null}
                 </div>

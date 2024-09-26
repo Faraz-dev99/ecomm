@@ -27,7 +27,7 @@ const ProductDetails = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await apiConnect("get", `product/${id}`);
+                const response = await apiConnect("get", `product/details/${id}`);
                 if (response) {
                     setProduct(response?.data?.product);
                     setMainImage(response?.data?.product.images[0].secure_url);

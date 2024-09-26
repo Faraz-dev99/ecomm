@@ -5,7 +5,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background:#020617;
+  background: linear-gradient(to left,rgb(2 6 23),rgb(15 23 42));
   color:white;
 }
 

@@ -96,7 +96,7 @@ const Slider = () => {
 
   return (
     <div
-      className="slider select-none flex justify-center w-full items-center max-md:h-[450px] md:h-[560px] bg-slate-950 relative"
+      className="slider select-none flex justify-center w-full items-center max-md:h-[450px] md:h-[560px] relative"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onMouseDown={handleMouseDown}
@@ -107,7 +107,7 @@ const Slider = () => {
           <div
             key={slide.id}
             style={{ transition: 'opacity 1s ease' }}
-            className={`slide absolute left-0 top-0  bg-gradient-to-r from-slate-950 to-slate-900 py-8 h-full w-full lg:text-white flex max-lg:flex-col justify-center items-center opacity-0 ${index === currentSlide ? 'opacity-100' : ''}`}
+            className={`slide absolute left-0 top-0 py-8 h-full w-full lg:text-white flex max-lg:flex-col justify-center items-center opacity-0 ${index === currentSlide ? 'opacity-100' : ''}`}
           >
             <div className="flex flex-col px-6 gap-5 rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-sky-500 md:w-full max-lg:h-2/5 slantBox">
               <h1 className="md:text-5xl font-semibold  relative md:z-50 max-md:text-4xl">{slide.name}</h1>
