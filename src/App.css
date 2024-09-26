@@ -1,38 +1,59 @@
-.App {
-  text-align: center;
+
+.active{
+    opacity:1;
+    z-index:1;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.toastBody{
+    font-size:14px;
+    background:'red';
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.spinner {
+    width: 50px; /* Size of the spinner */
+    height: 50px; /* Size of the spinner */
+    border: 8px solid transparent; /* Transparent border for the spinner background */
+    border-radius: 50%; /* Makes it circular */
+    border-top: 8px solid transparent; /* Makes the top part invisible to show gradient effect */
+    background: conic-gradient(from 0deg, transparent 0%, #0ea5e9 100%); /* Slightly darker gradient */
+    background-clip: content-box; /* Clips the background gradient to the content box */
+    animation: spin 1s linear infinite; /* Spinning animation */
   }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  
+  
+  /* Keyframes for the spinning animation */
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
   }
-  to {
-    transform: rotate(360deg);
+  
+
+.hide-horizontal-scrollbar::-webkit-scrollbar:horizontal {
+    display: none;
   }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+  }
+
+
+@media screen and (min-width:1080px){
+    .slantBox{
+        position:relative;
+        background: linear-gradient(to right,#09389e,#14a9b6);
+        transform:skew(170deg) translateX(20px);
+       
+    }
+    /* .slantBox::before{
+        content:'';
+        position:absolute;
+        top:0;
+        right:-50px;
+        height:100%;
+        width:100px;
+        background:red;
+        transform:skewX(-9deg);
+    } */
+  
 }
