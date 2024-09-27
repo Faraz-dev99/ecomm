@@ -93,13 +93,13 @@ const Navbar = () => {
         </div>
           
           {
-            usermenuToggle?<div  className=' absolute top-10 right-0 flex flex-col  gap-2 font-normal bg-slate-900/95 text-white px-3 py-2 rounded-md'>
-              <div className=' flex flex-col mb-2'>
+            usermenuToggle?<div  className=' absolute border border-slate-700 top-10 right-0 flex flex-col  gap-2 font-normal bg-slate-900/95 text-white px-4 py-2 rounded-md'>
+              <div className=' flex flex-col gap-2 mb-2'>
                 <div className=' text-sky-500'>{userloggedin.username}</div>
                 <div className=' w-full overflow-hidden text-ellipsis whitespace-nowrap'>{userloggedin.email}</div>
               </div>
-            <NavLink to='dashboard/profile' className='flex items-center gap-1 cursor-pointer py-2 px-4 bg-slate-700 bg-opacity-60 rounded-2xl'><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
-            <div className='flex ml-28 items-center gap-1 cursor-pointer' onClick={logout}><LogoutIcon style={{fontSize:"16px"}}/>Logout</div>
+            <NavLink to='dashboard/profile' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-slate-700 bg-opacity-60 rounded-2xl'><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
+            <div className='flex ml-28 my-2 items-center gap-1 cursor-pointer' onClick={logout}><LogoutIcon style={{fontSize:"16px"}}/>Logout</div>
          </div>:null
           }
         </div>:null
