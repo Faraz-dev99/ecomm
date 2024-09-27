@@ -35,7 +35,7 @@ const ProductDetails = () => {
                     let slides=response.data.product.images;
                     slides=slides.map((e,i)=>{
                         return <div key={i} className="flex  justify-center min-w-full min-h-full max-w-[300px] max-h-[300px] ">
-                        <img src={e.secure_url} alt={response.data.product.name} className=" w-full h-full max-w-[300px] max-h-[300px]  " />
+                        <img src={e.secure_url} alt={response.data.product.name} className=" w-full min-h-full max-w-[300px] max-h-[300px]  " />
                     </div>
                     })
                     setImageslides(slides)

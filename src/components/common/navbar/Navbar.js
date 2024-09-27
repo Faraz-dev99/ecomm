@@ -83,7 +83,7 @@ const Navbar = () => {
       </div>
     <nav className=' px-4 flex justify-between bg-slate-900   relative '>
       
-      <ul className='flex z-40 gap-4 mr-4  max-md:shadow-lg max-md:text-xs max-md:font-normal max-md:gap-3 py-3 max-md:shadow-stone-5
+      <ul className='flex z-40 gap-4 mr-4  max-md:shadow-lg max-md:text-sm max-md:font-normal max-md:gap-3 py-3 max-md:shadow-stone-5
                 00   w-full
        max-md:flex-col text-slate-400 max-md:bg-slate-950  max-md:items-center max-md:absolute max-md:top-0 max-md:left-0 transition-all duration-300' style={{top:menuToggle?'-300px':'0px'}}>
         <li><NavLink to='/' style={({ isActive }) => {
