@@ -60,7 +60,7 @@ const Login = () => {
   }
   return (
     <div className='flex justify-center items-center'>
-         <form className='flex flex-col justify-center mx-6 my-5  w-full max-w-96  gap-7 py-10 px-10 rounded-lg bg-slate-900' onSubmit={checkUser}>
+         <form className='flex flex-col justify-center mx-6 my-5  w-full max-w-96  gap-7 py-10 px-10 rounded-lg border border-slate-800' onSubmit={checkUser}>
       <h1 className=' text-2xl font-medium mb-4'>Login</h1>
           <input type='email' placeholder='email' name='email' className=' bg-transparent outline-none border-b border-b-slate-700 pb-3 focus:border-b-sky-500' value={userDetail.email} onChange={userInfo}/>
           {isinvalid && !userDetail.email?<div className=' text-xs font-medium text-red-600 -mt-4'>*please fill out this field</div>:null}

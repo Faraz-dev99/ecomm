@@ -114,7 +114,7 @@ const Slider = () => {
               <h2 className="text-lg md:text-slate-300 ">{slide.content}</h2>
             </div>
             <div className="flex justify-center items-center md:w-3/5 md:h-full max-md:h-[270px] max-md:w-[220px]">
-              <img src={slide.img} alt="img" className="max-md:w-full rounded-lg md:w-3/5 max-md:h-full md:h-full max-lg:h-3/5 " />
+              <img src={slide.img} alt="img" className="max-md:w-full select-none drag-none rounded-lg md:w-3/5 max-md:h-full md:h-full max-lg:h-3/5 " />
             </div>
           </div>
         ))}

@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      utilities: {
+        '.drag-none': {
+          'user-drag': 'none',
+        },
+      },
     },
     screens: {
       'mini-screen':'200px',

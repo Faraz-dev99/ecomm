@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { apiConnect } from '../oprations/apiConnect';
 import "../App.css"
+import ImageSlider from '../components/common/components/ImageSlider';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -9,7 +10,7 @@ const ProductDetails = () => {
     const [loading, setLoading] = useState(true);
     const [mainImage, setMainImage] = useState("");
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1080);
-
+    const [imageslides,setImageslides]=useState([])
 
 
 
@@ -31,6 +32,13 @@ const ProductDetails = () => {
                 if (response) {
                     setProduct(response?.data?.product);
                     setMainImage(response?.data?.product.images[0].secure_url);
+                    let slides=response.data.product.images;
+                    slides=slides.map((e,i)=>{
+                        return <div key={i} className="flex  justify-center min-w-full min-h-full max-w-[300px] max-h-[300px] ">
+                        <img src={e.secure_url} alt={response.data.product.name} className=" w-full h-full max-w-[300px] max-h-[300px]  " />
+                    </div>
+                    })
+                    setImageslides(slides)
                     setLoading(false);
                 }
             } catch (err) {
@@ -39,6 +47,7 @@ const ProductDetails = () => {
         };
         fetchProduct();
     }, [id]);
+    
 
     if (loading) {
         return (
@@ -53,19 +62,18 @@ const ProductDetails = () => {
     }
 
     return (
-        <div className=' lg:px-6  lg:py-6 flex flex-col gap-6'>
+        <div className=' lg:px-6  lg:py-6 flex flex-col gap-6 w-screen'>
             <div className='flex max-lg:flex-col  gap-6 text-slate-200'>
 
-                <div className="flex gap-2 relative lg:h-96">
+                <div className="flex max-lg:justify-center gap-2 relative lg:h-96 w-full h-full max-lg:bg-slate-950">
 
                     {isDesktop ? <>
-                        <div className="flex justify-center w-full lg:w-72 py-3 bg-gray-950">
+                        <div className="flex justify-center w-full lg:w-72 py-3 ">
                             <img src={mainImage} alt={product.name} className=" w-full max-w-96 h-72 lg:rounded-lg shadow-lg" />
                         </div>
                         <div className="flex flex-col gap-2 h-56 px-2 py-2 overflow-auto hide-scrollbar">
                             {product.images.map((image, index) => (
-                                <div className={`w-12 min-h-12  cursor-pointer border  rounded-full transition-transform duration-300 ease-in-out ${image.secure_url === mainImage ? 'border-blue-500 transform scale-110' : 'border-gray-300 hover:border-blue-500 hover:scale-105'}`}><img
-                                    key={index}
+                                <div  key={index} className={`w-12 min-h-12  cursor-pointer border  rounded-full transition-transform duration-300 ease-in-out ${image.secure_url === mainImage ? 'border-blue-500 transform scale-110' : 'border-gray-300 hover:border-blue-500 hover:scale-105'}`}><img
                                     src={image.secure_url}
                                     alt={`${product.name} ${index}`}
                                     className={`w-full h-full rounded-full`}
@@ -78,9 +86,9 @@ const ProductDetails = () => {
                             <button className=' py-2 px-3 bg-slate-700'>Add to Cart</button>
                             <button className=' py-2 px-3 bg-sky-500 lg:ml-8'>Buy Now</button>
                         </div>
-                    </> : <div className="flex justify-center w-full  py-3 bg-gray-950">
-                        <img src={mainImage} alt={product.name} className=" w-full max-w-96 h-80  " />
-                    </div>}
+                    </> :<ImageSlider slides={imageslides}/> /* <div className="flex  justify-center w-full h-full max-w-[300px] max-h-[300px] ">
+                        <img src={mainImage} alt={product.name} className=" w-full h-full max-w-[300px] max-h-[300px]  " />
+                    </div> */}
                 </div>
 
                 <div className=' w-full max-lg:px-4'>

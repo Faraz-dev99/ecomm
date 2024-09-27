@@ -8,7 +8,11 @@
     font-size:14px;
     background:'red';
 }
-
+.drag-none {
+  -webkit-user-drag: none;
+  user-drag: none;
+ 
+}
 .spinner {
     width: 50px; /* Size of the spinner */
     height: 50px; /* Size of the spinner */

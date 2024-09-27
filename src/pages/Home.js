@@ -14,7 +14,7 @@ const Home = () => {
           "get",
           "product/getProducts"
         )
-        if(response){
+        if(response.data.success){
           setProducts(response?.data?.products)
           setLoading(false);
         }
@@ -41,7 +41,7 @@ const Home = () => {
         <h1 className=' md:text-xl text-slate-200 font-bold max-md:text-lg mb-5'>All Products</h1>
         <div className=' inline-flex mt-3 mb-7 flex-wrap gap-4 justify-center'>
           {
-            products.map((e,i)=>{
+            products?.map((e,i)=>{
               return <Product key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url}/>
             })
           }

@@ -62,9 +62,9 @@ const Navbar = () => {
   }
   return (
     <>{/* bg-gradient-to-r from-blue-700 to-sky-500 */}
-    <div className='   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-3 pb-6 px-2 text-xl font-semibold max-sm:flex-col gap-3'>
+    <div className='   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-2 px-2 text-lg font-semibold max-sm:flex-col gap-3'>
       <div className=' flex gap-2'>
-      <div className=' md:hidden' onClick={()=>menuToggle?SetMenuToggle(false):SetMenuToggle(true)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
+      <div className=' md:hidden flex items-center' onClick={()=>menuToggle?SetMenuToggle(false):SetMenuToggle(true)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
       <div >E-Bazar</div>
       </div>
     
@@ -83,18 +83,18 @@ const Navbar = () => {
       </div>
     <nav className=' px-4 flex justify-between bg-slate-900   relative '>
       
-      <ul className='flex z-40 gap-4 mr-4 max-md:shadow-lg py-3 max-md:shadow-stone-5
-                00 font-semibold  w-full
-       max-md:flex-col text-slate-300 max-md:bg-slate-950  max-md:items-center max-md:absolute max-md:top-0 max-md:left-0 transition-all duration-300' style={{top:menuToggle?'-300px':'0px'}}>
+      <ul className='flex z-40 gap-4 mr-4  max-md:shadow-lg max-md:text-xs max-md:font-normal max-md:gap-3 py-3 max-md:shadow-stone-5
+                00   w-full
+       max-md:flex-col text-slate-400 max-md:bg-slate-950  max-md:items-center max-md:absolute max-md:top-0 max-md:left-0 transition-all duration-300' style={{top:menuToggle?'-300px':'0px'}}>
         <li><NavLink to='/' style={({ isActive }) => {
           return isActive ? { color: "#45bdf8" } : {};
         }}>Home</NavLink></li>
         <li className=' relative' onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)}>
 
           <div className=' flex'>
-            <div onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)} className=' cursor-pointer'>Category</div><ArrowDropDownIcon className='' style={{ fontSize: "30px", fontWeight: 'bold' }} />
+            <div onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)} className=' cursor-pointer'>Category</div><ArrowDropDownIcon className=' -ml-1 text-lg  max-md:text-xs max-md:-mt-[3px]' />
           </div>
-          {navDropDown ? <div><div className=' absolute top-5  h-5 w-5  border-l-transparent  border-r-transparent  border-b-sky-600 md:border-b-slate-300' style={{zIndex:'80', borderRightWidth: '35px', borderLeftWidth: "35px", borderBottomWidth: "30px", right: '-20px' }}></div>
+          {navDropDown ? <div><div className=' absolute top-5  h-4 w-4  border-l-transparent  border-r-transparent  border-b-sky-600 md:border-b-slate-300' style={{zIndex:'80', borderRightWidth: '35px', borderLeftWidth: "35px", borderBottomWidth: "30px", right: '-20px' }}></div>
           <ul
             className='flex flex-col gap-1 py-4  w-40 rounded-lg 
                 absolute top-8 -left-4   bg-sky-600
