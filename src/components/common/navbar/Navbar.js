@@ -18,7 +18,7 @@ const Navbar = () => {
   const [usermenuToggle,setUsermenuToggle]=useState(false);
   const [searchValue,setSearchValue]=useState('');
   const [userpfpdefault,setUserPfpDefault]=useState('p');
-  const [userloggedin,setUserloggedin]=useState(JSON.parse(sessionStorage.getItem('user')))
+  const userloggedin=JSON.parse(sessionStorage.getItem('user'))
 
 
   
