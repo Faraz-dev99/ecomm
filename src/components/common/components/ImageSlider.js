@@ -5,21 +5,24 @@ const ImageSlider = ({ slides }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [startPosition, setStartPosition] = useState(0);
   const [draggingPosition, setDraggingPosition] = useState(0);
+  const [transitionEnabled, setTransitionEnabled] = useState(true); // Control transition
   const sliderRef = useRef(null);
 
   const handleDragStart = (position) => {
     setIsDragging(true);
     setStartPosition(position);
+    setTransitionEnabled(false); // Disable transition while dragging
   };
 
   const handleDragMove = (position) => {
     if (isDragging) {
-      setDraggingPosition(position - startPosition);
+      setDraggingPosition(position - startPosition); // Track drag distance
     }
   };
 
   const handleDragEnd = () => {
     setIsDragging(false);
+    setTransitionEnabled(true); // Enable transition for smooth effect
 
     // Slide when dragged enough
     if (draggingPosition > 100 && currentIndex > 0) {
@@ -28,19 +31,21 @@ const ImageSlider = ({ slides }) => {
       if (currentIndex < slides.length - 1) {
         setCurrentIndex(currentIndex + 1);
       } else {
-        setCurrentIndex(0); // Transition to the first slide after the last slide
+        // If it's the last slide, reset to the first
+        setCurrentIndex(0);
       }
     }
-    setDraggingPosition(0); // Reset
+    setDraggingPosition(0); // Reset drag position after slide change
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
+      setTransitionEnabled(true); // Enable transition for auto slide
+      setCurrentIndex((prevIndex) =>
         prevIndex === slides.length - 1 ? 0 : prevIndex + 1
       );
     }, 4000);
-    
+
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -53,8 +58,9 @@ const ImageSlider = ({ slides }) => {
       <div
         className="flex transition-transform ease-out duration-500"
         style={{
-          transform: `translateX(${-currentIndex * 100}%)`,
-          transition: isDragging ? 'none' : 'transform 0.5s ease',
+          // Apply dragging offset while dragging
+          transform: `translateX(calc(${-currentIndex * 100}% + ${draggingPosition}px))`,
+          transition: transitionEnabled ? 'transform 0.5s ease' : 'none', // Apply transition only when needed
         }}
         onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
         onTouchMove={(e) => handleDragMove(e.touches[0].clientX)}
