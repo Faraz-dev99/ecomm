@@ -18,7 +18,8 @@ const Navbar = () => {
   const [usermenuToggle,setUsermenuToggle]=useState(false);
   const [searchValue,setSearchValue]=useState('');
   const [userpfpdefault,setUserPfpDefault]=useState('p');
-  const userloggedin=sessionStorage.getItem('user');
+  const [userloggedin,setUserloggedin]=useState(JSON.parse(sessionStorage.getItem('user')))
+
 
   
  
@@ -40,10 +41,14 @@ const Navbar = () => {
   })
 
   useEffect(()=>{
+
     if(userloggedin){
-        let pfptext=JSON.parse(userloggedin).username.slice(0, 1).toUpperCase();
+     
+        let pfptext=userloggedin.username.slice(0, 1).toUpperCase();
         setUserPfpDefault(pfptext);
-        
+       
+       
+       console.log(userloggedin)
     }
 
   },[userloggedin])
@@ -80,6 +85,25 @@ const Navbar = () => {
          </form>
         
       </div>
+      {
+        userloggedin?<div ref={usermenuRef} className=' flex justify-center text-sm items-center relative max-md:absolute max-md:top-2 max-md:right-2' style={{zIndex:'1'}}>
+        <div   className='flex cursor-pointer' onClick={()=>{usermenuToggle?setUsermenuToggle(false):setUsermenuToggle(true)}}>
+        <div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
+          >{userpfpdefault}</div>{/* <ArrowDropDownIcon className=' -ml-1' style={{ fontSize: "30px", fontWeight: 'bold' }} /> */}
+        </div>
+          
+          {
+            usermenuToggle?<div  className=' absolute top-10 right-0 flex flex-col  gap-2 font-normal bg-slate-900/95 text-white px-3 py-2 rounded-md'>
+              <div className=' flex flex-col mb-2'>
+                <div className=' text-sky-500'>{userloggedin.username}</div>
+                <div className=' w-full overflow-hidden text-ellipsis whitespace-nowrap'>{userloggedin.email}</div>
+              </div>
+            <NavLink to='dashboard/profile' className='flex items-center gap-1 cursor-pointer py-2 px-4 bg-slate-700 bg-opacity-60 rounded-2xl'><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
+            <div className='flex ml-28 items-center gap-1 cursor-pointer' onClick={logout}><LogoutIcon style={{fontSize:"16px"}}/>Logout</div>
+         </div>:null
+          }
+        </div>:null
+      }
       </div>
     <nav className=' px-4 flex justify-between bg-slate-900   relative '>
       
@@ -114,19 +138,7 @@ const Navbar = () => {
         }}>Contact Us</NavLink></li>
         <li className='flex gap-3 md:absolute md:right-5 navbarAuth max-md:items-center max-md:flex-col'>
           {
-            userloggedin?<div ref={usermenuRef} className=' flex justify-center items-center relative' style={{zIndex:'1'}}>
-            <div   className='flex cursor-pointer' onClick={()=>{usermenuToggle?setUsermenuToggle(false):setUsermenuToggle(true)}}>
-            <div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
-              >{userpfpdefault}</div><ArrowDropDownIcon className=' -ml-1' style={{ fontSize: "30px", fontWeight: 'bold' }} />
-            </div>
-              
-              {
-                usermenuToggle?<div  className=' absolute top-10 right-0 flex flex-col  gap-2 font-normal bg-sky-600 text-white px-3 py-2 rounded-md'>
-                <NavLink to='dashboard/profile' className='flex items-center gap-1 cursor-pointer'><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
-                <div className='flex items-center gap-1 cursor-pointer' onClick={logout}><LogoutIcon style={{fontSize:"16px"}}/>Logout</div>
-             </div>:null
-              }
-            </div>:<><NavLink to='/login' style={({ isActive }) => {
+            userloggedin?null:<><NavLink to='/login' style={({ isActive }) => {
           return isActive ? { color: "#45bdf8" } : {};
         }}>Login</NavLink>
         <NavLink to='/signup' style={({ isActive }) => {
