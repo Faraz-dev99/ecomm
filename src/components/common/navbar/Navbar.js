@@ -65,7 +65,7 @@ const Navbar = () => {
     <div className='   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-2 px-2 text-lg font-semibold max-sm:flex-col gap-3'>
       <div className=' flex gap-2'>
       <div className=' md:hidden flex items-center' onClick={()=>menuToggle?SetMenuToggle(false):SetMenuToggle(true)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
-      <div className=' bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-purple-400 to-slate-300 '><span className=' '>Bazaar</span><span className='  '>Seva</span></div>
+      <NavLink to={'/'} className=' bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-purple-400 to-slate-300 '><span className=' '>Bazaar</span><span className='  '>Seva</span></NavLink>
       </div>
     
         <div className=' flex flex-wrap justify-center items-center gap-2  max-md:w-full'>
