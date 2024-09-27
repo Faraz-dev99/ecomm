@@ -81,7 +81,7 @@ const ImageSlider = ({ slides }) => {
           <div
             key={index}
             onClick={() => handleDotClick(index)}
-            className={`w-2 h-2 rounded-full ${index === currentIndex ? 'bg-sky-500' : 'bg-slate-200'}`}
+            className={`w-2 h-2 rounded-full ${index === currentIndex ? 'bg-sky-500' : 'bg-slate-600'}`}
           />
         ))}
       </div>

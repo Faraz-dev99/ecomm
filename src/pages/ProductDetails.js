@@ -35,7 +35,7 @@ const ProductDetails = () => {
                     let slides=response.data.product.images;
                     slides=slides.map((e,i)=>{
                         return <div key={i} className="flex  justify-center min-w-full min-h-full max-w-[300px] max-h-[300px] ">
-                        <img src={e.secure_url} alt={response.data.product.name} className=" w-full min-h-full max-w-[300px] max-h-[300px]  " />
+                        <img src={e.secure_url} alt={response.data.product.name} className=" w-full object-contain max-w-[300px] max-h-[300px]  " />
                     </div>
                     })
                     setImageslides(slides)
@@ -65,7 +65,7 @@ const ProductDetails = () => {
         <div className=' lg:px-6  lg:py-6 flex flex-col gap-6 w-screen'>
             <div className='flex max-lg:flex-col  gap-6 text-slate-200'>
 
-                <div className="flex max-lg:justify-center gap-2 relative lg:h-96 w-full h-full max-lg:bg-slate-950">
+                <div className="flex max-lg:justify-center gap-2 relative lg:h-96 w-full h-full max-lg:bg-slate-100">
 
                     {isDesktop ? <>
                         <div className="flex justify-center w-full lg:w-72 py-3 ">
