@@ -2,7 +2,7 @@ import React, { useState,useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSignupData } from '../slices/authSlice';
 import { signup } from '../oprations/authApi';
-import { useNavigate } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [userDetail,setuserDetail]=useState({
@@ -69,9 +69,9 @@ const Signup = () => {
 
   
   return (
-    <div className='flex justify-center'>
+    <div className='flex flex-col mx-6 justify-center items-center'>
       
-      <form className='flex flex-col justify-center  mx-6 my-5 w-full max-w-96  gap-6 py-10 px-10 rounded-lg border border-slate-800' onSubmit={addUser}>
+      <form className='flex flex-col justify-center   my-3 w-full max-w-96  gap-6 py-8 px-10 rounded-lg border border-slate-800' onSubmit={addUser}>
       <h1 className=' text-2xl font-medium mb-4'>Signup</h1>
           <input type='text' placeholder='username' name='username' className=' bg-transparent outline-none border-b border-b-slate-700 pb-3 focus:border-b-sky-500' value={userDetail.username} onChange={userInfo}/>
           {isinvalid && !userDetail.username?<div className=' text-xs font-medium text-red-600 -mt-4'>*please fill out this field</div>:null}
@@ -81,7 +81,9 @@ const Signup = () => {
           {isinvalid && !userDetail.password?<div className=' text-xs font-medium text-red-600 -mt-4'>*please fill out this field</div>:null}
           <div className=' flex gap-2 text-zinc-300 text-sm font-normal'><span>want to sell products?</span><input type='checkbox' checked={seller} onChange={(e)=>setSeller(e.target.checked)}/></div>
           <button type='submit' className=' bg-sky-500 py-2 mt-4 rounded-md  font-medium'>signup</button>
+          <div className=' text-sm'>Already have an account? <NavLink to={'/login'} className=' text-sky-500'>Login</NavLink></div>
       </form>
+      <NavLink to={'/'} className=' mb-6 -mt-1'><span className=' text-sky-500 mr-2'>&larr;</span>back</NavLink>
     </div>
   )
 }
