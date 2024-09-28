@@ -120,7 +120,7 @@ const Navbar = () => {
         <li className=' relative' onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)}>
 
           <div className=' flex'>
-            <div onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)} className=' cursor-pointer'>Category</div><ArrowDropDownIcon className=' -ml-1 text-lg  max-md:text-xs max-md:-mt-[3px]' />
+            <div onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)} className=' cursor-pointer select-none'>Category</div><ArrowDropDownIcon className=' -ml-1 text-lg  max-md:text-xs max-md:-mt-[3px]' />
           </div>
           {navDropDown ? <div><div className=' absolute top-5  h-4 w-4  border-l-transparent  border-r-transparent  border-b-sky-600 md:border-b-slate-300' style={{zIndex:'80', borderRightWidth: '35px', borderLeftWidth: "35px", borderBottomWidth: "30px", right: '-20px' }}></div>
           <ul
