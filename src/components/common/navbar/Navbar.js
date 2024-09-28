@@ -71,7 +71,7 @@ const Navbar = () => {
   }
   return (
     <>{/* bg-gradient-to-r from-blue-700 to-sky-500 */}
-    <div className='   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-2 px-2 pt-4 text-lg font-semibold max-sm:flex-col gap-3'>
+    <div className=' select-none   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-2 px-2 pt-4 text-lg font-semibold max-sm:flex-col gap-3'>
       <div className=' flex gap-2'>
       <div className=' md:hidden flex items-center' onClick={()=>SetMenuToggle(!menuToggle)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
       <NavLink to={'/'} className='  '><span className=' '>Bazaar</span><span className=' text-sky-500'>Seva</span></NavLink>
