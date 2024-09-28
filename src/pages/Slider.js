@@ -107,11 +107,12 @@ const Slider = () => {
           <div
             key={slide.id}
             style={{ transition: 'opacity 1s ease' }}
-            className={`slide absolute left-0 top-0 py-8 h-full w-full lg:text-white flex max-lg:flex-col justify-center items-center opacity-0 ${index === currentSlide ? 'opacity-100' : ''}`}
+            className={`slide absolute left-0 top-0 py-8 gap-4 h-full w-full lg:text-white flex max-lg:flex-col justify-center items-center opacity-0 ${index === currentSlide ? 'opacity-100' : ''}`}
           >
-            <div className="flex flex-col px-6 gap-5 rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-sky-500 md:w-full max-lg:h-2/5 slantBox">
+            <div className="flex flex-col px-6 gap-2 rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-sky-500 md:w-full max-lg:h-2/5 slantBox">
               <h1 className="md:text-5xl font-semibold  relative md:z-50 max-md:text-4xl">{slide.name}</h1>
-              <h2 className="text-lg md:text-slate-300 ">{slide.content}</h2>
+              <h2 className="text-base max-md:font-light md:text-slate-300 ">{slide.content}</h2>
+              <button className=' px-2 py-2 mt-2 bg-sky-500 lg:bg-slate-200 lg:text-slate-900 rounded-md'>Buy Now</button>
             </div>
             <div className="flex justify-center items-center md:w-3/5 md:h-full max-md:h-[270px] max-md:w-[220px]">
               <img src={slide.img} alt="img" className="max-md:w-full select-none drag-none rounded-lg md:w-3/5 max-md:h-full md:h-full max-lg:h-3/5 " />
