@@ -40,6 +40,8 @@ const Navbar = () => {
     }
   })
 
+
+
   useEffect(()=>{
 
     if(userloggedin){
@@ -50,16 +52,18 @@ const Navbar = () => {
        
        console.log(userloggedin)
     }
+    setNavDropDown(false)
 
   },[userloggedin])
   
   const dropdown = () => {
     navDropDown ? setNavDropDown(false) : setNavDropDown(true);
   }
-
+  
   const logout=()=>{
     const toastId = toast.loading('Loading...');
     sessionStorage.clear();
+    SetMenuToggle(true)
     toast.success('logged out successfully', {
       id: toastId,
     });
@@ -69,7 +73,7 @@ const Navbar = () => {
     <>{/* bg-gradient-to-r from-blue-700 to-sky-500 */}
     <div className='   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-2 px-2 pt-4 text-lg font-semibold max-sm:flex-col gap-3'>
       <div className=' flex gap-2'>
-      <div className=' md:hidden flex items-center' onClick={()=>menuToggle?SetMenuToggle(false):SetMenuToggle(true)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
+      <div className=' md:hidden flex items-center' onClick={()=>SetMenuToggle(!menuToggle)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
       <NavLink to={'/'} className='  '><span className=' '>Bazaar</span><span className=' text-sky-500'>Seva</span></NavLink>
       </div>
     
@@ -87,7 +91,7 @@ const Navbar = () => {
       </div>
       {
         userloggedin?<div ref={usermenuRef} className=' flex justify-center text-sm items-center relative max-md:absolute max-md:top-4 max-md:right-2' style={{zIndex:'1'}}>
-        <div   className='flex cursor-pointer' onClick={()=>{usermenuToggle?setUsermenuToggle(false):setUsermenuToggle(true)}}>
+        <div   className='flex cursor-pointer' onClick={()=>{setUsermenuToggle(!usermenuToggle)}}>
         <div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
           >{userpfpdefault}</div>{/* <ArrowDropDownIcon className=' -ml-1' style={{ fontSize: "30px", fontWeight: 'bold' }} /> */}
         </div>
@@ -98,7 +102,7 @@ const Navbar = () => {
                 <div className=' text-sky-500'>{userloggedin.username}</div>
                 <div className=' w-full overflow-hidden text-ellipsis whitespace-nowrap'>{userloggedin.email}</div>
               </div>
-            <NavLink to='dashboard/profile' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-slate-700 bg-opacity-60 rounded-2xl'><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
+            <NavLink to='dashboard/profile' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-slate-700 bg-opacity-60 rounded-2xl'  onClick={() => { SetMenuToggle(true); setUsermenuToggle(false);}}><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
             <div className='flex ml-40 my-2 items-center gap-1 cursor-pointer' onClick={logout}><LogoutIcon style={{fontSize:"16px"}}/>Logout</div>
          </div>:null
           }
@@ -107,12 +111,12 @@ const Navbar = () => {
       </div>
     <nav className=' px-4 flex justify-between bg-slate-900   relative '>
       
-      <ul className='flex z-40 gap-4 mr-4  max-md:shadow-lg max-md:text-sm max-md:font-normal max-md:gap-3 py-3 max-md:shadow-stone-5
+      <ul className='flex z-40 gap-4 mr-4  max-md:shadow-lg max-md:text-sm max-md:font-normal max-md:gap-4 py-4 max-md:shadow-stone-5
                 00   w-full
-       max-md:flex-col text-slate-400 max-md:bg-slate-950  max-md:items-center max-md:absolute max-md:top-0 max-md:left-0 transition-all duration-300' style={{top:menuToggle?'-300px':'0px'}}>
+       max-md:flex-col text-slate-400 max-md:bg-slate-950/90  max-md:items-center max-md:absolute max-md:top-0 max-md:left-0 transition-all duration-300' style={{top:menuToggle?'-300px':'0px'}}>
         <li><NavLink to='/' style={({ isActive }) => {
           return isActive ? { color: "#45bdf8" } : {};
-        }}>Home</NavLink></li>
+        }} onClick={() => SetMenuToggle(true)}>Home</NavLink></li>
         <li className=' relative' onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)}>
 
           <div className=' flex'>
@@ -123,27 +127,27 @@ const Navbar = () => {
             className='flex flex-col gap-1 py-4  w-40 rounded-lg 
                 absolute top-8 -left-4   bg-sky-600
                 text-white opacity-0 md:bg-slate-200 md:text-slate-800' style={{zIndex:'80',transition:'all 2s ease',opacity:navDropDown?1:0}}>
-            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4'><li>mobile</li></NavLink>
-            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4'><li>cloths</li></NavLink>
-            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4'><li>devices</li></NavLink>
-            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4'><li>furniture</li></NavLink>
+            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4' onClick={() => SetMenuToggle(true)}><li>mobile</li></NavLink>
+            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4' onClick={() => SetMenuToggle(true)}><li>cloths</li></NavLink>
+            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4' onClick={() => SetMenuToggle(true)}><li>devices</li></NavLink>
+            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4' onClick={() => SetMenuToggle(true)}><li>furniture</li></NavLink>
           </ul></div> : null}
 
         </li>
         <li><NavLink to='/about' style={({ isActive }) => {
           return isActive ? { color: "#45bdf8" } : {};
-        }}>About Us</NavLink></li>
+        }} onClick={() => SetMenuToggle(true)}>About Us</NavLink></li>
         <li><NavLink to='/contact' style={({ isActive }) => {
           return isActive ? { color: "#45bdf8" } : {};
-        }}>Contact Us</NavLink></li>
+        }} onClick={() => SetMenuToggle(true)}>Contact Us</NavLink></li>
         <li className='flex gap-3 md:absolute md:right-5 navbarAuth max-md:items-center max-md:flex-col'>
           {
             userloggedin?null:<><NavLink to='/login' style={({ isActive }) => {
           return isActive ? { color: "#45bdf8" } : {};
-        }}>Login</NavLink>
+        }} onClick={() => SetMenuToggle(true)}>Login</NavLink>
         <NavLink to='/signup' style={({ isActive }) => {
           return isActive ? { color: "#45bdf8" } : {};
-        }}>Signup</NavLink></>
+        }} onClick={() => SetMenuToggle(true)}>Signup</NavLink></>
           }
         
         
