@@ -15,7 +15,7 @@ const Product = ({id,name,desc,price,thumbnail}) => {
           <img src={thumbnail} alt='img'
           className=' w-4/5  h-4/5 absolute top-1/2  left-1/2  -translate-x-1/2 -translate-y-1/2 object-contain opacity-100 transition-all group-hover:w-full group-hover:h-full group-hover:object-cover'/>
           <div className=" absolute w-full h-full grid place-items-center  bg-black opacity-0 bg-black/50 group-hover:opacity-100">
-          <PiShoppingCartSimpleFill className=' lg:text-3xl md:text-2xl max-md:text-xl'/>
+          <PiShoppingCartSimpleFill className=' lg:text-3xl md:text-2xl max-md:text-2xl'/>
           </div>
           
       </div>
