@@ -124,7 +124,7 @@ const ProductDetails = () => {
                             {product.attributes.type?<div className=' flex flex-col gap-3 mt-4'>{product.attributes.type.map((e,id)=>{
                                  return <div key={id} className='flex items-center gap-4'>
                                     <div>{e.name}:</div>
-                                    <div className=' flex gap-2'>{e.values.map((value,i)=>{
+                                    <div className=' flex flex-wrap gap-2'>{e.values.map((value,i)=>{
                                         return <div key={i} className=' py-2 px-2 border border-slate-800'>{value}</div>
                                     })}</div>
                                  </div>
