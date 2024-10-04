@@ -38,11 +38,11 @@ const Home = () => {
      { /* <div onClick={notify}>toast</div>*/ }
       <Slider />
       <div className='flex flex-col justify-center my-10 px-4'>
-        <h1 className=' md:text-xl text-slate-200 font-bold max-md:text-lg mb-5'>All Products</h1>
+        <h1 className='  text-slate-200 font-bold md:text-2xl lg:text-3xl max-md:text-xl  mb-6'>All Products</h1>
         <div className=' flex flex-wrap w-full'>
           {
             products?.map((e,i)=>{
-              return <Product key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url } />
+              return e.status==="Published" && <Product key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url } />
             })
           }
         </div>

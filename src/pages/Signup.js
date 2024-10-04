@@ -81,7 +81,7 @@ const Signup = () => {
           {isinvalid && !userDetail.password?<div className=' text-xs font-medium text-red-600 -mt-4'>*please fill out this field</div>:null}
           <div className=' flex gap-2 text-zinc-300 text-sm font-normal'><span>want to sell products?</span><input type='checkbox' checked={seller} onChange={(e)=>setSeller(e.target.checked)}/></div>
           <button type='submit' className=' bg-sky-500 py-2 mt-4 rounded-md  font-medium'>signup</button>
-          <div className=' text-sm'>Already have an account? <NavLink to={'/login'} className=' text-sky-500'>Login</NavLink></div>
+          <div className=' flex gap-2 text-[13px]'>Already have an account? <NavLink to={'/login'} className=' text-sky-500'>Login</NavLink></div>
       </form>
       <NavLink to={'/'} className=' mb-6 -mt-1'><span className=' text-sky-500 mr-2'>&larr;</span>back</NavLink>
     </div>

@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct } from '../../../../oprations/productApi'
-import ProductDetails from '../../../../pages/ProductDetails';
-import { apiConnect } from '../../../../oprations/apiConnect';
+import { addProduct } from '../../../../../../oprations/productApi'
+import ProductDetails from '../../../../../../pages/ProductDetails';
+import { apiConnect } from '../../../../../../oprations/apiConnect';
+
 import axios from 'axios';
-const AddProduct = () => {
+import { setProduct,setProductTypeRedux,setStep } from '../../../../../../slices/productSlice';
+import PublishSteps from '../../PublishSteps';
+const ProductForm = () => {
   const [categories,setCategories]=useState([]);
   const [productInformation, setProductInformation] = useState({
     name: "",
@@ -21,6 +24,7 @@ const AddProduct = () => {
     category: "",
     stock: "",
   })
+  const [productType,setProductType]=useState("simple-product");
   const [selectedColor, setSelectedColor] = useState('red');
 
   const { token } = useSelector((state) => state.auth)
@@ -139,7 +143,7 @@ const AddProduct = () => {
     })
   }
 
-  const dispatchProduct = (e) => {
+  const dispatchProduct =async (e) => {
     e.preventDefault();
 
     if (!productInformation.name || !productInformation.description || !productInformation.brand || !productInformation.price || !productInformation.color || !productInformation.image1 || !productInformation.image2 || !productInformation.image3 || !productInformation.image4 || !productInformation.category || !productInformation.stock) {
@@ -166,14 +170,35 @@ const AddProduct = () => {
 
 
 
-
-    dispatch(addProduct(formData, token, dispatch))
-
+    const result=await addProduct(formData, token)
+    dispatch(setProduct(result))
+    dispatch(setProductTypeRedux(productType))
+    dispatch(setStep(2));
   }
+
+  const handleProductType=(e)=>{
+       const value=e.target.value;
+       setProductType(value);
+       
+  }
+
+  useEffect(()=>{
+    dispatch(setProductTypeRedux(productType));
+  },[productType])
+ 
   return (
     <div>
       <div>
-        <h2 className=' text-slate-300 font-semibold mb-6'>Product Information</h2>
+      
+        <h2 className=' text-slate-300 text-lg font-semibold mb-6'>Product Information</h2>
+        
+        <div className='flex flex-wrap gap-2 items-center'>
+          <div>product type:</div>
+          <select className='outline-none py-2 px-2 text-slate-600 bg-transparent  border border-slate-700 focus:border-sky-500 rounded-lg' value={productType} onChange={handleProductType}>
+            <option value={"simple-product"}>simple product</option>
+            <option value={"property-product"}>property product</option>
+          </select>
+        </div>
         <form className=' flex flex-col gap-3 my-2 text-sm' style={{ maxWidth: '548px' }}>
           <div className=' flex flex-col'>
             <input placeholder='Product Name' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-sky-500  py-3 px-2 outline-none' name='name' value={productInformation.name} onChange={(e) => handleFormData(e.target)} />
@@ -314,11 +339,15 @@ const AddProduct = () => {
 
 
           </div>
-          <button className=' py-2 px-2 bg-sky-500 mt-4 text-white' onClick={dispatchProduct}>Add</button>
+          <div className=' flex justify-end w-full my-4'>
+          <button className=' py-2 px-6 bg-sky-500 text-slate-950  rounded-lg' onClick={dispatchProduct}>Next</button>
+          
+          </div>
+         
         </form>
       </div>
     </div>
   )
 }
 
-export default AddProduct
+export default ProductForm

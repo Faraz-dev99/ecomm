@@ -11,6 +11,17 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const store=configureStore({
         reducer:rootReducer,
+        middleware: (getDefaultMiddleware) =>
+          getDefaultMiddleware({
+            serializableCheck: {
+              // Ignore these action types
+              ignoredActions: ['product/setProduct'],
+              // Ignore these field paths in all actions
+              ignoredActionPaths: ['payload'],
+              // Ignore these paths in the state
+              ignoredPaths: ['product.product'],
+            },
+          }),
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

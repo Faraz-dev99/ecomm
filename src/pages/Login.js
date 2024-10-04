@@ -67,7 +67,7 @@ const Login = () => {
           <input type='password' placeholder='password' name='password' className=' bg-transparent outline-none border-b border-b-slate-700 pb-3 focus:border-b-sky-500' value={userDetail.password} onChange={userInfo}/>
           {isinvalid && !userDetail.password?<div className=' text-xs font-medium text-red-600 -mt-4'>*please fill out this field</div>:null}
           <button type='submit' className='bg-sky-500 mt-4 py-2 rounded-md font-medium'>login</button>
-          <div className=' text-sm'>Don't have account? <NavLink to={'/signup'} className=' text-sky-500'>Sign up</NavLink></div>
+          <div className=' flex gap-2 text-[13px]'>Don't have account? <NavLink to={'/signup'} className=' text-sky-500'>Sign up</NavLink></div>
       </form>
       <NavLink to={'/'}><span className=' text-sky-500 mr-2'>&larr;</span>back</NavLink>
     </div>

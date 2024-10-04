@@ -11,9 +11,10 @@ import { useEffect, useState } from 'react';
 import WarningIcon from '@mui/icons-material/Warning';
 import { useDispatch } from 'react-redux';
 import { getUserDetails } from './oprations/userApi.js';
-import AddProduct from './components/core/Dashboard/Seller/AddProduct.js';
+import AddProduct from './components/core/Dashboard/Seller/AddProduct';
 import AdminDashboard from './components/core/Dashboard/Admin/AdminDashboard.js';
 import ProductDetails from './pages/ProductDetails.js';
+import AddAttributes from './components/core/Dashboard/Seller/AddAttributes.js';
 
 
 
@@ -46,7 +47,12 @@ function App() {
           <Route element={<PrivateComponents />}>
             <Route path='/dashboard' element={<Dashboard />} >
             
-            {userDetails.role==="Admin"||userDetails.role==="Seller"?<Route path='/dashboard/add-product' element={<AddProduct/>}/>:null}
+            {userDetails.role==="Admin"||userDetails.role==="Seller"?
+            <>
+            <Route path='/dashboard/add-product' element={<AddProduct/>}/>
+            <Route path='/dashboard/edit-products' element={<AddAttributes/>}/>
+            </>
+            :null}
               
              {userDetails.role==="Admin"?<Route path='/dashboard/admin' element={<AdminDashboard/>}/>:null} 
               <Route path='/dashboard/profile' element={<Profile />} />
