@@ -79,7 +79,7 @@ function App() {
 
           },
           success: {
-            duration: 3000,
+            duration: 4000,
             iconTheme: {
               primary: 'rgba(12,74,110,.9)',
             },
@@ -88,24 +88,24 @@ function App() {
             }
           },
           error: {
-            duration: 3000,
+            duration: 4000,
             style: {
-              background: 'rgba(255, 3, 3,.8)',
+              background: 'rgba(255, 3, 3,.5)',
               color: 'white',
             },
             icon: <WarningIcon />,
             iconTheme: {
-              primary: 'rgba(248, 248, 248, 0.8)',
+              primary: 'rgba(248, 248, 248, 0.5)',
               secondary: 'black'
             }
 
           },
           loading: {
             iconTheme: {
-              secondary: 'rgb(61, 17, 1)'
+              secondary: 'black'
             },
             style: {
-              color: 'rgb(61, 17, 1)',
+              color: 'black',
               background: 'white',
 
             },
