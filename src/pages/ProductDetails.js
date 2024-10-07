@@ -16,6 +16,7 @@ const ProductDetails = () => {
     const [imageslides, setImageslides] = useState([])
     const {cart,totalCartItems}=useSelector((state)=>state.cart)
     const {userDetails}=useSelector((state=>state.user))
+    const userloggedin=sessionStorage.getItem("user") || null;
     const dispatch=useDispatch();
 
 
@@ -55,7 +56,7 @@ const ProductDetails = () => {
     }, [id]);
 
     const addToCart=()=>{
-        if(userDetails.role!=="Admin"){
+        if(userDetails.role!=="Admin" && userloggedin){
             const cartProductExist=cart.some(e=>e._id===product._id)
             if(cartProductExist){
              toast.error('Product already in the cart!');
@@ -65,6 +66,10 @@ const ProductDetails = () => {
             dispatch(setCart(updatecart))
             localStorage.setItem("cart",JSON.stringify(updatecart))
             toast.success("Product addedd successfully")
+        }
+        else if(!userloggedin){
+            toast.error("you're not logged in");
+             return;
         }
         else{
             toast.error("you're adming you can't add to cart");

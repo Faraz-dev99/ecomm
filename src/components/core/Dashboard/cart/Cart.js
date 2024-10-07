@@ -23,10 +23,10 @@ const Cart = () => {
         <div className=' min-w-96 text-xl font-medium self-start'>YOUR CART</div>
         {
           cart.length > 0 ? <div className=' flex flex-wrap gap-8'>
-            <div className=' flex flex-col gap-8 py-4 px-2 bg-slate-900 max-lg:w-full md:min-w-[600px]'>
+            <div className=' flex flex-col gap-8 py-4 px-4 bg-slate-900 max-lg:w-full md:min-w-[600px]'>
               {
                 cart.map((item, index, arr) => {
-                  return <div className=' flex gap-3 w-full relative'>
+                  return <div className=' flex max-476:justify-between gap-4 w-full relative'>
                     <div className=' h-full flex justify-center items-center'>
                       <div className=' h-24 w-32 flex justify-center items-center bg-white'><img className=' w-full h-full object-contain' src={item.images[0].secure_url} /></div>
                     </div>
@@ -60,7 +60,7 @@ const Cart = () => {
                 })
               }
             </div>
-            <div className=' flex flex-col gap-4 py-4 px-2 bg-slate-900 max-lg:w-full max-h-[150px]'>
+            <div className=' flex flex-col gap-5 py-6 px-5 bg-slate-900 max-lg:w-full max-h-[170px]'>
               <div className=' text-lg font-semibold'>Order Summary ( {cart.length} item )</div>
               <div className='flex justify-between text-sm font-extralight'>
                 <div>Total</div><div>₹{cart.reduce((total, item) => total + parseFloat(item.price), 0)}</div>
