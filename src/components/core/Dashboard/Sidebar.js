@@ -19,7 +19,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className=' flex flex-col gap-3  bg-slate-900 max-sm:min-h-[calc(100vh-93.6px)]  max-md:min-h-[calc(100vh-53.6px)] md:min-h-[calc(100vh-109.2px)]  text-slate-400 px-3 pr-5 py-4 max-md:min-w-52 md:min-w-72 overflow-auto max-lg:relative' style={{ zIndex: '20' }}>
+    <div className=' flex flex-col gap-3  bg-slate-900 max-sm:min-h-[calc(100vh-93.6px)]  max-md:min-h-[calc(100vh-53.6px)] md:min-h-[calc(100vh-109.2px)]  text-slate-400 px-3 pr-5 py-4 max-md:min-w-56 md:min-w-80 overflow-auto max-lg:relative' style={{ zIndex: '20' }}>
       {/* <div className=' text-lg font-semibold'>E-bazar</div> */}
       <div className=' flex flex-col gap-3'>
         <h3 className=' font-semibold text-xs text-slate-700'>MENU</h3>

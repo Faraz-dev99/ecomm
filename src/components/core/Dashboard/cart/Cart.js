@@ -18,9 +18,9 @@ const Cart = () => {
     }
   }
   return (
-    <div className=' flex justify-center py-4 px-4 w-full min-h-full absolute top-0 left-0'>
-      <div className={` flex flex-col gap-8 items-center relative  w-full mt-6  max-w-[1000px]`} style={{display:"flex",justifyContent:cart.length>0?"none":"center"}}>
-        <div className=' min-w-96 text-xl font-medium absolute top-0 left-0'>YOUR CART</div>
+    <div className=' flex  justify-center py-4 px-4 w-full min-h-full absolute top-0 left-0'>
+      <div className={` flex flex-col gap-8 items-center relative  w-full mt-8  max-w-[1000px]`} style={{display:"flex",justifyContent:cart.length>0?"none":"center"}}>
+        <div className='  text-xl font-medium absolute top-0 left-0'>YOUR CART</div>
         {
           cart.length > 0 ? <div className=' flex flex-wrap gap-8 mt-12'>
             <div className=' flex flex-col gap-8 py-4 px-4 bg-slate-900 max-lg:w-full md:min-w-[600px]'>
