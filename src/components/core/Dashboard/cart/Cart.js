@@ -18,12 +18,12 @@ const Cart = () => {
     }
   }
   return (
-    <div className=' flex  justify-center py-4 px-2 w-full min-h-full absolute top-0 left-0'>
+    <div className=' flex  justify-center py-4 px-3 w-full min-h-full absolute top-0 left-0'>
       <div className={` flex flex-col gap-8 items-center relative  w-full mt-8  max-w-[1000px]`} style={{display:"flex",justifyContent:cart.length>0?"none":"center"}}>
         <div className='  text-xl font-medium absolute top-0 left-0'>YOUR CART</div>
         {
           cart.length > 0 ? <div className=' flex flex-wrap gap-8 mt-12'>
-            <div className=' flex flex-col gap-8 py-4 px-4  max-lg:w-full md:min-w-[600px]'>
+            <div className=' flex flex-col gap-8 py-4 px-[1.5px]  max-lg:w-full md:min-w-[600px]'>
               {
                 cart.map((item, index, arr) => {
                   return <div className=' flex  pb-10 border-b border-b-sky-500 gap-6 max-476:gap-3 w-full relative'>
@@ -31,10 +31,10 @@ const Cart = () => {
                       <div className=' h-24 w-32 max-476:h-16 max-476:w-20 flex justify-center items-center bg-white'><img className=' w-full h-full object-contain' src={item.images[0].secure_url} /></div>
                     </div>
 
-                    <div className=' flex flex-col gap-1 max-md:gap-0'>
+                    <div className=' flex flex-col gap-1 max-md:gap-[1px]'>
                       <div className=' max-476:text-xs'>{item.name}</div>
-                      <div className=' text-slate-400 text-xs max-476:text-[8px]'>{item.brand}</div>
-                      <div className=' text-lg max-476:text-xs sm:hidden font-semibold text-sky-500'>₹{item.price}</div>
+                      <div className=' text-slate-400 text-xs max-476:text-[9px]'>{item.brand}</div>
+                      <div className=' text-lg max-476:text-sm 476:hidden font-semibold text-sky-500'>₹{item.price}</div>
 
                       <div className='flex  gap-2 mt-5 max-476:mt-2'>
                        
@@ -50,10 +50,10 @@ const Cart = () => {
 
                           </select>
                      
-                        <button className=' px-2 rounded-md border border-sky-500 text-sky-500 text-xs text-[8px] ' onClick={() => removeItemCart(item._id)}>Remove</button>
+                        <button className=' px-2 rounded-md border border-sky-500 text-sky-500 text-xs text-[7px] ' onClick={() => removeItemCart(item._id)}>Remove</button>
                       </div>
                     </div>
-                    <div className=' max-sm:hidden absolute right-0'>
+                    <div className=' max-476:hidden absolute right-0'>
                       <div className=' text-xl font-semibold text-sky-500'>₹{item.price}</div>
                     </div>
                   </div>
