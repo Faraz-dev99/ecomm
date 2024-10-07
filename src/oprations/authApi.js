@@ -100,6 +100,7 @@ const adduser = (otp, token, navigate,dispatch) => {
                     id: toastId,
                 });
                 dispatch(setToken(result.token));
+                dispatch(getUserDetails(result.token,dispatch))
                 navigate('/')
             }
             else {
@@ -113,6 +114,7 @@ const adduser = (otp, token, navigate,dispatch) => {
 
         }
         catch (err) {
+            console.log(err)
             toast.error('something went wrong', {
                 id: toastId,
             });

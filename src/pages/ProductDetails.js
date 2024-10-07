@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { json, useParams } from 'react-router-dom';
 import { apiConnect } from '../oprations/apiConnect';
+import toast from "react-hot-toast";
 import "../App.css"
 import ImageSlider from '../components/common/components/ImageSlider';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCart,settotalCartItems } from '../slices/cartSlice';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -11,7 +14,9 @@ const ProductDetails = () => {
     const [mainImage, setMainImage] = useState("");
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1080);
     const [imageslides, setImageslides] = useState([])
-
+    const {cart,totalCartItems}=useSelector((state)=>state.cart)
+    const {userDetails}=useSelector((state=>state.user))
+    const dispatch=useDispatch();
 
 
 
@@ -20,7 +25,7 @@ const ProductDetails = () => {
         const handleResize = () => {
             setIsDesktop(window.innerWidth >= 1080);
         };
-
+       
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
@@ -40,6 +45,7 @@ const ProductDetails = () => {
                     })
                     setImageslides(slides)
                     setLoading(false);
+            
                 }
             } catch (err) {
                 console.log(err);
@@ -48,7 +54,24 @@ const ProductDetails = () => {
         fetchProduct();
     }, [id]);
 
+    const addToCart=()=>{
+        if(userDetails.role!=="Admin"){
+            const cartProductExist=cart.some(e=>e._id===product._id)
+            if(cartProductExist){
+             toast.error('Product already in the cart!');
+             return;
+            }
+            const updatecart=[...cart,product];
+            dispatch(setCart(updatecart))
+            localStorage.setItem("cart",JSON.stringify(updatecart))
+            toast.success("Product addedd successfully")
+        }
+        else{
+            toast.error("you're adming you can't add to cart");
+             return;
+        }
 
+    }
     if (loading) {
         return (
             <div className='flex items-center justify-center absolute  top-0 left-0 h-screen w-full bg-slate-950' style={{ zIndex: 1000 }}>
@@ -73,7 +96,7 @@ const ProductDetails = () => {
                         </div>
                         <div className="flex flex-col gap-2 h-56 px-2 py-2 overflow-auto hide-scrollbar">
                             {product.images.map((image, index) => (
-                                <div key={index} className={`w-12 min-h-12  cursor-pointer border  rounded-full transition-transform duration-300 ease-in-out ${image.secure_url === mainImage ? 'border-blue-500 transform scale-110' : 'border-gray-300 hover:border-blue-500 hover:scale-105'}`}><img
+                                <div key={image.secure_url} className={`w-12 min-h-12  cursor-pointer border  rounded-full transition-transform duration-300 ease-in-out ${image.secure_url === mainImage ? 'border-blue-500 transform scale-110' : 'border-gray-300 hover:border-blue-500 hover:scale-105'}`}><img
                                     src={image.secure_url}
                                     alt={`${product.name} ${index}`}
                                     className={`w-full h-full rounded-full`}
@@ -83,7 +106,7 @@ const ProductDetails = () => {
                             ))}
                         </div>
                         <div className='flex w-full gap-4 absolute max-lg:sticky  bottom-0 left-0 '>
-                            <button className=' py-2 px-3 bg-slate-700'>Add to Cart</button>
+                            <button className=' py-2 px-3 bg-slate-700' onClick={addToCart}>Add to Cart</button>
                             <button className=' py-2 px-3 bg-sky-500 lg:ml-8'>Buy Now</button>
                         </div>
                     </> : <ImageSlider slides={imageslides} /> /* <div className="flex  justify-center w-full h-full max-w-[300px] max-h-[300px] ">
@@ -108,7 +131,7 @@ const ProductDetails = () => {
                                 <h3 className=' text-slate-500'>Colour:</h3>
                                 <div className='flex gap-2'>
                                     {product.color.map((e, i) => {
-                                        return <div key={i} className={` rounded-full h-5 w-5`} style={{ background: e.name }}></div>
+                                        return <div key={e.name+i} className={` rounded-full h-5 w-5`} style={{ background: e.name }}></div>
                                     })}
                                 </div>
 
@@ -125,10 +148,10 @@ const ProductDetails = () => {
 
                         </div>
 
-                        {product.attributes.type ? <div key={id} className=' flex-col gap-4 mt-8 mb-4 '>
+                        {product.attributes.type ? <div  className=' flex-col gap-4 mt-8 mb-4 '>
                             <div className=' text-2xl font-semibold'> Additional Details</div>
                             <div className=' flex flex-col gap-6 mt-4 border border-slate-800 py-6 px-3 max-w-[600px] text-slate-300 '>{product.attributes.type.map((e, id) => {
-                                return <div className='flex items-center gap-4 text-sm'>
+                                return <div key={id} className='flex items-center gap-4 text-sm'>
                                     <div className=' text-slate-400'>{e.name}:</div>
                                     <div className=' flex flex-wrap gap-2'>{e.values.map((value, i) => {
                                         return <div key={i} className=' py-2 px-2 bg-slate-800 border border-slate-800'>{value}</div>
@@ -144,7 +167,7 @@ const ProductDetails = () => {
 
             </div>
             <div className='flex lg:hidden sticky bottom-0 w-full justify-center items-center  '>
-                <button className=' py-2 px-3 bg-slate-700 w-full'>Add to Cart</button>
+                <button className=' py-2 px-3 bg-slate-700 w-full' onClick={addToCart}>Add to Cart</button>
                 <button className=' py-2 px-3 bg-sky-500 lg:ml-8 w-full'>Buy Now</button>
             </div>
 

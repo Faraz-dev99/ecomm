@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import SearchIcon from '@mui/icons-material/Search';
-
+import { FaShoppingCart } from "react-icons/fa";
 import '../../../App.css';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
@@ -18,13 +18,16 @@ const Navbar = () => {
   const [usermenuToggle,setUsermenuToggle]=useState(false);
   const [searchValue,setSearchValue]=useState('');
   const [userpfpdefault,setUserPfpDefault]=useState('p');
-  const userloggedin=JSON.parse(sessionStorage.getItem('user'))
-
+  const userloggedin=JSON.parse(sessionStorage.getItem('user'));
+  const {userDetails}=useSelector((state)=>state.user);
+  const {cart,totalCartItems}=useSelector((state)=>state.cart)
 
   
  
   const navigate=useNavigate();
   const usermenuRef=useRef();
+  
+
 
   //click outside usermenu
   useEffect(()=>{
@@ -40,19 +43,28 @@ const Navbar = () => {
     }
   })
 
+  useEffect(() => {
+    // Sync with localStorage when it's updated in the same tab
+   /*  const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(cartData); // Update cartItems state
+    setCartItemCount(cartData.length); */ // Update cartItemCount state
+  }, []);
+
 
 
   useEffect(()=>{
+  
+    
 
     if(userloggedin){
      
         let pfptext=userloggedin.username.slice(0, 1).toUpperCase();
         setUserPfpDefault(pfptext);
+        
        
-       
-       console.log(userloggedin)
     }
     setNavDropDown(false)
+    
 
   },[userloggedin])
   
@@ -89,6 +101,15 @@ const Navbar = () => {
          </form>
         
       </div>
+      {
+        (userDetails.role==="Seller" || userDetails.role==="Visitor") && userloggedin?<div className=' absolute right-14 top-6 max-md:right-12 max-md:top-5'>
+          <div className=' relative'>
+          <NavLink to={"/dashboard/cart"}><FaShoppingCart className=' text-xl'/></NavLink>
+          {totalCartItems>0&&<div className=' grid place-items-center absolute -top-2 -right-2 bg-red-600 h-4 w-4 rounded-full text-xs'>{totalCartItems}</div>}
+          
+          </div>
+        </div>:null
+      }
       {
         userloggedin?<div ref={usermenuRef} className=' flex justify-center text-sm items-center relative max-md:absolute max-md:top-4 max-md:right-2' style={{zIndex:'1'}}>
         <div   className='flex cursor-pointer' onClick={()=>{setUsermenuToggle(!usermenuToggle)}}>
@@ -152,6 +173,7 @@ const Navbar = () => {
         
         
       </li>
+      
       </ul>
       
       

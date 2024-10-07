@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import {Slider,Product} from '../filespath'
 import '../App.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { apiConnect } from '../oprations/apiConnect';
+import { setProduct } from '../slices/productSlice';
 
 const Home = () => {
   const [loading,setLoading]=useState(true);
   const [products,setProducts]=useState([]);
+  const dispatch=useDispatch();
   useEffect(()=>{
     const getProducts=async ()=>{
       try{
@@ -15,8 +17,10 @@ const Home = () => {
           "product/getProducts"
         )
         if(response.data.success){
-          setProducts(response?.data?.products)
+          let productVar=response?.data?.products;
+          setProducts(productVar)
           setLoading(false);
+          setProduct(productVar)
         }
         console.log(response)
       }

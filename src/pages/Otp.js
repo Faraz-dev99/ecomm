@@ -51,7 +51,7 @@ const Otp = () => {
     <div className='flex flex-col gap-2 justify-center items-center'>
         <form className='flex flex-col gap-4 justify-center max-w-96 px-2 mt-20' onSubmit={verify}>
         <h2 className=' mb-1 font-semibold text-lg'>Email Verification</h2>
-        <p className='  text-slate-800 font-medium'>we've sent an email to ** <br/> enter otp to verify your email address</p>
+        <p className='  text-slate-400 font-medium'>we've sent an email to ** <br/> enter otp to verify your email address</p>
         <div className='flex justify-center items-center'>
       {
         otparr.map((data,index)=>{
@@ -67,7 +67,7 @@ const Otp = () => {
         })
       }
       </div>
-      <button type='submit' className=' bg-slate-900 text-white py-2 px-2 mt-2 hover:bg-slate-800'>verify email</button>
+      <button type='submit' className=' bg-sky-600 text-white py-2 px-2 mt-2 hover:bg-sky-700'>verify email</button>
       </form>
     </div>
   )

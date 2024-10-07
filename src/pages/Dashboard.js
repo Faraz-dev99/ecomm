@@ -16,7 +16,7 @@ const Dashboard = () => {
       </div>
       
 
-      <div className=' relative w-full max-md:py-2  max-sm:h-[calc(100vh-93.6px)]  max-md:h-[calc(100vh-53.6px)] md:h-[calc(100vh-109.2px)] overflow-auto hide-scrollbar'>
+      <div className=' relative w-full  max-sm:h-[calc(100vh-93.6px)]  max-md:h-[calc(100vh-53.6px)] md:h-[calc(100vh-109.2px)] overflow-auto hide-scrollbar'>
 
         <div className={` sticky ${sidebarToggle?'max-lg:left-0':'max-md:left-40 max-lg:left-60'}  lg:left-0 top-0 inline-flex`} style={{zIndex:'20'}}
          onClick={()=>sidebarToggle?setSidebarToggle(false):setSidebarToggle(true)}>
