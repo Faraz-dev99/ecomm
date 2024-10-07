@@ -3,13 +3,19 @@ import { useDispatch, useSelector } from 'react-redux'
 import { BsCart2 } from "react-icons/bs";
 import { NavLink } from 'react-router-dom';
 import { removeItem } from '../../../../slices/cartSlice';
-
+import { toast } from 'react-hot-toast';
 
 const Cart = () => {
    const {cart}=useSelector((state)=>state.cart);
    const dispatch=useDispatch();
    const removeItemCart=(id)=>{
-    dispatch(removeItem(id))
+    try {
+      dispatch(removeItem(id)); // Dispatch the remove action
+      toast.success("Item removed from cart!"); // Show success toast
+    } catch (error) {
+      // If error occurs, show an error toast
+      toast.error("Failed to remove item from cart!"); 
+    }
    }
   return (
     <div className=' flex justify-center py-4 px-4 w-full min-h-full absolute top-0 left-0'>
