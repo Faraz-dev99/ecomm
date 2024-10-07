@@ -31,9 +31,9 @@ const Cart = () => {
                       <div className=' h-24 w-32 max-476:h-16 max-476:w-20 flex justify-center items-center bg-white'><img className=' w-full h-full object-contain' src={item.images[0].secure_url} /></div>
                     </div>
 
-                    <div className=' flex flex-col gap-1 max-md:gap-[1px]'>
-                      <div className=' max-476:text-xs'>{item.name}</div>
-                      <div className=' text-slate-400 text-xs max-476:text-[9px]'>{item.brand}</div>
+                    <div className=' flex flex-col gap-1 max-md:gap-[1.5px]'>
+                      <div className=' max-476:text-[12px]'>{item.name}</div>
+                      <div className=' text-slate-400 text-xs max-476:text-[10px]'>{item.brand}</div>
                       <div className=' text-lg max-476:text-sm 476:hidden font-semibold text-sky-500'>₹{item.price}</div>
 
                       <div className='flex  gap-2 mt-5 max-476:mt-2'>
@@ -50,7 +50,7 @@ const Cart = () => {
 
                           </select>
                      
-                        <button className=' px-2 rounded-md border border-sky-500 text-sky-500 text-xs text-[7px] ' onClick={() => removeItemCart(item._id)}>Remove</button>
+                        <button className=' px-2 rounded-md border border-sky-500 text-sky-500 text-xs max-476:text-[7px] ' onClick={() => removeItemCart(item._id)}>Remove</button>
                       </div>
                     </div>
                     <div className=' max-476:hidden absolute right-0'>
