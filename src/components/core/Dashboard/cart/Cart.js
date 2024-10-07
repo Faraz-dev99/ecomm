@@ -38,7 +38,7 @@ const Cart = () => {
 
                       <div className='flex  gap-2 mt-5 max-476:mt-2'>
                        
-                          <select className=' bg-transparent py-2 max-476:py-1 px-2  rounded-md border border-sky-500 text-sky-500 text-xs max-476:text-[8px] '>
+                          <select className=' bg-transparent py-2 max-476:py-1 px-2  rounded-md border border-sky-500 text-sky-500 text-xs max-476:text-[9px] '>
                             {
                               // Generate options based on the stock
                               Array.from({ length: item.stock }, (_, i) => (
@@ -50,7 +50,7 @@ const Cart = () => {
 
                           </select>
                      
-                        <button className=' px-2 rounded-md border border-sky-500 text-sky-500 text-xs max-476:text-[7px] ' onClick={() => removeItemCart(item._id)}>Remove</button>
+                        <button className=' px-3 py-[2px] rounded-md border border-sky-500 text-sky-500 text-xs max-476:text-[9px] font-extralight ' onClick={() => removeItemCart(item._id)}>Remove</button>
                       </div>
                     </div>
                     <div className=' max-476:hidden absolute right-0'>
