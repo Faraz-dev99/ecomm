@@ -90,10 +90,11 @@ function App() {
           error: {
             duration: 4000,
             style: {
-              background: 'rgba(255, 3, 3,.5)',
-              color: 'white',
+              background: 'white',
+              color: 'black',
+              fontSize:'14px'
             },
-            icon: <WarningIcon />,
+            icon: <WarningIcon className=' text-red-600'/>,
             iconTheme: {
               primary: 'rgba(248, 248, 248, 0.5)',
               secondary: 'black'
