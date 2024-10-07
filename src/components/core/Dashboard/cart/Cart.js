@@ -23,22 +23,22 @@ const Cart = () => {
         <div className='  text-xl font-medium absolute top-0 left-0'>YOUR CART</div>
         {
           cart.length > 0 ? <div className=' flex flex-wrap gap-8 mt-12'>
-            <div className=' flex flex-col gap-8 py-4 px-4 bg-slate-900 max-lg:w-full md:min-w-[600px]'>
+            <div className=' flex flex-col gap-8 py-4 px-4  max-lg:w-full md:min-w-[600px]'>
               {
                 cart.map((item, index, arr) => {
-                  return <div className=' flex max-476:justify-between gap-4 w-full relative'>
+                  return <div className=' flex  pb-10 border-b border-b-sky-500 gap-6 max-476:gap-3 w-full relative'>
                     <div className=' h-full flex justify-center items-center'>
-                      <div className=' h-24 w-32 flex justify-center items-center bg-white'><img className=' w-full h-full object-contain' src={item.images[0].secure_url} /></div>
+                      <div className=' h-24 w-32 max-476:h-16 max-476:w-20 flex justify-center items-center bg-white'><img className=' w-full h-full object-contain' src={item.images[0].secure_url} /></div>
                     </div>
 
-                    <div className=' flex flex-col gap-2'>
-                      <div>{item.name}</div>
-                      <div className=' text-slate-400 text-xs'>{item.brand}</div>
-                      <div className=' text-xl sm:hidden font-semibold text-sky-500'>₹{item.price}</div>
+                    <div className=' flex flex-col gap-1 max-md:gap-0'>
+                      <div className=' max-476:text-xs'>{item.name}</div>
+                      <div className=' text-slate-400 text-xs max-476:text-[8px]'>{item.brand}</div>
+                      <div className=' text-lg max-476:text-xs sm:hidden font-semibold text-sky-500'>₹{item.price}</div>
 
-                      <div className='flex  gap-2 mt-5'>
+                      <div className='flex  gap-2 mt-5 max-476:mt-2'>
                        
-                          <select className=' bg-transparent py-2 px-2  rounded-md border border-sky-500 text-sky-500 text-xs '>
+                          <select className=' bg-transparent py-2 max-476:py-1 px-2  rounded-md border border-sky-500 text-sky-500 text-xs max-476:text-[8px] '>
                             {
                               // Generate options based on the stock
                               Array.from({ length: item.stock }, (_, i) => (
@@ -50,7 +50,7 @@ const Cart = () => {
 
                           </select>
                      
-                        <button className=' py-2 px-2 rounded-md border border-sky-500 text-sky-500 text-xs ' onClick={() => removeItemCart(item._id)}>Remove</button>
+                        <button className=' px-2 rounded-md border border-sky-500 text-sky-500 text-xs text-[8px] ' onClick={() => removeItemCart(item._id)}>Remove</button>
                       </div>
                     </div>
                     <div className=' max-sm:hidden absolute right-0'>
