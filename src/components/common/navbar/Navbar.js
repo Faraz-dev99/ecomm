@@ -44,10 +44,42 @@ const Navbar = () => {
   })
 
   useEffect(() => {
-    // Sync with localStorage when it's updated in the same tab
-   /*  const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(cartData); // Update cartItems state
-    setCartItemCount(cartData.length); */ // Update cartItemCount state
+   /*  const fetchCategory=async()=>{
+      try{
+  
+        let response=await fetch('https://ecomm-backend-1.onrender.com/api/product/getCategories',{
+          headers:{
+            'Content-Type':'application/json',
+            Authorization:`berear ${token}`,
+            'Cache-Control': 'no-cache',
+          },
+          cache: 'no-store', 
+        });
+        response=await response.json();
+        if(!response.success){
+          console.log("failed")
+          return
+        }
+        
+        let categoryId=response.categories.map((e)=>{
+          return e._id
+        })
+        console.log(categoryId)
+        setCategories(response.categories)
+        setProductInformation((prev)=>{
+          return {
+            ...prev,
+            category:response.categories[0]._id
+          }
+        })
+        console.log("checking ",productInformation.category)
+       
+      }
+      catch(err){
+        console.log("err",err.response)
+      }
+    }
+  //  fetchCategory(); */
   }, []);
 
 
@@ -141,7 +173,7 @@ const Navbar = () => {
         <li className=' relative' onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)}>
 
           <div className=' flex'>
-            <div onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)} className=' cursor-pointer select-none'>Category</div><ArrowDropDownIcon className=' -ml-1 text-lg  max-md:text-xs max-md:-mt-[3px]' />
+            <div onMouseOver={() => setNavDropDown(!true)}  className=' cursor-pointer select-none'>Category</div><ArrowDropDownIcon className=' -ml-1 text-lg  max-md:text-xs max-md:-mt-[3px]' />
           </div>
           {navDropDown ? <div><div className=' absolute top-5  h-4 w-4  border-l-transparent  border-r-transparent  border-b-sky-600 md:border-b-slate-300' style={{zIndex:'80', borderRightWidth: '35px', borderLeftWidth: "35px", borderBottomWidth: "30px", right: '-20px' }}></div>
           <ul

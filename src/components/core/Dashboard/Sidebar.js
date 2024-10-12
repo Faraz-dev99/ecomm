@@ -61,7 +61,10 @@ const Sidebar = () => {
                   return isActive ? { color:'rgb(14 165 233)' } : {};
                 }}>Add Product</NavLink>
               </li>
-              <li className=' cursor-pointer px-4 hover:text-sky-500 hover:border-l hover:border-l-cyan-500'>box2</li>
+              <li className=' cursor-pointer px-4 hover:text-sky-500 hover:border-l hover:border-l-cyan-500'>
+                <NavLink to='/dashboard/product-listing' style={({ isActive }) => {
+                  return isActive ? { color:'rgb(14 165 233)' } : {};
+                }}>Product List</NavLink></li>
             </ul>
             </div>
             

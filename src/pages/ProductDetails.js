@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import "../App.css"
 import ImageSlider from '../components/common/components/ImageSlider';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCart,settotalCartItems } from '../slices/cartSlice';
+import { setCart, settotalCartItems } from '../slices/cartSlice';
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -14,10 +14,10 @@ const ProductDetails = () => {
     const [mainImage, setMainImage] = useState("");
     const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1080);
     const [imageslides, setImageslides] = useState([])
-    const {cart,totalCartItems}=useSelector((state)=>state.cart)
-    const {userDetails}=useSelector((state=>state.user))
-    const userloggedin=sessionStorage.getItem("user") || null;
-    const dispatch=useDispatch();
+    const { cart, totalCartItems } = useSelector((state) => state.cart)
+    const { userDetails } = useSelector((state => state.user))
+    const userloggedin = sessionStorage.getItem("user") || null;
+    const dispatch = useDispatch();
 
 
 
@@ -26,7 +26,7 @@ const ProductDetails = () => {
         const handleResize = () => {
             setIsDesktop(window.innerWidth >= 1080);
         };
-       
+
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
@@ -46,7 +46,7 @@ const ProductDetails = () => {
                     })
                     setImageslides(slides)
                     setLoading(false);
-            
+
                 }
             } catch (err) {
                 console.log(err);
@@ -55,25 +55,25 @@ const ProductDetails = () => {
         fetchProduct();
     }, [id]);
 
-    const addToCart=()=>{
-        if(userDetails.role!=="Admin" && userloggedin){
-            const cartProductExist=cart.some(e=>e._id===product._id)
-            if(cartProductExist){
-             toast.error('Product already in the cart!');
-             return;
+    const addToCart = () => {
+        if (userDetails.role !== "Admin" && userloggedin) {
+            const cartProductExist = cart.some(e => e._id === product._id)
+            if (cartProductExist) {
+                toast.error('Product already in the cart!');
+                return;
             }
-            const updatecart=[...cart,product];
+            const updatecart = [...cart, product];
             dispatch(setCart(updatecart))
-            localStorage.setItem("cart",JSON.stringify(updatecart))
+            localStorage.setItem("cart", JSON.stringify(updatecart))
             toast.success("Product addedd successfully")
         }
-        else if(!userloggedin){
+        else if (!userloggedin) {
             toast.error("you're not logged in");
-             return;
+            return;
         }
-        else{
+        else {
             toast.error("you're adming you can't add to cart");
-             return;
+            return;
         }
 
     }
@@ -136,15 +136,25 @@ const ProductDetails = () => {
                                 <h3 className=' text-slate-500'>Colour:</h3>
                                 <div className='flex gap-2'>
                                     {product.color.map((e, i) => {
-                                        return <div key={e.name+i} className={` rounded-full h-5 w-5`} style={{ background: e.name }}></div>
+                                        return <div key={e.name + i} className={` rounded-full h-5 w-5`} style={{ background: e.name }}></div>
                                     })}
                                 </div>
 
                             </div>
-                            <div className='flex items-center gap-2'>
-                                <h3 className=' text-slate-500'>Stock:</h3>
-                                <p className=' text-sm'>{product.stock}</p>
-                            </div>
+                            {
+                                product.sizes.length > 0 ? <div className=' flex items-center gap-2 '>
+                                    <div  className=' text-slate-500'>sizes:</div>
+                                    <div className='flex gap-2'>
+                                        {product.sizes.map((e, i) => {
+                                            return <div key={i} className=' border border-slate-600 min-w-8 text-center rounded-md py-2 px-2 text-xs text-slate-400'>{e.size}</div>
+                                        })}
+                                    </div>
+                                </div> : <div className='flex items-center gap-2'>
+                                    <h3 className=' text-slate-500'>Stock:</h3>
+                                    <p className=' text-sm'>{product.stock}</p>
+                                </div>
+                            }
+
 
                             <div>
                                 <h3 className=' text-slate-500 mb-4'>Description:</h3>
@@ -153,7 +163,7 @@ const ProductDetails = () => {
 
                         </div>
 
-                        {product.attributes?.type ? <div  className=' flex-col gap-4 mt-8 mb-4 '>
+                        {product.attributes?.type ? <div className=' flex-col gap-4 mt-8 mb-4 '>
                             <div className=' text-2xl font-semibold'> Additional Details</div>
                             <div className=' flex flex-col gap-6 mt-4 border border-slate-800 py-6 px-3 max-w-[600px] text-slate-300 '>{product.attributes.type.map((e, id) => {
                                 return <div key={id} className='flex items-center gap-4 text-sm'>

@@ -15,6 +15,7 @@ import AddProduct from './components/core/Dashboard/Seller/AddProduct';
 import AdminDashboard from './components/core/Dashboard/Admin/AdminDashboard.js';
 import ProductDetails from './pages/ProductDetails.js';
 import AddAttributes from './components/core/Dashboard/Seller/AddAttributes.js';
+import ProductListing from './components/core/Dashboard/Seller/ProductListing';
 
 
 
@@ -51,6 +52,7 @@ function App() {
             <>
             <Route path='/dashboard/add-product' element={<AddProduct/>}/>
             <Route path='/dashboard/edit-products' element={<AddAttributes/>}/>
+            <Route path='/dashboard/product-listing' element={<ProductListing/>}/>
             </>
             :null}
               

@@ -1,3 +1,4 @@
+import { baseUrl } from "./api";
 import { apiConnect } from "./apiConnect";
 import toast from "react-hot-toast";
 
@@ -35,7 +36,7 @@ const addProduct = async (formData, token) => {
         }
         console.log("attributes data ",data)
         try {
-            const response = await fetch('https://ecomm-backend-1.onrender.com/api/product/createAttributes', { // Adjust URL as needed
+            const response = await fetch(`${baseUrl}product/createAttributes`, { // Adjust URL as needed
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -71,7 +72,7 @@ const addProduct = async (formData, token) => {
         }
         try{
             console.log("testing the status here : ",status)
-            const response=await fetch('https://ecomm-backend-1.onrender.com/api/product/productStatus',{ // Adjust URL as needed
+            const response=await fetch(`${baseUrl}product/productStatus`,{ // Adjust URL as needed
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

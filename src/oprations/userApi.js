@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { setUserDetails } from "../slices/userSlice";
 import { apiConnect } from "./apiConnect";
 
