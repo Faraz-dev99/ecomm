@@ -51,7 +51,7 @@ function App() {
             {userDetails.role==="Admin"||userDetails.role==="Seller"?
             <>
             <Route path='/dashboard/add-product' element={<AddProduct/>}/>
-            <Route path='/dashboard/edit-products' element={<AddAttributes/>}/>
+            <Route path='/dashboard/edit-product/:id' element={<AddProduct/>}/>
             <Route path='/dashboard/product-listing' element={<ProductListing/>}/>
             </>
             :null}

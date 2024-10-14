@@ -1,18 +1,32 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addProduct, createAttributes, productStatusApi } from '../../../../oprations/productApi';
-import { resetProductState } from '../../../../slices/productSlice';
+import { resetProductState, setEditProduct } from '../../../../slices/productSlice';
+import { useParams } from 'react-router';
 
 const SaveProductChanges = () => {
     const {editProduct,product,productType,attributesRedux}=useSelector((state)=>state.product)
     const [productStatus,setProductStatus]=useState("Published");
+    const params=useParams();
     const { token } = useSelector((state) => state.auth)
     const dispatch=useDispatch();
-    const saveChanges=()=>{
+    const saveChanges=async ()=>{
+        if(editProduct){
+            const id=params.id;
+            if(productStatus==="Published" || productStatus==="Draft"){
+                
+              const result=await productStatusApi(productStatus,id, token);
+              console.log("see if it's actually working and saving correctlly : ",result)
+             }
+             dispatch(resetProductState());
+             return;
 
+        }
     }
 
     const saveProduct=async ()=>{
+
+        
         console.log("attributeRedux and product id ",attributesRedux," ",product," and also ",product.product._id)
    
      if(productStatus==="Published" || productStatus==="Draft"){

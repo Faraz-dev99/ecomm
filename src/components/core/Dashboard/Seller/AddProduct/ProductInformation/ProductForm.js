@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct } from '../../../../../../oprations/productApi'
+import { addProduct, updateProduct } from '../../../../../../oprations/productApi'
 import { FaAngleDown } from "react-icons/fa";
 import ProductDetails from '../../../../../../pages/ProductDetails';
 import { apiConnect } from '../../../../../../oprations/apiConnect';
@@ -12,6 +12,7 @@ import { setProduct, setProductTypeRedux, setStep } from '../../../../../../slic
 import PublishSteps from '../../PublishSteps';
 import { clothingSizes } from '../../../../../../data/productFormData';
 import { baseUrl } from '../../../../../../oprations/api';
+import { useParams } from 'react-router';
 const ProductForm = () => {
   const [categories, setCategories] = useState([]);
   const [sizeDropDown,setSizeDropDown]=useState(false);
@@ -20,12 +21,16 @@ const ProductForm = () => {
   const [appliedSizes, setAppliedSizes] = useState([]);
   const {userDetails}=useSelector((state)=>state.user)
   const [selectedCategory, setSelectedCategory] = useState("");
+  const {editProduct,product}=useSelector((state)=>state.product);
+  const params=useParams();
   const [productInformation, setProductInformation] = useState({
     name: "",
     description: "",
     brand: "",
     price: "",
-    color: ["red"],
+    color: [{
+      name:"red"
+    }],
     image1: [],
     image2: [],
     image3: [],
@@ -35,7 +40,9 @@ const ProductForm = () => {
   })
  
   const [productType, setProductType] = useState("simple-product");
-  const [selectedColor, setSelectedColor] = useState('red');
+  const [selectedColor, setSelectedColor] = useState({
+    name:'red'
+  });
 
   const { token } = useSelector((state) => state.auth)
 
@@ -44,7 +51,23 @@ const ProductForm = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
+    if(editProduct){
+      console.log("edit product",product)
+       setProductInformation({
+        name: product.name,
+        description: product.description,
+        brand: product.brand,
+        price: product.price,
+        color: product.color,
+        image1: [null,product.images[0].secure_url],
+        image2: [null,product.images[1].secure_url],
+        image3: [null,product.images[2].secure_url],
+        image4: [null,product.images[3].secure_url],
+        stock: product.stock,
+      })
+    }
     const fetchCategory = async () => {
+      
       try {
 
         let response = await fetch(`${baseUrl}product/getCategories`, {
@@ -83,7 +106,10 @@ const ProductForm = () => {
   }, [])
 
   const handleSelectColor = (e) => {
-    setSelectedColor(e.target.value);
+    const sc={
+      name:e.target.value
+    }
+    setSelectedColor(sc);
   };
 
  // Handle selecting/unselecting sizes via checkboxes
@@ -145,7 +171,7 @@ const handleStockChange = (index, value) => {
       console.log(preview)
       return;
     }
-    if (name === "color") {
+    /* if (name === "color") {
       let flag = true;
       productInformation.color.forEach((e) => {
         if (selectedColor === e) {
@@ -163,7 +189,7 @@ const handleStockChange = (index, value) => {
       }
 
       return;
-    }
+    } */
     setProductInformation((prev) => {
       return {
         ...prev,
@@ -171,6 +197,25 @@ const handleStockChange = (index, value) => {
       }
     })
 
+  }
+
+  //push selected color
+  const pushSelectedColor=(color)=>{
+    const colorExist=productInformation.color.some((cl)=>cl.name===color)
+    if(colorExist){
+      return false;
+    }
+    setProductInformation((prev)=>{
+      return {
+        ...prev,
+        color:[
+          ...prev.color,
+          {
+            name:color
+          }
+        ]
+      }
+    })
   }
   const closeImage = (e) => {
 
@@ -195,6 +240,8 @@ const handleStockChange = (index, value) => {
       setIsrequired(true);
       return;
     }
+
+    
     const formData = new FormData();
 
     // Append text data
@@ -209,8 +256,9 @@ const handleStockChange = (index, value) => {
     }
     formData.append('brand', productInformation.brand);
     formData.append('price', productInformation.price);
-    formData.append('color', productInformation.color.join(','));
-    console.log(productInformation.color.join(','))
+    formData.append('color', JSON.stringify(productInformation.color));
+    console.log(productInformation.color)
+
 
     if (productInformation.image1[0]) formData.append('images', productInformation.image1[0]);
     if (productInformation.image2[0]) formData.append('images', productInformation.image2[0]);
@@ -220,9 +268,23 @@ const handleStockChange = (index, value) => {
     
 
     formData.append('category', productInformation.category);
+
+    
     
     
 console.log("doing the work")
+
+if(editProduct){
+  const id=params.id;
+  formData.append("productId",id)
+      const updateResult=await updateProduct(formData,token);
+      if(updateResult){
+        dispatch(setProduct(updateResult));
+        dispatch(setProductTypeRedux(productType));
+        dispatch(setStep(2));
+      }
+      return;
+}
 
     const result = await addProduct(formData, token)
     if(result){
@@ -280,7 +342,7 @@ console.log("doing the work")
 
               <div className=' flex flex-col gap-2'>
                 <div className=' flex gap-2'>
-                  <select className=' outline-none py-2 px-2 bg-transparent border border-slate-700 focus:border-sky-500 rounded-lg w-full' value={selectedColor} onChange={handleSelectColor}>
+                  <select className=' outline-none py-2 px-2 bg-transparent border border-slate-700 focus:border-sky-500 rounded-lg w-full' value={selectedColor.name} onChange={handleSelectColor}>
                     <option disabled>select Color</option>
                     <option>red</option>
                     <option >yellow</option>
@@ -288,12 +350,12 @@ console.log("doing the work")
 
                     </option>
                   </select>
-                  <input type='button' className=' py-2 px-2 bg-sky-500 text-slate-950 rounded-md max-w-16 text-center' name="color" value="add" onClick={(e) => handleFormData(e.target)} />
+                  <input type='button' className=' py-2 px-2 bg-sky-500 text-slate-950 rounded-md max-w-16 text-center' name="color" value="add" onClick={(e) => pushSelectedColor(selectedColor.name)} />
                 </div>
 
                 <div className=' flex gap-2 px-2'>
                   {productInformation.color.map((e, i) => {
-                    return <div key={i} className={`  h-5 w-5 rounded-full`} style={{ background: e }}></div>
+                    return <div key={i} className={`  h-5 w-5 rounded-full`} style={{ background: e.name }}></div>
                   })}
                 </div>
               </div>

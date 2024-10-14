@@ -6,13 +6,15 @@ import { json, NavLink } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import Button from '@mui/material/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../../../App.css';
 import AdminPanelSettings from '@mui/icons-material/AdminPanelSettings';
+import { setEditProduct } from '../../../slices/productSlice';
 const Sidebar = () => {
   const { userDetails } = useSelector((state) => state.user);
 
   const [toggleSubmenu,setToggleSubmenu]=useState(null);
+  const dispatch=useDispatch();
 
   const isToggleSubmenu=(index)=>{
     toggleSubmenu===index?setToggleSubmenu(null):setToggleSubmenu(index);
@@ -55,11 +57,11 @@ const Sidebar = () => {
             </button>
             <div className={`overflow-hidden`}
             style={{transition:'all .2s ease-out',height:toggleSubmenu===2?'75px':'0px'}}>
-            <ul className={` py-3 border-slate-800 border-l list-none mx-4 flex flex-col justify-center gap-3  font-medium`} style={{ fontSize: '13px' }}>
+            <ul className={` py-3 border-slate-800 border-l list-none mx-4 flex flex-col justify-center gap-3  font-light`} style={{ fontSize: '11px' }}>
               <li className=' cursor-pointer px-4 hover:text-sky-500 hover:border-l hover:border-l-cyan-500'>
                 <NavLink to='/dashboard/add-product' style={({ isActive }) => {
                   return isActive ? { color:'rgb(14 165 233)' } : {};
-                }}>Add Product</NavLink>
+                }} onClick={()=>dispatch(setEditProduct(false))}>Add Product</NavLink>
               </li>
               <li className=' cursor-pointer px-4 hover:text-sky-500 hover:border-l hover:border-l-cyan-500'>
                 <NavLink to='/dashboard/product-listing' style={({ isActive }) => {

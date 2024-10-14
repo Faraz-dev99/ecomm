@@ -46,6 +46,7 @@ const ProductDetails = () => {
                     })
                     setImageslides(slides)
                     setLoading(false);
+                    
 
                 }
             } catch (err) {

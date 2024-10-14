@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ProductForm from './ProductInformation/ProductForm'
 import PublishSteps from '../PublishSteps'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import AddAttributes from "../AddAttributes"
 import SaveProductChanges from '../SaveProductChanges'
+import { setEditProduct } from '../../../../../slices/productSlice'
 
 const AddProduct = () => {
-  const {step,productType}=useSelector((state)=>state.product)
+  const {step,productType,editProduct}=useSelector((state)=>state.product)
+  const dispatch=useDispatch();
+  
   return (
     <div className=' flex justify-evenly max-lg:flex-col'>
       <div className='flex flex-col lg:order-2 justify-center  lg:items-center lg:h-[400px] lg:sticky lg:top-[60px]  lg:w-1/2'>
-      <div className=' lg:text-3xl md:text-2xl max-md:text-2xl font-bold mb-8'>Add Product</div>
+      {editProduct?<div className=' lg:text-3xl md:text-2xl max-md:text-2xl font-bold mb-8'>Edit Product</div>:<div className=' lg:text-3xl md:text-2xl max-md:text-2xl font-bold mb-8'>Add Product</div>}
+      
       <div className=" my-2 mb-10"><PublishSteps /></div>
       </div>
       {step===1&&<div className=' lg:w-1/2'><ProductForm/></div>}

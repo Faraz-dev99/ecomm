@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { FaRegClock } from "react-icons/fa";
 import { MdOutlinePublic } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { baseUrl } from '../../../../../oprations/api';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
+import { setEditProduct,setProduct } from '../../../../../slices/productSlice';
+
 
 const ProductListing = () => {
     const { token } = useSelector((state) => state.auth);
     const [productList, setProductList] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate=useNavigate();
+    const dispatch=useDispatch();
     useEffect(() => {
         const getProductList = async () => {
             try {
@@ -42,6 +46,12 @@ const ProductListing = () => {
         getProductList();
     }, []);
 
+    const editProductMethod=async (id)=>{
+        const findProduct=productList.find((e)=>e._id===id)
+        dispatch(setProduct(findProduct))
+        dispatch(setEditProduct(true))
+        navigate(`/dashboard/edit-product/${id}`)
+    }
 
     const deleteProductMethod = async (id) => {
         const toastId = toast.loading('Loading...');
@@ -102,8 +112,8 @@ const ProductListing = () => {
                             </div>
                         </div>
                         <div className=' flex flex-wrap max-md:flex-col items-center text-lg  bg-sky-500 text-slate-900 rounded-md'>
-                            <div className=' md:border-r max-md:border-b py-2 px-2 border-slate-900'><MdEdit /> </div>
-                            <div className=' py-2 px-2' onClick={() => deleteProductMethod(e._id)}><MdDelete /></div>
+                            <div className=' md:border-r max-md:border-b py-2 px-2 border-slate-900 cursor-pointer' onClick={()=>editProductMethod(e._id)}><MdEdit /> </div>
+                            <div className=' py-2 px-2 cursor-pointer' onClick={() => deleteProductMethod(e._id)}><MdDelete /></div>
                         </div>
                     </div>
                 }):<div className=' flex flex-col justify-center items-center gap-4 min-h-40'>

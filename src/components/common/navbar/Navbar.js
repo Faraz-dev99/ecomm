@@ -134,13 +134,13 @@ const Navbar = () => {
         
       </div>
       {
-        (userDetails.role==="Seller" || userDetails.role==="Visitor") && userloggedin?<div className=' absolute right-14 top-6 max-md:right-12 max-md:top-5'>
+        (userDetails.role==="Seller" || userDetails.role==="Visitor") && userloggedin?<NavLink to={"/dashboard/cart"} className=' py-2 px-2 rounded-full hover:bg-sky-700/25 absolute right-12 top-4 max-md:right-12 max-md:top-5'>
           <div className=' relative'>
-          <NavLink to={"/dashboard/cart"}><FaShoppingCart className=' text-xl'/></NavLink>
+          <div ><FaShoppingCart className=' text-xl'/></div>
           {totalCartItems>0&&<div className=' grid place-items-center absolute -top-2 -right-2 bg-red-600 h-4 w-4 rounded-full text-xs'>{totalCartItems}</div>}
           
           </div>
-        </div>:null
+        </NavLink>:null
       }
       {
         userloggedin?<div ref={usermenuRef} className=' flex justify-center text-sm items-center relative max-md:absolute max-md:top-4 max-md:right-2' style={{zIndex:'1'}}>
