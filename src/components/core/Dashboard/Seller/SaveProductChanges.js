@@ -27,10 +27,10 @@ const SaveProductChanges = () => {
     const saveProduct=async ()=>{
 
         
-        console.log("attributeRedux and product id ",attributesRedux," ",product," and also ",product.product._id)
+        console.log("attributeRedux and product id ",attributesRedux," ",product," and also ",product._id)
    
      if(productStatus==="Published" || productStatus==="Draft"){
-        const productId= product.product._id
+        const productId= product._id
       const result=await productStatusApi(productStatus,productId, token);
       console.log("see if it's actually working and saving correctlly : ",result)
      }

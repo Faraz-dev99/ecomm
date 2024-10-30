@@ -11,6 +11,10 @@ import { FaShoppingCart } from "react-icons/fa";
 import '../../../App.css';
 import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
+import { baseUrl } from '../../../oprations/api';
+import DotLoader from '../DotLoader';
+import { FaAngleRight } from "react-icons/fa";
+import { applicationBaseUrl } from '../../../data/applicationUrls';
 
 const Navbar = () => {
   const [navDropDown, setNavDropDown] = useState(false)
@@ -21,6 +25,9 @@ const Navbar = () => {
   const userloggedin=JSON.parse(sessionStorage.getItem('user'));
   const {userDetails}=useSelector((state)=>state.user);
   const {cart,totalCartItems}=useSelector((state)=>state.cart)
+  const [searchedList,setSearchedList]=useState([]);
+  const [loadingSearch,setLoadingSearch]=useState(false);
+  const abortControllerRef = useRef(null);
 
   
  
@@ -103,6 +110,70 @@ const Navbar = () => {
   const dropdown = () => {
     navDropDown ? setNavDropDown(false) : setNavDropDown(true);
   }
+
+
+  const searchItem = async (key) => {
+    // Abort the previous request if it exists
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+    // Create a new AbortController instance
+    abortControllerRef.current = new AbortController();
+    const { signal } = abortControllerRef.current;
+
+    // Clear results if input is empty
+    if (key.trim() === '') {
+      setSearchedList([]);
+      setLoadingSearch(false);
+      return;
+    }
+
+    setLoadingSearch(true);
+
+    try {
+      const response = await fetch(`${baseUrl}product/searchProduct/${key}`, { signal });
+      if (!response.ok) {
+        if (response.status === 404) {
+          setSearchedList([]); // Clear results if no products are found
+        }
+        return;
+      }
+
+      const items = await response.json();
+      if (items.success) {
+        setSearchedList(items.products);
+      }
+    } catch (err) {
+      if (err.name === "AbortError") {
+        console.log("Fetch aborted");
+      }
+    } finally {
+      setLoadingSearch(false);
+    }
+  };
+  // Handle input change and call searchItem with the new value
+  const handleInputChange = (e) => {
+    const newValue = e.target.value;
+    setSearchValue(newValue);
+    searchItem(newValue); // Call searchItem directly
+  };
+
+  const handleSearchSubmit=(e)=>{
+    e.preventDefault();
+    if(searchValue!==""){
+      
+    setSearchedList([])
+    setSearchValue("");
+    navigate(`search/${searchValue}`)
+    }
+    
+  }
+
+  const searchNavigate=(id)=>{
+    setSearchedList([]);
+    setSearchValue("");
+    navigate(`/product/${id}`)
+  }
   
   const logout=()=>{
     const toastId = toast.loading('Loading...');
@@ -118,23 +189,45 @@ const Navbar = () => {
     <div className=' select-none   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-2 px-2 pt-4 text-lg font-semibold max-sm:flex-col gap-3'>
       <div className=' flex gap-2'>
       <div className=' md:hidden flex items-center' onClick={()=>SetMenuToggle(!menuToggle)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
-      <NavLink to={'/'} className='  '><span className=' '>Bazaar</span><span className=' text-sky-500'>Seva</span></NavLink>
+      <NavLink to={'/'} className='  '><span className=' '>Light</span><span className=' text-sky-500'>Store</span></NavLink>
       </div>
     
-        <div className={` flex flex-wrap justify-center items-center gap-2 ${userloggedin?'md:min-w-[500px]':null}   max-md:w-full`}>
-         <form className=' flex justify-center w-full items-center px-2 py-2 border max-md:w-full rounded-md  border-sky-100 bg-sky-100'>
+        <form className={` flex flex-wrap relative justify-center items-center gap-2 ${userloggedin?'md:min-w-[500px]':null}   max-md:w-full`} onSubmit={handleSearchSubmit}>
+         <div className=' flex justify-center w-full items-center px-2 py-2 border max-md:w-full rounded-md  border-sky-100 bg-sky-100' >
          <button type='submit' className='flex justify-center items-center mr-2'><SearchIcon className=' text-slate-800 font-thin text-xs' style={{fontSize:'18px'}}/></button>
          <input className=' outline-none w-full bg-sky-100 border-none text-black font-normal text-sm placeholder:text-xs placeholder:text-slate-800'
           placeholder='search product..'
           value={searchValue}
-          onChange={(e)=>setSearchValue(e.target.value)}
+          onChange={handleInputChange}
+          required
          />
          
-         </form>
+         </div>
+         {loadingSearch && <div className=' absolute w-full top-[50px] right-0  py-10 rounded-md border border-slate-800 bg-slate-950 md:min-w-80'><DotLoader/></div>}
+         {(searchValue!=="" && !loadingSearch && searchedList.length===0)&&<div className=' absolute w-full border border-slate-800 top-[50px] right-0 py-4 text-base px-4 rounded-md bg-slate-950 text-slate-400 font-normal'>No result found!</div>}
+         {
+           searchedList.length>0 && !loadingSearch?<div className=' absolute w-full border border-slate-800 py-4 px-3 rounded-md flex gap-4 flex-col md:min-w-80 top-[50px] right-0 bg-slate-950 text-sm'>
+            {searchedList.map((e,i)=>{
+                 if(i<4 && e.status==="Published")
+                return <div to={`product/${e._id}`} onClick={()=>searchNavigate(e._id)} key={i} className={`flex gap-4 items-center`}>
+                   <div>
+                       <img src={`${e.images[0].secure_url}`} alt='product' className=' h-12 w-10'/>
+                   </div>
+                   <div className=' flex flex-col gap-1 text-xs'>
+                   <div className=' text-sm font-semibold'>{e.name}</div>
+                   <div className="truncate w-32 text-slate-400">{e.description}</div>
+                   <div className=' text-slate-400'>₹{e.price}</div>
+                   </div>
+                   
+                </div>
+            })}
+            <button  className=' flex gap-1 justify-center items-center py-2 px-2 bg-sky-500 text-slate-900 text-base mt-3 font-normal text-center'><span>view all results</span> <FaAngleRight/></button>
+           </div>:null
+         }
         
-      </div>
+      </form>
       {
-        (userDetails.role==="Seller" || userDetails.role==="Visitor") && userloggedin?<NavLink to={"/dashboard/cart"} className=' py-2 px-2 rounded-full hover:bg-sky-700/25 absolute right-12 top-4 max-md:right-12 max-md:top-5'>
+        (userDetails.role==="Seller" || userDetails.role==="Visitor") && userloggedin?<NavLink to={"/dashboard/cart"} className='rounded-full  absolute right-14 top-6 max-md:right-12 max-md:top-5'>
           <div className=' relative'>
           <div ><FaShoppingCart className=' text-xl'/></div>
           {totalCartItems>0&&<div className=' grid place-items-center absolute -top-2 -right-2 bg-red-600 h-4 w-4 rounded-full text-xs'>{totalCartItems}</div>}

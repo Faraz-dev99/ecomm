@@ -164,7 +164,7 @@ const ProductDetails = () => {
 
                         </div>
 
-                        {product.attributes?.type ? <div className=' flex-col gap-4 mt-8 mb-4 '>
+                        {product.attributes?.type.length>0 ? <div className=' flex-col gap-4 mt-8 mb-4 '>
                             <div className=' text-2xl font-semibold'> Additional Details</div>
                             <div className=' flex flex-col gap-6 mt-4 border border-slate-800 py-6 px-3 max-w-[600px] text-slate-300 '>{product.attributes.type.map((e, id) => {
                                 return <div key={id} className='flex items-center gap-4 text-sm'>

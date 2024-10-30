@@ -42,6 +42,37 @@
   }
 
 
+  @keyframes grow-shrink {
+    0% {
+      transform: scale(0);
+    }
+    50% {
+      transform: scale(1.5); /* Adjust the scale factor as desired */
+    }
+    100%{
+      transform:scale(0)
+    }
+  }
+  
+  .dot {
+    animation: grow-shrink 1.6s ease-in-out infinite;
+  }
+ 
+  
+  /* Adding specific delays for each dot */
+  .dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .dot:nth-child(2) {
+    animation-delay: 0.2s; /* 100ms delay */
+  }
+  
+  .dot:nth-child(3) {
+    animation-delay: 0.4s; /* 200ms delay */
+  }
+    
+
 @media screen and (min-width:1080px){
     .slantBox{
         position:relative;

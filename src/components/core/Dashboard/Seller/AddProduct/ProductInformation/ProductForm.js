@@ -53,6 +53,8 @@ const ProductForm = () => {
   useEffect(() => {
     if(editProduct){
       console.log("edit product",product)
+      if(product.attributes)
+        setProductType('property-product')
        setProductInformation({
         name: product.name,
         description: product.description,
@@ -279,6 +281,7 @@ if(editProduct){
   formData.append("productId",id)
       const updateResult=await updateProduct(formData,token);
       if(updateResult){
+        console.log("update result is : ",updateResult)
         dispatch(setProduct(updateResult));
         dispatch(setProductTypeRedux(productType));
         dispatch(setStep(2));
@@ -288,7 +291,8 @@ if(editProduct){
 
     const result = await addProduct(formData, token)
     if(result){
-      dispatch(setProduct(result))
+      console.log("product result is ::: ",result)
+      dispatch(setProduct(result.product))
       dispatch(setProductTypeRedux(productType))
       dispatch(setStep(2));
     }

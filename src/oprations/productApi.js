@@ -1,3 +1,4 @@
+import { json } from "react-router";
 import { baseUrl } from "./api";
 import { apiConnect } from "./apiConnect";
 import toast from "react-hot-toast";
@@ -61,6 +62,40 @@ export const updateProduct = async (formData, token) => {
     toast.error(`Error: ${err.response?.data?.message || err.message || 'Something went wrong'}`, {
       id: toastId,
     });
+    return null;
+  }
+}
+
+
+//update attributes
+const updateAttribute=async (attributeData,attributeId,token)=>{
+  const toastId=toast.loading("updating attributes...");
+  const update={
+    attributeId,
+    type:attributeData.type
+  }
+  try{
+    const response=await fetch(`${baseUrl}product/editAttributes`,{
+      method:"POST",
+      headers:{
+        'Content-Type':'application/json',
+        Authorization:`berear ${token}`
+      },
+      body:JSON.stringify(update)
+    })
+    const result=await response.json();
+    if(result.success){
+      toast.success("Attribute updated successfully",{id:toastId});
+      return result
+    } else {
+      toast.error('Failed to update attributes', { id: toastId });
+      console.error('Failed to add attributes:', result.message);
+      return null;
+    }
+  }
+  catch(err){
+    console.log("error is : ",err)
+    toast.error(`Error4: ${err.message}`, { id: toastId });
     return null;
   }
 }
@@ -137,4 +172,4 @@ const productStatusApi = async (status, productId, token) => {
 
 
 
-export { addProduct, createAttributes, productStatusApi }
+export { addProduct, createAttributes,updateAttribute, productStatusApi }

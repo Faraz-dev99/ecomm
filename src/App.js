@@ -16,6 +16,7 @@ import AdminDashboard from './components/core/Dashboard/Admin/AdminDashboard.js'
 import ProductDetails from './pages/ProductDetails.js';
 import AddAttributes from './components/core/Dashboard/Seller/AddAttributes.js';
 import ProductListing from './components/core/Dashboard/Seller/ProductListing';
+import Search from './pages/Search.js';
 
 
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/search/:key' element={<Search />} />
 
           <Route element={<PrivateComponents />}>
             <Route path='/dashboard' element={<Dashboard />} >
