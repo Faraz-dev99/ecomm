@@ -207,22 +207,22 @@ const Navbar = () => {
          {loadingSearch && <div className=' absolute w-full top-[50px] right-0  py-10 rounded-md border border-slate-800 bg-slate-950 md:min-w-80'><DotLoader/></div>}
          {(searchValue!=="" && !loadingSearch && searchedList.length===0)&&<div className=' absolute w-full border border-slate-800 top-[50px] right-0 py-4 text-base px-4 rounded-md bg-slate-950 text-slate-400 font-normal'>No result found!</div>}
          {
-           searchedList.length>0 && !loadingSearch?<div className=' absolute w-full border border-slate-800 py-4 px-3 rounded-md flex gap-4 flex-col md:min-w-80 top-[50px] right-0 bg-slate-950 text-sm'>
+           searchedList.length>0 && !loadingSearch?<div className=' absolute w-full border border-slate-800 flex flex-col md:min-w-80 top-[45.6px] right-0 bg-slate-950 text-sm'>
             {searchedList.map((e,i)=>{
                  if(i<4 && e.status==="Published")
-                return <div to={`product/${e._id}`} onClick={()=>searchNavigate(e._id)} key={i} className={`flex items-center px-1 cursor-pointer gap-4 items- hover:bg-slate-900`}>
+                return <div to={`product/${e._id}`} onClick={()=>searchNavigate(e._id)} key={i} className={`flex border-dashed border-b border-b-slate-900 items-center px-3 py-3 cursor-pointer gap-4 group hover:bg-slate-900`}>
                    <div>
                        <img src={`${e.images[0].secure_url}`} alt='product' className=' h-12 w-10'/>
                    </div>
                    <div className=' flex flex-col gap-1 text-xs'>
-                   <div className=' text-sm font-semibold'>{e.name}</div>
+                   <div className=' text-sm font-semibold group-hover:text-sky-500'>{e.name}</div>
                    <div className="truncate w-32 text-slate-400">{e.description}</div>
                    <div className=' text-slate-400'>₹{e.price}</div>
                    </div>
                    
                 </div>
             })}
-            <button  className=' flex gap-1 justify-center items-center py-2 px-2 bg-sky-500 text-slate-900 text-base mt-3 font-normal text-center'><span>view all results</span> <FaAngleRight/></button>
+            <button  className=' flex gap-1 justify-center items-center py-3 px-2 bg-sky-500 text-slate-900 text-base font-normal text-center'><span>view all results</span> <FaAngleRight/></button>
            </div>:null
          }
         
