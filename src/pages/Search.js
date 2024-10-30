@@ -46,7 +46,7 @@ const Search = () => {
   }
   if (!loader && searchedProducts.length > 0) {
     return <div className='flex flex-col justify-center my-10 px-4'>
-      <h1 className='  text-sky-500 font-bold md:text-2xl lg:text-3xl max-md:text-xl  mb-6'>search results for: {key}</h1>
+      <h1 className='  text-sky-500 font-bold md:text-2xl max-md:text-xl  mb-6'>search results for: {key}</h1>
     <div className='flex flex-wrap w-full'>
       {
         searchedProducts.map((e, i) => {

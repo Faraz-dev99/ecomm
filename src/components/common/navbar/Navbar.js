@@ -210,7 +210,7 @@ const Navbar = () => {
            searchedList.length>0 && !loadingSearch?<div className=' absolute w-full border border-slate-800 py-4 px-3 rounded-md flex gap-4 flex-col md:min-w-80 top-[50px] right-0 bg-slate-950 text-sm'>
             {searchedList.map((e,i)=>{
                  if(i<4 && e.status==="Published")
-                return <div to={`product/${e._id}`} onClick={()=>searchNavigate(e._id)} key={i} className={`flex gap-4 items-center`}>
+                return <div to={`product/${e._id}`} onClick={()=>searchNavigate(e._id)} key={i} className={`flex items-center px-1 cursor-pointer gap-4 items- hover:bg-slate-900`}>
                    <div>
                        <img src={`${e.images[0].secure_url}`} alt='product' className=' h-12 w-10'/>
                    </div>
