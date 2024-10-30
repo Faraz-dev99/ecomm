@@ -196,6 +196,7 @@ const Navbar = () => {
          <div className=' flex justify-center w-full items-center px-2 py-2 border max-md:w-full rounded-md  border-sky-100 bg-sky-100' >
          <button type='submit' className='flex justify-center items-center mr-2'><SearchIcon className=' text-slate-800 font-thin text-xs' style={{fontSize:'18px'}}/></button>
          <input className=' outline-none w-full bg-sky-100 border-none text-black font-normal text-sm placeholder:text-xs placeholder:text-slate-800'
+         type='search'
           placeholder='search product..'
           value={searchValue}
           onChange={handleInputChange}
