@@ -21,7 +21,7 @@ const Catalog = () => {
             if(categories.length<1){
                 navigate('/')
             }
-            setLoader(false);
+            
             let catalog=categories.filter((e)=>e.name===key)
             catalog=catalog[0]._id
             console.log("ye hai",catalog)
