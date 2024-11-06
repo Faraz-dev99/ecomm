@@ -15,6 +15,7 @@ import { baseUrl } from '../../../oprations/api';
 import DotLoader from '../DotLoader';
 import { FaAngleRight } from "react-icons/fa";
 import { applicationBaseUrl } from '../../../data/applicationUrls';
+import { fetchCategory } from '../../../oprations/productApi';
 
 const Navbar = () => {
   const [navDropDown, setNavDropDown] = useState(false)
@@ -28,6 +29,8 @@ const Navbar = () => {
   const [searchedList,setSearchedList]=useState([]);
   const [loadingSearch,setLoadingSearch]=useState(false);
   const abortControllerRef = useRef(null);
+  const {token}=useSelector((state)=>state.auth)
+  const [categories,setCategories]=useState([])
 
   
  
@@ -51,42 +54,19 @@ const Navbar = () => {
   })
 
   useEffect(() => {
-   /*  const fetchCategory=async()=>{
-      try{
-  
-        let response=await fetch('https://ecomm-backend-1.onrender.com/api/product/getCategories',{
-          headers:{
-            'Content-Type':'application/json',
-            Authorization:`berear ${token}`,
-            'Cache-Control': 'no-cache',
-          },
-          cache: 'no-store', 
-        });
-        response=await response.json();
-        if(!response.success){
-          console.log("failed")
-          return
-        }
-        
-        let categoryId=response.categories.map((e)=>{
-          return e._id
-        })
-        console.log(categoryId)
-        setCategories(response.categories)
-        setProductInformation((prev)=>{
-          return {
-            ...prev,
-            category:response.categories[0]._id
-          }
-        })
-        console.log("checking ",productInformation.category)
-       
+    
+    const fetchCategoryFunc=async ()=>{
+      const categories=await fetchCategory();
+      if(categories.length>0){
+        setCategories(categories)
       }
-      catch(err){
-        console.log("err",err.response)
+      else{
+        setCategories([])
       }
+     // console.log("categories : ",categories)
     }
-  //  fetchCategory(); */
+    fetchCategoryFunc();
+  
   }, []);
 
 
@@ -102,7 +82,7 @@ const Navbar = () => {
         
        
     }
-    setNavDropDown(false)
+    
     
 
   },[userloggedin])
@@ -204,8 +184,8 @@ const Navbar = () => {
          />
          
          </div>
-         {loadingSearch && <div className=' absolute w-full top-[50px] right-0  py-10 rounded-md border border-slate-800 bg-slate-950 md:min-w-80'><DotLoader/></div>}
-         {(searchValue!=="" && !loadingSearch && searchedList.length===0)&&<div className=' absolute w-full border border-slate-800 top-[50px] right-0 py-4 text-base px-4 rounded-md bg-slate-950 text-slate-400 font-normal'>No result found!</div>}
+         {loadingSearch && <div className=' absolute w-full top-[45.6px] right-0  py-10 rounded-md border border-slate-800 bg-slate-950 md:min-w-80'><DotLoader/></div>}
+         {(searchValue!=="" && !loadingSearch && searchedList.length===0)&&<div className=' absolute w-full border border-slate-800 top-[45.6px] right-0 py-4 text-base px-4 rounded-md bg-slate-950 text-slate-400 font-normal'>No result found!</div>}
          {
            searchedList.length>0 && !loadingSearch?<div className=' absolute w-full border border-slate-800 flex flex-col md:min-w-80 top-[45.6px] right-0 bg-slate-950 text-sm'>
             {searchedList.map((e,i)=>{
@@ -267,17 +247,16 @@ const Navbar = () => {
         <li className=' relative' onMouseOver={() => setNavDropDown(true)} onMouseOut={() => setNavDropDown(false)}>
 
           <div className=' flex'>
-            <div onMouseOver={() => setNavDropDown(!true)}  className=' cursor-pointer select-none'>Category</div><ArrowDropDownIcon className=' -ml-1 text-lg  max-md:text-xs max-md:-mt-[3px]' />
+            <div   className=' cursor-pointer select-none'>Category</div><ArrowDropDownIcon className=' -ml-1 text-lg  max-md:text-xs max-md:-mt-[3px]' />
           </div>
           {navDropDown ? <div><div className=' absolute top-5  h-4 w-4  border-l-transparent  border-r-transparent  border-b-sky-600 md:border-b-slate-300' style={{zIndex:'80', borderRightWidth: '35px', borderLeftWidth: "35px", borderBottomWidth: "30px", right: '-20px' }}></div>
           <ul
             className='flex flex-col gap-1 py-4  w-40 rounded-lg 
                 absolute top-8 -left-4   bg-sky-600
                 text-white opacity-0 md:bg-slate-200 md:text-slate-800' style={{zIndex:'80',transition:'all 2s ease',opacity:navDropDown?1:0}}>
-            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4' onClick={() => SetMenuToggle(true)}><li>mobile</li></NavLink>
-            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4' onClick={() => SetMenuToggle(true)}><li>cloths</li></NavLink>
-            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4' onClick={() => SetMenuToggle(true)}><li>devices</li></NavLink>
-            <NavLink  to='' className=' hover:bg-blue-200 py-2 px-4' onClick={() => SetMenuToggle(true)}><li>furniture</li></NavLink>
+            {categories.map((e,i)=>{
+              return <NavLink key={i}  to={`/catalog/${e.name}`} className=' hover:bg-blue-200 py-2 px-4' onClick={() => {SetMenuToggle(true); setNavDropDown(false)}}><li>{e.name}</li></NavLink>
+            })}
           </ul></div> : null}
 
         </li>

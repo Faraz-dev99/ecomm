@@ -171,5 +171,31 @@ const productStatusApi = async (status, productId, token) => {
 }
 
 
+//fetch categories
+const fetchCategory = async () => {
+      
+  try {
 
-export { addProduct, createAttributes,updateAttribute, productStatusApi }
+    let response = await fetch(`${baseUrl}product/getCategories`, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache',
+      },
+      cache: 'no-store',
+    });
+    response = await response.json();
+    if (!response.success) {
+      console.log("failed")
+      return
+    }
+
+    return response.categories;
+  }
+  catch (err) {
+    console.log("err", err.response)
+  }
+}
+
+
+
+export { addProduct, createAttributes,updateAttribute, productStatusApi,fetchCategory }

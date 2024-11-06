@@ -17,6 +17,8 @@ import ProductDetails from './pages/ProductDetails.js';
 import AddAttributes from './components/core/Dashboard/Seller/AddAttributes.js';
 import ProductListing from './components/core/Dashboard/Seller/ProductListing';
 import Search from './pages/Search.js';
+import { setToken } from './slices/authSlice.js';
+import Catalog from './pages/Catalog.js';
 
 
 
@@ -31,6 +33,7 @@ function App() {
     
      if (token) {
       const token = JSON.parse(sessionStorage.getItem("token"));
+      dispatch(setToken(token))
       dispatch(getUserDetails(token, dispatch));
     } 
   },[])
@@ -46,6 +49,7 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/search/:key' element={<Search />} />
+          <Route path='/catalog/:key' element={<Catalog />} />
 
           <Route element={<PrivateComponents />}>
             <Route path='/dashboard' element={<Dashboard />} >

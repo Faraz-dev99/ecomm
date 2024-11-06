@@ -1,47 +1,60 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
-import { baseUrl } from '../oprations/api';
-import DotLoader from '../components/common/DotLoader';
-import { Product } from '../filespath';
+import React, { useEffect,useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
 import Filtermenu from '../components/core/Dashboard/filter/Filtermenu';
+import { Product } from '../filespath';
+import { apiConnect } from '../oprations/apiConnect';
+import DotLoader from '../components/common/DotLoader';
+import { fetchCategory } from '../oprations/productApi';
 
-const Search = () => {
-  const { key } = useParams();
-  const [searchedProducts, setSearchedProducts] = useState([]);
+const Catalog = () => {
+    const { key } = useParams();
+  const [catalogProducts, setCatalogProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loader, setLoader] = useState(true);
-  
+  const navigate=useNavigate();
 
-  useEffect(() => {
-    const getSearchedProduct = async () => {
-      try {
-        const response = await fetch(`${baseUrl}product/searchProduct/${key}`);
-        if (!response.ok) {
-          if (response.status === 404) {
-            setSearchedProducts([]);
-            setFilteredProducts([]);
+  useEffect(()=>{
+    const getCatalogProducts=async ()=>{
+        try{
+            const categories = await fetchCategory();
+            if(categories.length<1){
+                navigate('/')
+            }
             setLoader(false);
+            let catalog=categories.filter((e)=>e.name===key)
+            catalog=catalog[0]._id
+            console.log("ye hai",catalog)
+            if(catalog){
+                 const response=await apiConnect(
+              "get",
+              "product/getProducts"
+            )
+            if(response.data.success){
+              let products=response?.data?.products;
+              products=products.filter((e)=>e.category===catalog)
+              
+              setLoader(false);
+              setCatalogProducts(products)
+              setFilteredProducts(products)
+              console.log("catalog products ",products)
+            }
+            }
+           
+            
           }
-          return;
-        }
-        const items = await response.json();
-        if (items.success) {
-          setSearchedProducts(items.products);
-          setFilteredProducts(items.products); // Set both searched and filtered products
-          setLoader(false);
-        }
-      } catch (err) {
-        console.log("Error fetching searched products", err);
-      }
-    };
-    getSearchedProduct();
-  }, [key]);
+          catch(err){
+            console.log(err)
+          }
+    }
+    getCatalogProducts();
+  },[key])
 
-  // Handle filter changes
-  const handleFilterChange = (newFilters) => {
+   // Handle filter changes
+   const handleFilterChange = (newFilters) => {
     const { categories, minPrice, maxPrice,sortBy } = newFilters;
 
-    const filtered = searchedProducts.filter(product => {
+    const filtered = catalogProducts.filter(product => {
       // Filter by category
       const categoryMatch = categories.length === 0 || categories.includes(product.category);
       
@@ -52,7 +65,7 @@ const Search = () => {
 
       return categoryMatch && priceMatch && product.status === "Published";
     });
-    console.log("filter is ",filtered)
+   // console.log("filter is ",filtered)
     // Apply sorting based on the selected filter
     if (sortBy === 'lowToHigh') {
       filtered.sort((a, b) => a.price - b.price);
@@ -66,7 +79,8 @@ const Search = () => {
 
   // Clear all filters
   const clearFilters = () => {
-    setFilteredProducts(searchedProducts); // Reset to original searched products
+     // Reset to original searched products
+     setFilteredProducts(catalogProducts);
   };
 
   if (loader) {
@@ -93,7 +107,7 @@ const Search = () => {
     <div className='flex flex-col justify-center relative my-10 px-4'>
       <Filtermenu onFilterChange={handleFilterChange} onClearFilters={clearFilters}/>
       <h1 className='text-sky-500 font-bold md:text-2xl max-md:text-xl mb-6'>
-        search results for: {key}
+        Catalog: {key}
       </h1>
       <div className='flex flex-wrap w-full'>
         {filteredProducts.map((product, i) => (
@@ -108,7 +122,7 @@ const Search = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Search;
+export default Catalog
