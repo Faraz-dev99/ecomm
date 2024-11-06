@@ -107,7 +107,7 @@ const Catalog = () => {
   return (
     <div className='flex flex-col justify-center relative my-10 px-4'>
       <Filtermenu onFilterChange={handleFilterChange} onClearFilters={clearFilters}/>
-      <div className=' mb-5 mt-2'>
+      <div className=' mb-5'>
       <div className=' text-slate-300 text-xs flex items-center gap-1 '>
         <div>LightStore</div>
         <IoIosArrowForward className=' text-slate-500 text-lg'/>
