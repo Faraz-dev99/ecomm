@@ -98,7 +98,7 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
             </div>
             <div className={`fixed w-0 top-0 right-0 bg-none transition-opacity duration-300 overflow-hidden ${toggleMenu ? 'grid place-items-end w-screen h-screen bg-slate-950/90 opacity-1' : 'opacity-0'}`}>
 
-                <div className={` relative px-5 py-5 h-screen font-semibold bg-slate-900 border border-slate-700 overflow-auto transition-all duration-150  ${toggleMenu ? 'right-[0px]' : '-right-[300px]'} text-slate-400 w-[300px]`} >
+                <div className={` relative px-5 py-5 h-screen font-semibold bg-slate-900  overflow-auto transition-all duration-150  ${toggleMenu ? 'right-[0px]' : '-right-[300px]'} text-slate-400 w-[300px]`} >
                     <div className=' flex justify-between items-center gap-4 mb-5'>
                         <div className=' text-lg '>Filtering</div>
                         <div onClick={() => setToggleMenu(!toggleMenu)}><FaArrowRight className=' text-lg cursor-pointer' /></div>

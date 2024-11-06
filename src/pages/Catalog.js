@@ -6,6 +6,7 @@ import { Product } from '../filespath';
 import { apiConnect } from '../oprations/apiConnect';
 import DotLoader from '../components/common/DotLoader';
 import { fetchCategory } from '../oprations/productApi';
+import { IoIosArrowForward } from "react-icons/io";
 
 const Catalog = () => {
     const { key } = useParams();
@@ -106,9 +107,17 @@ const Catalog = () => {
   return (
     <div className='flex flex-col justify-center relative my-10 px-4'>
       <Filtermenu onFilterChange={handleFilterChange} onClearFilters={clearFilters}/>
-      <h1 className='text-sky-500 font-bold md:text-2xl max-md:text-xl mb-6'>
-        Catalog: {key}
-      </h1>
+      <div className=' mb-5 mt-2'>
+      <div className=' text-slate-300 text-xs flex items-center gap-1 '>
+        <div>LightStore</div>
+        <IoIosArrowForward className=' text-slate-500 text-lg'/>
+        <div>Catalog</div>
+        <IoIosArrowForward className=' text-slate-500 text-lg'/>
+        <div>{key}</div>
+      </div>
+      <div className=' text-xl font-semibold mt-5'>{key}</div>
+      </div>
+      
       <div className='flex flex-wrap w-full'>
         {filteredProducts.map((product, i) => (
           <Product
