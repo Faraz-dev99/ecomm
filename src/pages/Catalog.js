@@ -7,6 +7,7 @@ import { apiConnect } from '../oprations/apiConnect';
 import DotLoader from '../components/common/DotLoader';
 import { fetchCategory } from '../oprations/productApi';
 import { IoIosArrowForward } from "react-icons/io";
+import Pagination from '../components/common/pagination/Pagination';
 
 const Catalog = () => {
     const { key } = useParams();
@@ -14,6 +15,15 @@ const Catalog = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [loader, setLoader] = useState(true);
   const navigate=useNavigate();
+
+   // Pagination states
+   const [currentPage, setCurrentPage] = useState(1);
+   const itemsPerPage = 3; 
+
+   // Calculate the products to show on the current page
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
   useEffect(()=>{
     const getCatalogProducts=async ()=>{
@@ -119,7 +129,7 @@ const Catalog = () => {
       </div>
       
       <div className='flex flex-wrap w-full'>
-        {filteredProducts.map((product, i) => (
+        {currentProducts.map((product, i) => (
           <Product
             key={i}
             id={product._id}
@@ -130,6 +140,12 @@ const Catalog = () => {
           />
         ))}
       </div>
+      <Pagination
+        totalItems={filteredProducts.length}
+        itemsPerPage={itemsPerPage}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
     </div>
   )
 }

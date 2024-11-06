@@ -92,11 +92,11 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
     }
 
     return (
-        <div style={{ zIndex: '1000' }}>
-            <div className=' fixed top-36 right-4 h-10 w-10 grid place-items-center rounded-full bg-slate-900 cursor-pointer' onClick={() => setToggleMenu(!toggleMenu)}>
+        <div>
+            <div className=' fixed top-36 right-4 h-10 z-30 w-10 grid place-items-center rounded-full bg-slate-800 cursor-pointer' onClick={() => setToggleMenu(!toggleMenu)} >
                 <IoIosArrowBack className=' text-2xl' />
             </div>
-            <div className={`fixed w-0 top-0 right-0 bg-none transition-opacity duration-300 overflow-hidden ${toggleMenu ? 'grid place-items-end w-screen h-screen bg-slate-950/90 opacity-1' : 'opacity-0'}`}>
+            <div className={`fixed w-0 top-0 right-0 bg-none transition-opacity duration-300 overflow-hidden ${toggleMenu ? 'grid place-items-end w-screen h-screen bg-slate-950/90 opacity-1' : 'opacity-0'}`} style={{zIndex:'1000'}}>
 
                 <div className={` relative px-5 py-5 h-screen font-semibold bg-slate-900  overflow-auto transition-all duration-150  ${toggleMenu ? 'right-[0px]' : '-right-[300px]'} text-slate-400 w-[300px]`} >
                     <div className=' flex justify-between items-center gap-4 mb-5'>
