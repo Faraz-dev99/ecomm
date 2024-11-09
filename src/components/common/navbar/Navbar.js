@@ -166,7 +166,7 @@ const Navbar = () => {
   }
   return (
     <>{/* bg-gradient-to-r from-blue-700 to-sky-500 */}
-    <div className=' select-none   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-2 px-2 pt-4 text-lg font-semibold max-sm:flex-col gap-3'>
+    <div className=' select-none   relative z-50 bg-slate-950 text-white flex flex-wrap  justify-between py-2 px-2 pt-4 text-lg font-semibold max-sm:flex-col gap-3' style={{zIndex:'500'}}>
       <div className=' flex gap-2'>
       <div className=' md:hidden flex items-center' onClick={()=>SetMenuToggle(!menuToggle)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
       <NavLink to={'/'} className='  '><span className=' '>Light</span><span className=' text-sky-500'>Store</span></NavLink>
@@ -236,7 +236,7 @@ const Navbar = () => {
         </div>:null
       }
       </div>
-    <nav className=' px-4 flex justify-between bg-slate-900   relative '>
+    <nav className=' px-4 flex justify-between bg-slate-900   relative ' style={{zIndex:'400'}}>
       
       <ul className='flex z-40 gap-4 mr-4  max-md:shadow-lg max-md:text-sm max-md:font-normal max-md:gap-4 py-4 max-md:shadow-stone-5
                 00   w-full

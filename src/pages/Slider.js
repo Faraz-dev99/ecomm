@@ -144,7 +144,7 @@ const Slider = ({ data }) => {
         }
 
         {/* Buttons visible only on desktop */}
-        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col space-y-2">
+        <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col space-y-2" style={{zIndex:'200'}}>
           <button
             onClick={prevSlide}
             className="w-8 h-8 max-lg:rounded-full bg-sky-600/20 lg:bg-sky-500/75 text-white rounded-md flex items-center justify-center shadow-md hover:bg-sky-500"
