@@ -8,6 +8,7 @@ import { baseUrl } from '../../../../../oprations/api';
 import { NavLink, useNavigate } from 'react-router-dom';
 import toast from "react-hot-toast";
 import { setEditProduct,setProduct } from '../../../../../slices/productSlice';
+import Pagination from '../../../../common/pagination/Pagination';
 
 
 const ProductListing = () => {
@@ -16,6 +17,13 @@ const ProductListing = () => {
     const [loading, setLoading] = useState(true);
     const navigate=useNavigate();
     const dispatch=useDispatch();
+
+    // Pagination states
+   const [currentPage, setCurrentPage] = useState(1);
+   const itemsPerPage = 5; 
+
+  
+
     useEffect(() => {
         const getProductList = async () => {
             try {
@@ -83,6 +91,11 @@ const ProductListing = () => {
         }
     }
 
+     // Calculate the products to show on the current page
+  const indexOfLastProduct = currentPage * itemsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
+  const currentProducts = productList.slice(indexOfFirstProduct, indexOfLastProduct);
+
 
     if (loading) {
         return <div className=' absolute  top-0 left-0 grid place-items-center h-full  w-full bg-gray-950' style={{ zIndex: 1000 }}>
@@ -92,9 +105,10 @@ const ProductListing = () => {
 
     return (
         <div>
+        <div>
             <div className=' text-lg font-semibold text-slate-300 mb-8'>My Products</div>
             {
-                productList.length!==0?productList.map((e, i) => {
+                currentProducts.length!==0?currentProducts.map((e, i) => {
                     return <div key={i} className=' flex relative justify-between pb-6 mt-6 border-b border-b-slate-700  items-center'>
                         <div className=' flex items-center'>
                             <div className=' h-16 w-28'><img className=' object-contain w-full h-full' src={e.images[0].secure_url} alt='product' /></div>
@@ -121,6 +135,13 @@ const ProductListing = () => {
                     <NavLink className=" text-sky-500 text-base font-semibold text-center" to={"/dashboard/add-product"}>create new product</NavLink>
                 </div>
             }
+        </div>
+        <Pagination
+                    totalItems={productList.length}
+                    itemsPerPage={itemsPerPage}
+                    currentPage={currentPage}
+                    onPageChange={setCurrentPage}
+                    />
         </div>
     )
 }
