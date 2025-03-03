@@ -57,7 +57,7 @@ const Navbar = () => {
     
     const fetchCategoryFunc=async ()=>{
       const categories=await fetchCategory();
-      if(categories.length>0){
+      if(categories?.length>0){
         setCategories(categories)
       }
       else{

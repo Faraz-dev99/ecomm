@@ -10,6 +10,7 @@ import Otp from './pages/Otp'
 import PrivateComponents from './pages/PrivateComponents'
 import OpenRoute from './pages/OpenRoute'
 import Dashboard from './pages/Dashboard'
+import Footer from './pages/Footer'
 
 
-export {Header,Home,Slider,Product,About,Contact,Login,Signup,Otp,PrivateComponents,OpenRoute,Dashboard}
+export {Header,Footer,Home,Slider,Product,About,Contact,Login,Signup,Otp,PrivateComponents,OpenRoute,Dashboard}

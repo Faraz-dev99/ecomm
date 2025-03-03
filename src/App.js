@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Home, Header, PrivateComponents, About, Contact, Login, Signup, Otp, Dashboard, OpenRoute } from './filespath'
+import { Home, Header,Footer, PrivateComponents, About, Contact, Login, Signup, Otp, Dashboard, OpenRoute } from './filespath'
 import Profile from './components/core/Dashboard/profile/Profile.js';
 import Cart from './components/core/Dashboard/cart/Cart';
 import Settings from './components/core/Dashboard/settings/Settings';
@@ -78,6 +78,7 @@ function App() {
           </Route>
           <Route path='*' element={'page not found'} />
         </Routes>
+        <Footer/>
       </div>
       <Toaster
         position={width > 600 ? 'bottom-right' : 'bottom-right'}
