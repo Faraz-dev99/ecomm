@@ -93,12 +93,12 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
 
     return (
         <div>
-            <div className=' fixed top-36 right-4 h-10 z-30 w-10 grid place-items-center rounded-full bg-slate-800 cursor-pointer' onClick={() => setToggleMenu(!toggleMenu)} >
+            <div className=' fixed top-36 right-4 h-10 z-30 w-10 grid place-items-center rounded-full bg-zinc-800 cursor-pointer' onClick={() => setToggleMenu(!toggleMenu)} >
                 <IoIosArrowBack className=' text-2xl' />
             </div>
-            <div className={`fixed w-0 top-0 right-0 bg-none transition-opacity duration-300 overflow-hidden ${toggleMenu ? 'grid place-items-end w-screen h-screen bg-slate-950/90 opacity-1' : 'opacity-0'}`} style={{zIndex:'1000'}}>
+            <div className={`fixed w-0 top-0 right-0 bg-none transition-opacity duration-300 overflow-hidden ${toggleMenu ? 'grid place-items-end w-screen h-screen bg-zinc-950/90 opacity-1' : 'opacity-0'}`} style={{zIndex:'2000'}}>
 
-                <div className={` relative px-5 py-5 h-screen font-semibold bg-slate-900  overflow-auto transition-all duration-150  ${toggleMenu ? 'right-[0px]' : '-right-[300px]'} text-slate-400 w-[300px]`} >
+                <div className={` relative px-5 py-5 h-screen font-semibold bg-zinc-900  overflow-auto transition-all duration-150  ${toggleMenu ? 'right-[0px]' : '-right-[300px]'} text-zinc-400 w-[300px]`} >
                     <div className=' flex justify-between items-center gap-4 mb-5'>
                         <div className=' text-lg '>Filtering</div>
                         <div onClick={() => setToggleMenu(!toggleMenu)}><FaArrowRight className=' text-lg cursor-pointer' /></div>
@@ -110,7 +110,7 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
                             <div className=' flex flex-wrap gap-1 text-xs'>
                                 {
                                     filterData.categories.map((e, i) => {
-                                        return <div key={i} onClick={() => toggleCategorySelection(e._id)} className={` rounded-xl border border-slate-600 py-1 px-2 cursor-pointer  ${filterValues.categories.includes(e._id) ? 'bg-sky-500' : 'bg-slate-800/95'}`}>{e.name}</div>
+                                        return <div key={i} onClick={() => toggleCategorySelection(e._id)} className={` rounded-xl border border-zinc-600 py-1 px-2 cursor-pointer  ${filterValues.categories.includes(e._id) ? 'bg-teal-800' : 'bg-zinc-800/95'}`}>{e.name}</div>
                                     })
                                 }
                             </div>
@@ -130,7 +130,7 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
                                             minPrice: minPrice === "" || minPrice <= prev.maxPrice ? minPrice : prev.maxPrice
                                         }));
                                     }}
-                                    className='w-1/2 px-2 py-1 outline-none bg-slate-800 border border-slate-600 text-white rounded'
+                                    className='w-1/2 px-2 py-1 outline-none bg-zinc-800 border border-zinc-600 text-white rounded'
                                 />
                                 <input
                                     type='number'
@@ -144,7 +144,7 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
                                             maxPrice: maxPrice === "" || maxPrice >= prev.minPrice ? maxPrice : prev.minPrice
                                         }));
                                     }}
-                                    className='w-1/2 px-2 py-1 outline-none bg-slate-800 border border-slate-600 text-white rounded'
+                                    className='w-1/2 px-2 py-1 outline-none bg-zinc-800 border border-zinc-600 text-white rounded'
                                 />
 
                             </div>
@@ -157,19 +157,19 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
 
                                 <button
                                     onClick={() => handleFilterChange('sortBy', 'lowToHigh')}
-                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'lowToHigh' ? 'bg-sky-500' : 'bg-slate-800/95'} `}
+                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'lowToHigh' ? 'bg-teal-800' : 'bg-zinc-800/95'} `}
                                 >
                                     Ascending
                                 </button>
                                 <button
                                     onClick={() => handleFilterChange('sortBy', 'highToLow')}
-                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'highToLow' ? 'bg-sky-500' : 'bg-slate-800/95'} `}
+                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'highToLow' ? 'bg-teal-800' : 'bg-zinc-800/95'} `}
                                 >
                                     Descending
                                 </button>
                                 <button
                                     onClick={() => handleFilterChange('sortBy', 'newest')}
-                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'newest' ? 'bg-sky-500' : 'bg-slate-800/95'} `}
+                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'newest' ? 'bg-teal-800' : 'bg-zinc-800/95'} `}
                                 >
                                     Newest
                                 </button>
@@ -178,7 +178,7 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
 
                         <div className=' mt-10'>
 
-                            <button onClick={handleClearFilters} className=" text-xs text-slate-200 py-1 px-2 rounded-lg bg-slate-500">
+                            <button onClick={handleClearFilters} className=" text-xs text-zinc-200 py-1 px-2 rounded-lg bg-zinc-500">
                                 Clear Filters
                             </button>
                         </div>

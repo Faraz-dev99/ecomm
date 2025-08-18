@@ -26,19 +26,19 @@ const Cart = () => {
             <div className=' flex flex-col gap-8 py-4 px-[1.5px]  max-lg:w-full md:min-w-[600px]'>
               {
                 cart.map((item, index, arr) => {
-                  return <div className=' flex  pb-10 border-b border-b-sky-500 gap-6 max-476:gap-3 w-full relative'>
+                  return <div className=' flex  pb-10 border-b border-b-teal-800 gap-6 max-476:gap-3 w-full relative'>
                     <div className=' h-full flex justify-center items-center'>
                       <div className=' h-24 w-32 max-476:h-16 max-476:w-20 flex justify-center items-center bg-white'><img className=' w-full h-full object-contain' src={item.images[0].secure_url} /></div>
                     </div>
 
                     <div className=' flex flex-col gap-1 max-md:gap-[1.5px]'>
                       <div className=' max-476:text-[12px]'>{item.name}</div>
-                      <div className=' text-slate-400 text-xs max-476:text-[10px]'>{item.brand}</div>
-                      <div className=' text-lg max-476:text-sm 476:hidden font-semibold text-sky-500'>₹{item.price}</div>
+                      <div className=' text-zinc-400 text-xs max-476:text-[10px]'>{item.brand}</div>
+                      <div className=' text-lg max-476:text-sm 476:hidden font-semibold text-teal-800'>₹{item.price}</div>
 
                       <div className='flex  gap-2 mt-5 max-476:mt-2'>
                        
-                          <select className=' bg-transparent py-2 max-476:py-1 px-2  rounded-md border border-sky-500 text-sky-500 text-xs max-476:text-[9px] '>
+                          <select className=' bg-transparent py-2 max-476:py-1 px-2  rounded-md border border-teal-800 text-teal-800 text-xs max-476:text-[9px] '>
                             {
                               // Generate options based on the stock
                               Array.from({ length: item.stock }, (_, i) => (
@@ -50,27 +50,27 @@ const Cart = () => {
 
                           </select>
                      
-                        <button className=' px-3 py-[2px] rounded-md border border-sky-500 text-sky-500 text-xs max-476:text-[9px] font-extralight ' onClick={() => removeItemCart(item._id)}>Remove</button>
+                        <button className=' px-3 py-[2px] rounded-md border border-teal-800 text-teal-800 text-xs max-476:text-[9px] font-extralight ' onClick={() => removeItemCart(item._id)}>Remove</button>
                       </div>
                     </div>
                     <div className=' max-476:hidden absolute right-0'>
-                      <div className=' text-xl font-semibold text-sky-500'>₹{item.price}</div>
+                      <div className=' text-xl font-semibold text-teal-800'>₹{item.price}</div>
                     </div>
                   </div>
                 })
               }
             </div>
-            <div className=' flex flex-col gap-5 py-6 px-5 bg-slate-900 max-lg:w-full max-h-[170px]'>
+            <div className=' flex flex-col gap-5 py-6 px-5 bg-zinc-900 max-lg:w-full max-h-[170px]'>
               <div className=' text-lg font-semibold'>Order Summary ( {cart.length} item )</div>
               <div className='flex justify-between text-sm font-extralight'>
                 <div>Total</div><div>₹{cart.reduce((total, item) => total + parseFloat(item.price), 0)}</div>
               </div>
-              <button className=' rounded-md bg-sky-500 text-slate-950 w-full py-2 px-2 text-center text-xs mt-2'>checkout</button>
+              <button className=' rounded-md bg-teal-800 text-zinc-950 w-full py-2 px-2 text-center text-xs mt-2'>checkout</button>
             </div>
           </div> : <div className=' grid place-items-center gap-4'>
-            <div><BsCart2 className=' text-9xl text-slate-700' /></div>
+            <div><BsCart2 className=' text-9xl text-zinc-700' /></div>
             <div className=' font-semibold text-xl'>Your cart is empty</div>
-            <NavLink to={"/"} className=" text-sky-500 font-semibold">continue shopping</NavLink>
+            <NavLink to={"/"} className=" text-teal-800 font-semibold">continue shopping</NavLink>
           </div>
         }
       </div>

@@ -59,7 +59,7 @@ const ImageSlider = ({ slides }) => {
         className="flex transition-transform ease-out duration-500"
         style={{
           // Apply dragging offset while dragging
-          transform: `translateX(calc(${-currentIndex * 100}% + ${draggingPosition}px))`,
+          transform: `tranzincX(calc(${-currentIndex * 100}% + ${draggingPosition}px))`,
           transition: transitionEnabled ? 'transform 0.5s ease' : 'none', // Apply transition only when needed
         }}
         onTouchStart={(e) => handleDragStart(e.touches[0].clientX)}
@@ -76,12 +76,12 @@ const ImageSlider = ({ slides }) => {
           </div>
         ))}
       </div>
-      <div className="absolute top-1/2 -translate-y-1/2 right-2 transform -translate-x-1/2 flex flex-col gap-2">
+      <div className="absolute top-1/2 -tranzinc-y-1/2 right-2 transform -tranzinc-x-1/2 flex flex-col gap-2">
         {slides.map((_, index) => (
           <div
             key={index}
             onClick={() => handleDotClick(index)}
-            className={`w-2 h-2 rounded-full ${index === currentIndex ? 'bg-sky-500' : 'bg-slate-600'}`}
+            className={`w-2 h-2 rounded-full ${index === currentIndex ? 'bg-teal-800' : 'bg-zinc-600'}`}
           />
         ))}
       </div>

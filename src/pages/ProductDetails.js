@@ -80,7 +80,7 @@ const ProductDetails = () => {
     }
     if (loading) {
         return (
-            <div className='flex items-center justify-center absolute  top-0 left-0 h-screen w-full bg-slate-950' style={{ zIndex: 1000 }}>
+            <div className='flex items-center justify-center absolute   top-0 left-0 h-screen w-full bg-zinc-950' style={{ zIndex: 1000 }}>
                 <div className="spinner"></div>
             </div>
         );
@@ -92,9 +92,9 @@ const ProductDetails = () => {
 
     return (
         <div className=' lg:px-6  lg:py-6 flex flex-col gap-6 text-base'>
-            <div className='flex max-lg:flex-col justify-center   gap-10 text-slate-200 '>
+            <div className='flex max-lg:flex-col justify-center   gap-10 text-zinc-200 '>
 
-                <div className="flex justify-center gap-2 relative lg:h-96  h-full  max-lg:bg-slate-100">
+                <div className="flex justify-center gap-2 relative lg:h-96  h-full  max-lg:bg-zinc-100-100">
 
                     {isDesktop ? <>
                         <div className="flex justify-center w-full lg:w-72 py-3 ">
@@ -102,7 +102,7 @@ const ProductDetails = () => {
                         </div>
                         <div className="flex flex-col gap-2 h-56 px-2 py-2 overflow-auto hide-scrollbar">
                             {product.images.map((image, index) => (
-                                <div key={image.secure_url} className={`w-12 min-h-12  cursor-pointer border  rounded-full transition-transform duration-300 ease-in-out ${image.secure_url === mainImage ? 'border-blue-500 transform scale-110' : 'border-gray-300 hover:border-blue-500 hover:scale-105'}`}><img
+                                <div key={image.secure_url} className={`w-12 min-h-12  cursor-pointer border  rounded-full transition-transform duration-300 ease-in-out ${image.secure_url === mainImage ? 'border-teal-500 transform scale-110' : 'border-zinc-300 hover:border-teal-500 hover:scale-105'}`}><img
                                     src={image.secure_url}
                                     alt={`${product.name} ${index}`}
                                     className={`w-full h-full rounded-full`}
@@ -111,9 +111,9 @@ const ProductDetails = () => {
 
                             ))}
                         </div>
-                        <div className='flex w-full gap-4 absolute max-lg:sticky  bottom-0 left-0 '>
-                            <button className=' py-2 px-3 bg-slate-700' onClick={addToCart}>Add to Cart</button>
-                            <button className=' py-2 px-3 bg-sky-500 lg:ml-8'>Buy Now</button>
+                        <div className='flex w-full gap-4 absolute max-lg:fixed  bottom-0 left-0 '>
+                            <button className=' py-2 px-3 bg-zinc-900' onClick={addToCart}>Add to Cart</button>
+                            <button className=' py-2 px-3 bg-teal-800 lg:ml-8'>Buy Now</button>
                         </div>
                     </> : <ImageSlider slides={imageslides} /> /* <div className="flex  justify-center w-full h-full max-w-[300px] max-h-[300px] ">
                         <img src={mainImage} alt={product.name} className=" w-full h-full max-w-[300px] max-h-[300px]  " />
@@ -123,18 +123,18 @@ const ProductDetails = () => {
                 <div className=' max-lg:px-4 md:min-w-96'>
                     <div className=' flex flex-col gap-2'>
                         <div className=' mt-2 '>
-                            <h1 className=" text-slate-400 text-lg font-semibold mb-2 ">{product.name}</h1>
-                            <p className="text-2xl font-bold mb-2 text-sky-500">₹{product.price}</p>
+                            <h1 className=" text-zinc-400 text-lg font-semibold mb-2 ">{product.name}</h1>
+                            <p className="text-2xl font-bold mb-2 text-teal-800">₹{product.price}</p>
                         </div>
 
                         <div className=" flex flex-col gap-4 py-4 w-full max-w-[600px]">
 
                             <div className='flex items-center gap-2'>
-                                <h3 className=' text-slate-500'>Brand:</h3>
+                                <h3 className=' text-zinc-500'>Brand:</h3>
                                 <p className=' text-sm'>{product.brand}</p>
                             </div>
                             <div className='flex items-center gap-2'>
-                                <h3 className=' text-slate-500'>Colour:</h3>
+                                <h3 className=' text-zinc-500'>Colour:</h3>
                                 <div className='flex gap-2'>
                                     {product.color.map((e, i) => {
                                         return <div key={e.name + i} className={` rounded-full h-5 w-5`} style={{ background: e.name }}></div>
@@ -144,33 +144,33 @@ const ProductDetails = () => {
                             </div>
                             {
                                 product.sizes.length > 0 ? <div className=' flex items-center gap-2 '>
-                                    <div  className=' text-slate-500'>sizes:</div>
+                                    <div  className=' text-zinc-500'>sizes:</div>
                                     <div className='flex gap-2'>
                                         {product.sizes.map((e, i) => {
-                                            return <div key={i} className=' border border-slate-600 min-w-8 text-center rounded-md py-2 px-2 text-xs text-slate-400'>{e.size}</div>
+                                            return <div key={i} className=' border border-zinc-600 min-w-8 text-center rounded-md py-2 px-2 text-xs text-zinc-400'>{e.size}</div>
                                         })}
                                     </div>
                                 </div> : <div className='flex items-center gap-2'>
-                                    <h3 className=' text-slate-500'>Stock:</h3>
+                                    <h3 className=' text-zinc-500'>Stock:</h3>
                                     <p className=' text-sm'>{product.stock}</p>
                                 </div>
                             }
 
 
                             <div>
-                                <h3 className=' text-slate-500 mb-4'>Description:</h3>
-                                <p className=' py-3 px-3 text-sm text-slate-200 bg-slate-800'>{product.description}</p>
+                                <h3 className=' text-zinc-500 mb-4'>Description:</h3>
+                                <p className=' py-3 px-3 text-sm text-zinc-200-200 bg-zinc-900'>{product.description}</p>
                             </div>
 
                         </div>
 
                         {product.attributes?.type.length>0 ? <div className=' flex-col gap-4 mt-8 mb-4 '>
                             <div className=' text-2xl font-semibold'> Additional Details</div>
-                            <div className=' flex flex-col gap-6 mt-4 border border-slate-800 py-6 px-3 max-w-[600px] text-slate-300 '>{product.attributes.type.map((e, id) => {
+                            <div className=' flex flex-col gap-6 mt-4 border border-zinc-800 py-6 px-3 max-w-[600px] text-zinc-300 '>{product.attributes.type.map((e, id) => {
                                 return <div key={id} className='flex items-center gap-4 text-sm'>
-                                    <div className=' text-slate-400'>{e.name}:</div>
+                                    <div className=' text-zinc-400'>{e.name}:</div>
                                     <div className=' flex flex-wrap gap-2'>{e.values.map((value, i) => {
-                                        return <div key={i} className=' py-2 px-2 bg-slate-800 border border-slate-800'>{value}</div>
+                                        return <div key={i} className=' py-2 px-2 bg-zinc-800-800 border border-zinc-800'>{value}</div>
                                     })}</div>
                                 </div>
 
@@ -182,9 +182,9 @@ const ProductDetails = () => {
 
 
             </div>
-            <div className='flex lg:hidden sticky bottom-0 w-full justify-center items-center  '>
-                <button className=' py-2 px-3 bg-slate-700 w-full' onClick={addToCart}>Add to Cart</button>
-                <button className=' py-2 px-3 bg-sky-500 lg:ml-8 w-full'>Buy Now</button>
+            <div className='flex lg:hidden fixed bottom-0 w-full justify-center items-center  '>
+                <button className=' py-2 px-3 bg-zinc-900/80 w-full' onClick={addToCart}>Add to Cart</button>
+                <button className=' py-2 px-3 bg-teal-800/80 lg:ml-8 w-full'>Buy Now</button>
             </div>
 
         </div>

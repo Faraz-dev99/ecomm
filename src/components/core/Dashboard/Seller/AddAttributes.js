@@ -120,13 +120,13 @@ const AddAttributes = () => {
   };
 
   return (
-    <div className="p-4 border border-slate-700 rounded-lg shadow-lg">
+    <div className="p-4 border border-zinc-700 rounded-lg shadow-lg">
       <h1 className="text-xl font-semibold mb-4">Add Attributes</h1>
       <div className="flex flex-col gap-4">
         {/* Input for attribute name */}
         <input
           type="text"
-          className="placeholder:text-slate-600 bg-transparent border border-slate-700 focus:border-sky-500 py-2 px-3 outline-none rounded-lg"
+          className="placeholder:text-zinc-600 bg-transparent border border-zinc-700 focus:border-teal-800 py-2 px-3 outline-none rounded-lg"
           placeholder="Attribute name"
           name="name"
           value={attributeData.name}
@@ -136,14 +136,14 @@ const AddAttributes = () => {
         {/* Input for attribute value and button to add the value */}
         <div className="flex gap-2">
           <input
-            className="placeholder:text-slate-600 bg-transparent border border-slate-700 focus:border-sky-500 py-2 px-3 outline-none rounded-lg"
+            className="placeholder:text-zinc-600 bg-transparent border border-zinc-700 focus:border-teal-800 py-2 px-3 outline-none rounded-lg"
             placeholder="Attribute value"
             name="value"
             value={attributeData.value}
             onChange={handleAttributeData}
           />
           <button
-            className="py-2 px-3 rounded-md bg-sky-500 text-slate-950"
+            className="py-2 px-3 rounded-md bg-teal-800 text-zinc-950"
             onClick={addAttributeValue}
           >
             Add Value
@@ -152,14 +152,14 @@ const AddAttributes = () => {
 
         {/* Button to create and store the attribute */}
         <button
-          className="mt-2 py-2 px-4 rounded-md bg-sky-500 text-white"
+          className="mt-2 py-2 px-4 rounded-md bg-teal-800 text-white"
           onClick={createAttribute}
         >
           Create Attribute
         </button>
 
         {/* Display the current attribute being created */}
-        <div className="mt-4 border border-slate-700 rounded-lg p-2">
+        <div className="mt-4 border border-zinc-700 rounded-lg p-2">
           <strong>Current Attribute:</strong> {currentAttribute.name}
           <ul className="list-disc pl-5">
             {currentAttribute.values.map((value, index) => (
@@ -173,8 +173,8 @@ const AddAttributes = () => {
           <h2 className="font-semibold mb-2">All Attributes:</h2>
           <ul>
             {attributes.type.map((attribute, index) => (
-              <li key={index} className="mb-3 border border-slate-700 rounded-lg  py-4">
-                <div className="flex items-center justify-between mb-2 px-3 pb-2 border-b border-b-slate-700">
+              <li key={index} className="mb-3 border border-zinc-700 rounded-lg  py-4">
+                <div className="flex items-center justify-between mb-2 px-3 pb-2 border-b border-b-zinc-700">
                   <strong>{attribute.name}:</strong>
                   <button
                     className=" text-xl"
@@ -203,7 +203,7 @@ const AddAttributes = () => {
 
         {/* Submit all attributes */}
         <button
-          className="mt-4 py-2 px-4 rounded-md bg-sky-500"
+          className="mt-4 py-2 px-4 rounded-md bg-teal-800"
           onClick={handleSubmit}
         >
           Submit All Attributes

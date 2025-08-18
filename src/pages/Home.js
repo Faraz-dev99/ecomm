@@ -13,7 +13,7 @@ const Home = () => {
   const dispatch=useDispatch();
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 5; 
+  const itemsPerPage = 10; 
 
   // Calculate the products to show on the current page
  const indexOfLastProduct = currentPage * itemsPerPage;
@@ -53,7 +53,7 @@ const Home = () => {
   }, [products]);
 
   if(loading){
-    return <div className=' absolute  top-0 left-0 grid place-items-center h-screen  w-full bg-gray-950' style={{zIndex:1000}}>
+    return <div className=' absolute  top-0 left-0 grid place-items-center h-screen  w-full bg-zinc-950' style={{zIndex:1000}}>
       <div className="spinner"></div>
     </div>
   }

@@ -21,7 +21,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-3 py-1 rounded ${currentPage === page ? 'bg-sky-500 text-white' : 'text-slate-100'}`}
+          className={`px-3 py-1 rounded ${currentPage === page ? 'bg-teal-800 text-white' : 'text-zinc-100'}`}
         >
           {page}
         </button>
@@ -31,7 +31,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
     // Display ellipsis if there are pages after the range
     if (endPage < totalPages - 1) {
       pageButtons.push(
-        <span key="ellipsis" className="px-3 py-1 text-slate-100">
+        <span key="ellipsis" className="px-3 py-1 text-zinc-100">
           ...
         </span>
       );
@@ -43,7 +43,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
         <button
           key={totalPages}
           onClick={() => onPageChange(totalPages)}
-          className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-sky-500 text-white' : 'text-slate-100'}`}
+          className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-teal-800 text-white' : 'text-zinc-100'}`}
         >
           {totalPages}
         </button>
@@ -54,12 +54,12 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
   };
 
   return (
-    <div className="flex justify-center text-sm space-x-2 mt-4 text-slate-100">
+    <div className="flex justify-center text-sm space-x-2 mt-4 text-zinc-100">
       {/* Previous Button */}
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className={`px-3 py-1 ${currentPage === 1 ? 'text-gray-400' : 'text-slate-100'}`}
+        className={`px-3 py-1 ${currentPage === 1 ? 'text-gray-400' : 'text-zinc-100'}`}
       >
         Previous
       </button>
@@ -71,7 +71,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className={`px-3 py-1 ${currentPage === totalPages ? 'text-gray-400' : 'text-slate-100'}`}
+        className={`px-3 py-1 ${currentPage === totalPages ? 'text-gray-400' : 'text-zinc-100'}`}
       >
         Next
       </button>

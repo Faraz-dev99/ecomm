@@ -18,7 +18,7 @@ const Catalog = () => {
 
    // Pagination states
    const [currentPage, setCurrentPage] = useState(1);
-   const itemsPerPage = 3; 
+   const itemsPerPage = 10; 
 
    // Calculate the products to show on the current page
   const indexOfLastProduct = currentPage * itemsPerPage;
@@ -106,7 +106,7 @@ const Catalog = () => {
     return (
       <div className='flex flex-col justify-center relative px-4'>
         <Filtermenu onFilterChange={handleFilterChange}  onClearFilters={clearFilters}/>
-        <div className=' max-md:min-h-[calc(100vh-101.6px)] md:min-h-[calc(100vh-117.6px)] grid place-items-center text-slate-400 text-lg font-semibold'>
+        <div className=' max-md:min-h-[calc(100vh-101.6px)] md:min-h-[calc(100vh-117.6px)] grid place-items-center text-zinc-400 text-lg font-semibold'>
         No result found!
         </div>
         
@@ -118,11 +118,11 @@ const Catalog = () => {
     <div className='flex flex-col justify-center relative my-10 px-4'>
       <Filtermenu onFilterChange={handleFilterChange} onClearFilters={clearFilters}/>
       <div className=' mb-5'>
-      <div className=' text-slate-300 text-xs flex items-center gap-1 '>
+      <div className=' text-zinc-300 text-xs flex items-center gap-1 '>
         <div>LightStore</div>
-        <IoIosArrowForward className=' text-slate-500 text-lg'/>
+        <IoIosArrowForward className=' text-zinc-500 text-lg'/>
         <div>Catalog</div>
-        <IoIosArrowForward className=' text-slate-500 text-lg'/>
+        <IoIosArrowForward className=' text-zinc-500 text-lg'/>
         <div>{key}</div>
       </div>
       <div className=' text-xl font-semibold mt-5'>{key}</div>

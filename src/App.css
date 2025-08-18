@@ -19,7 +19,7 @@
     border: 8px solid transparent; /* Transparent border for the spinner background */
     border-radius: 50%; /* Makes it circular */
     border-top: 8px solid transparent; /* Makes the top part invisible to show gradient effect */
-    background: conic-gradient(from 0deg, transparent 0%, #0ea5e9 100%); /* Slightly darker gradient */
+    background: conic-gradient(from 0deg, transparent 0%, #00695C 100%); /* Slightly darker gradient */
     background-clip: content-box; /* Clips the background gradient to the content box */
     animation: spin 1s linear infinite; /* Spinning animation */
   }
@@ -37,9 +37,16 @@
     display: none;
   }
 
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none; /* For Chrome, Safari, and Opera */
-  }
+  /* Hide scrollbar but keep scroll functionality */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  visibility:hidden; /* Chrome, Safari, Opera */
+}
+
 
 
   @keyframes grow-shrink {
@@ -76,7 +83,7 @@
 @media screen and (min-width:1080px){
     .slantBox{
         position:relative;
-        background: linear-gradient(to right,#09389e,#14a9b6);
+        background: linear-gradient(to right,#2E7D32,#14a9b6);
         transform:skew(170deg) translateX(20px);
        
     }

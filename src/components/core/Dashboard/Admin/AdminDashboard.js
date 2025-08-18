@@ -30,7 +30,7 @@ const AdminDashboard = () => {
 
         {/* Best Selling Products Section */}
         <div
-          className=" bg-gradient-to-r from-sky-700 to-sky-500 text-white p-4 w-full lg:w-1/4 font-bold flex flex-col gap-3 max-lg:min-h-60"
+          className=" bg-gradient-to-r from-teal-700 to-teal-500 text-white p-4 w-full lg:w-1/4 font-bold flex flex-col gap-3 max-lg:min-h-60"
           style={{ height: 'auto' }}
         >
           <h2 className=' text-base font-semibold'>Total Sales</h2>

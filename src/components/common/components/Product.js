@@ -22,12 +22,12 @@ const Product = ({id,name,desc,price,thumbnail}) => {
       </div>
       <div className='flex justify-center gap-1  flex-col '>
         
-        <p className='flex items-center text-lg text-slate-100 font-medium max-md:text-base'>₹{price}</p>
-        <h2 className=' text-sm font-normal text-slate-400 max-md:text-xs'>{name}</h2>
+        <p className='flex items-center text-lg text-zinc-100 font-medium max-md:text-base'>₹{price}</p>
+        <h2 className=' text-sm font-normal text-zinc-400 max-md:text-xs'>{name}</h2>
        
       </div>
       </div>
-     {/*  <div className=' w-full py-[4px] px-2 text-sm font-semibold text-center text-slate-950  bg-sky-500 transition-all'>
+     {/*  <div className=' w-full py-[4px] px-2 text-sm font-semibold text-center text-zinc-950  bg-sky-500 transition-all'>
         Buy Now
       </div> */}
       

@@ -71,19 +71,19 @@ const Signup = () => {
   return (
     <div className='flex flex-col mx-6 justify-center items-center'>
       
-      <form className='flex flex-col justify-center   my-3 w-full max-w-96  gap-6 py-8 px-10 rounded-lg border border-slate-800' onSubmit={addUser}>
+      <form className='flex flex-col justify-center   my-3 w-full max-w-96  gap-6 py-8 px-10 rounded-lg border border-zinc-800' onSubmit={addUser}>
       <h1 className=' text-2xl font-medium mb-4'>Signup</h1>
-          <input type='text' placeholder='username' name='username' className=' bg-transparent outline-none border-b border-b-slate-700 pb-3 focus:border-b-sky-500' value={userDetail.username} onChange={userInfo}/>
+          <input type='text' placeholder='username' name='username' className=' bg-transparent outline-none border-b border-b-zinc-700 pb-3 focus:border-b-teal-800' value={userDetail.username} onChange={userInfo}/>
           {isinvalid && !userDetail.username?<div className=' text-xs font-medium text-red-600 -mt-4'>*please fill out this field</div>:null}
-          <input type='email' placeholder='email' name='email' className=' bg-transparent outline-none border-b border-b-slate-700 pb-3 focus:border-b-sky-500' value={userDetail.email} onChange={userInfo}/>
+          <input type='email' placeholder='email' name='email' className=' bg-transparent outline-none border-b border-b-zinc-700 pb-3 focus:border-b-teal-800' value={userDetail.email} onChange={userInfo}/>
           {isinvalid && !userDetail.email?<div className=' text-xs font-medium text-red-600 -mt-4'>*please fill out this field</div>:null}
-          <input type='password' placeholder='password' name='password' className=' bg-transparent outline-none border-b border-b-slate-700 pb-3 focus:border-b-sky-500' value={userDetail.password} onChange={userInfo}/>
+          <input type='password' placeholder='password' name='password' className=' bg-transparent outline-none border-b border-b-zinc-700 pb-3 focus:border-b-teal-800' value={userDetail.password} onChange={userInfo}/>
           {isinvalid && !userDetail.password?<div className=' text-xs font-medium text-red-600 -mt-4'>*please fill out this field</div>:null}
           <div className=' flex gap-2 text-zinc-300 text-sm font-normal'><span>want to sell products?</span><input type='checkbox' checked={seller} onChange={(e)=>setSeller(e.target.checked)}/></div>
-          <button type='submit' className=' bg-sky-500 py-2 mt-4 rounded-md  font-medium'>signup</button>
-          <div className=' flex gap-2 text-[13px]'>Already have an account? <NavLink to={'/login'} className=' text-sky-500'>Login</NavLink></div>
+          <button type='submit' className=' bg-teal-800 py-2 mt-4 rounded-md  font-medium'>signup</button>
+          <div className=' flex gap-2 text-[13px]'>Already have an account? <NavLink to={'/login'} className=' text-teal-800'>Login</NavLink></div>
       </form>
-      <NavLink to={'/'} className=' mb-6 -mt-1'><span className=' text-sky-500 mr-2'>&larr;</span>back</NavLink>
+      <NavLink to={'/'} className=' mb-6 -mt-1'><span className=' text-teal-800 mr-2'>&larr;</span>back</NavLink>
     </div>
   )
 }

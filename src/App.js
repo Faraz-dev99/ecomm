@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Home, Header,Footer, PrivateComponents, About, Contact, Login, Signup, Otp, Dashboard, OpenRoute } from './filespath'
 import Profile from './components/core/Dashboard/profile/Profile.js';
 import Cart from './components/core/Dashboard/cart/Cart';
@@ -26,6 +26,8 @@ function App() {
   const [width, setWidth] = useState(window.innerWidth);
   const {userDetails}=useSelector((state)=>state.user)
   const dispatch=useDispatch();
+   const location = useLocation();
+  const hideFooter = location.pathname.startsWith("/dashboard");
   
  
   useEffect(()=>{
@@ -39,8 +41,8 @@ function App() {
   },[])
 
   return (
-    <BrowserRouter>
-      <div className=' '>
+   <>
+      <div className=' bg-zinc-950'>
         <Header />
         <Routes>
 
@@ -78,7 +80,7 @@ function App() {
           </Route>
           <Route path='*' element={'page not found'} />
         </Routes>
-        <Footer/>
+         {!hideFooter && <Footer />}
       </div>
       <Toaster
         position={width > 600 ? 'bottom-right' : 'bottom-right'}
@@ -127,7 +129,7 @@ function App() {
 
 
       />
-    </BrowserRouter>
+</>
   );
 }
 

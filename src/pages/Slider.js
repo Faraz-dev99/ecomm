@@ -24,7 +24,7 @@ const Slider = ({ data }) => {
       id: 3,
       name: 'samsung 21',
       content: 'Slide three is here',
-      color: 'bg-green-800',
+      color: 'bg-teal-800',
       img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMySlWxE3HujgwGR1ajC25N7R9yEsSS2BOQg&s',
     },
   ];
@@ -117,10 +117,10 @@ const Slider = ({ data }) => {
               style={{ transition: 'opacity 1s ease' }}
               className={`slide absolute left-0 top-0 py-8 gap-4 h-full w-full lg:text-white flex max-lg:flex-col justify-center items-center ${i === currentSlide ? 'opacity-100 z-50' : 'opacity-0 z-0'}`}
             >
-              <div className="flex flex-col px-6 gap-2 rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-sky-500 md:w-full max-lg:h-2/5 slantBox">
+              <div className="flex flex-col px-6 gap-2 birder  rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-teal-800 md:w-full max-lg:h-2/5 slantBox">
                 <h1 className="md:text-5xl font-semibold relative md:z-50 max-md:text-4xl">{e.name}</h1>
-                <h2 className="text-base max-md:font-light md:text-slate-300 truncate max-w-40 text-center">{e.description}</h2>
-                <NavLink to={`/product/${e._id}`} className=' px-3 py-2 mt-2 bg-sky-500 lg:bg-slate-200 text-slate-900 rounded-md'>Buy Now</NavLink>
+                <h2 className="text-base max-md:font-light md:text-zinc-300 truncate max-w-40 text-center">{e.description}</h2>
+                <NavLink to={`/product/${e._id}`} className=' px-3 py-2 mt-2 bg-teal-800 lg:bg-slate-200 text-zinc-900 rounded-md'>Buy Now</NavLink>
               </div>
               <div className="flex justify-center items-center md:w-3/5 md:h-full max-md:h-[270px] max-md:w-[220px]">
                 <img src={e.images[0].secure_url} alt="img" className="max-md:w-full select-none drag-none rounded-lg md:w-3/5 max-md:h-full md:h-full max-lg:h-3/5 " />
@@ -132,9 +132,9 @@ const Slider = ({ data }) => {
               style={{ transition: 'opacity 1s ease' }}
               className={`slide absolute left-0 top-0 py-8 gap-4 h-full w-full lg:text-white flex max-lg:flex-col justify-center items-center ${index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
             >
-              <div className="flex flex-col px-6 gap-2 rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-sky-500 md:w-full max-lg:h-2/5 slantBox">
+              <div className="flex flex-col px-6 gap-2 rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-teal-800 md:w-full max-lg:h-2/5 slantBox">
                 <h1 className="md:text-5xl font-semibold relative md:z-50 max-md:text-4xl">{slide.name}</h1>
-                <h2 className="text-base max-md:font-light md:text-slate-300 ">{slide.content}</h2>
+                <h2 className="text-base max-md:font-light md:text-zinc-300 ">{slide.content}</h2>
               </div>
               <div className="flex justify-center items-center md:w-3/5 md:h-full max-md:h-[270px] max-md:w-[220px]">
                 <img src={slide.img} alt="img" className="max-md:w-full select-none drag-none rounded-lg md:w-3/5 max-md:h-full md:h-full max-lg:h-3/5 " />
@@ -147,13 +147,13 @@ const Slider = ({ data }) => {
         <div className="absolute right-3 top-1/2 transform -translate-y-1/2 flex flex-col space-y-2" style={{zIndex:'200'}}>
           <button
             onClick={prevSlide}
-            className="w-8 h-8 max-lg:rounded-full bg-sky-600/20 lg:bg-sky-500/75 text-white rounded-md flex items-center justify-center shadow-md hover:bg-sky-500"
+            className="w-8 h-8 max-lg:rounded-full bg-teal-800/20 lg:bg-teal-800/75 text-white rounded-md flex items-center justify-center shadow-md hover:bg-teal-800"
           >
             <NavigateBeforeIcon />
           </button>
           <button
             onClick={nextSlide}
-            className="w-8 h-8 max-lg:rounded-full bg-sky-600/20 lg:bg-sky-500/75 text-white rounded-md flex items-center justify-center shadow-md hover:bg-sky-500"
+            className="w-8 h-8 max-lg:rounded-full bg-teal-800/20 lg:bg-teal-800/75 text-white rounded-md flex items-center justify-center shadow-md hover:bg-teal-800"
           >
             <NavigateNextIcon />
           </button>
