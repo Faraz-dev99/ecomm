@@ -97,7 +97,7 @@ const ProductDetails = () => {
                 <div className="flex justify-center gap-2 relative lg:h-96  h-full  max-lg:bg-zinc-100-100">
 
                     {isDesktop ? <>
-                        <div className="flex justify-center w-full lg:w-72 py-3 ">
+                        <div className="flex justify-center w-full lg:w-72 py-3">
                             <img src={mainImage} alt={product.name} className=" w-full max-w-96 h-72 lg:rounded-lg shadow-lg" />
                         </div>
                         <div className="flex flex-col gap-2 h-56 px-2 py-2 overflow-auto hide-scrollbar">
