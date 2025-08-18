@@ -120,7 +120,7 @@ const Slider = ({ data }) => {
               <div className="flex flex-col px-6 gap-2 birder  rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-teal-800 md:w-full max-lg:h-2/5 slantBox">
                 <h1 className="md:text-5xl font-semibold relative md:z-50 max-md:text-4xl">{e.name}</h1>
                 <h2 className="text-base max-md:font-light md:text-zinc-300 truncate max-w-40 text-center">{e.description}</h2>
-                <NavLink to={`/product/${e._id}`} className=' px-3 py-2 mt-2 bg-teal-800 lg:bg-slate-200 text-zinc-900 rounded-md'>Buy Now</NavLink>
+                <NavLink to={`/product/${e._id}`} className=' px-3 py-2 mt-2 max-lg:bg-gradient-to-tr max-lg:text-white from-lime-500 via-green-500 to-sky-500 lg:bg-slate-200 text-zinc-900 rounded-md'>Buy Now</NavLink>
               </div>
               <div className="flex justify-center items-center md:w-3/5 md:h-full max-md:h-[270px] max-md:w-[220px]">
                 <img src={e.images[0].secure_url} alt="img" className="max-md:w-full select-none drag-none rounded-lg md:w-3/5 max-md:h-full md:h-full max-lg:h-3/5 " />
