@@ -103,7 +103,7 @@ const Slider = ({ data }) => {
 
   return (
     <div
-      className="slider select-none flex justify-center w-full items-center max-md:h-[450px] md:h-[560px] relative"
+      className="slider select-none flex justify-center w-full items-center max-md:h-[450px] md:h-[560px]  relative h-full  max-md:min-h-[calc(100vh-101.6px)] md:min-h-[calc(100vh-117.6px)]"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onMouseDown={handleMouseDown}
@@ -115,15 +115,15 @@ const Slider = ({ data }) => {
             <div
               key={e._id}
               style={{ transition: 'opacity 1s ease' }}
-              className={`slide absolute left-0 top-0 py-8 gap-4 h-full w-full lg:text-white flex max-lg:flex-col justify-center items-center ${i === currentSlide ? 'opacity-100 z-50' : 'opacity-0 z-0'}`}
+              className={`slide absolute left-0 top-0 py-8 gap-4 h-full w-full lg:text-white flex max-lg:flex-col  items-center  ${i === currentSlide ? 'opacity-100 z-50' : 'opacity-0 z-0'}`}
             >
               <div className="flex flex-col mx-8 px-6 gap-2   rounded-lg justify-center items-center lg:w-2/5 lg:h-full lg:bg-teal-600 md:w-full max-lg:h-2/5 lg:bg-gradient-to-br from-slate-800 via-slate-950 to-teal-600 slantBox">
-                <h1 className="md:text-5xl font-semibold relative md:z-50 max-md:text-4xl">{e.name}</h1>
-                <h2 className="text-base max-md:font-light md:text-zinc-300 truncate max-w-40 text-center">{e.description}</h2>
-                <NavLink to={`/product/${e._id}`} className=' px-3 py-2 mt-2 max-lg:bg-gradient-to-br max-lg:text-white from-slate-800 via-slate-950 to-teal-600 lg:bg-slate-200 text-zinc-900 rounded-md'>Buy Now</NavLink>
+                <h1 className="md:text-5xl font-semibold mb-4 relative md:z-50 max-md:text-4xl">{e.name}</h1>
+                <h2 className="text-base max-md:font-light text-zinc-300 truncate max-w-40 text-center">{e.description}</h2>
+                <NavLink to={`/product/${e._id}`} className=' px-3 py-2 mt-3 max-lg:bg-gradient-to-br max-lg:text-white from-slate-800 via-slate-950 to-teal-600 lg:bg-slate-200 text-zinc-900 rounded-md'>Buy Now</NavLink>
               </div>
               <div className="flex justify-center items-center md:w-3/5 md:h-full max-md:h-[270px] max-md:w-[220px]">
-                <img src={e.images[0].secure_url} alt="img" className="max-md:w-full select-none drag-none rounded-lg md:w-3/5 max-md:h-full md:h-full max-lg:h-3/5 " />
+                <img src={e.images[0].secure_url} alt="img" className="max-md:w-full  select-none drag-none rounded-lg md:w-3/5 max-md:h-full md:h-full max-lg:h-3/5 " />
               </div>
             </div>
           )) : slides.map((slide, index) => (
