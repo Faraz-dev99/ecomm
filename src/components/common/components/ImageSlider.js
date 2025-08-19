@@ -71,7 +71,7 @@ const ImageSlider = ({ slides }) => {
         onMouseLeave={handleDragEnd}
       >
         {slides.map((slide, index) => (
-          <div key={index} className="flex-shrink-0 w-full bg-gradient-to-br from-slate-800 via-slate-950 to-sky-500">
+          <div key={index} className="flex-shrink-0 w-full bg-gradient-to-br from-slate-800 via-slate-950 to-teal-600">
             {slide}
           </div>
         ))}
