@@ -83,7 +83,7 @@
 @media screen and (min-width:1080px){
     .slantBox{
         position:relative;
-        background: linear-gradient(to right,#2E7D32,#14a9b6);
+        /* background: linear-gradient(to right,#2E7D32,#14a9b6); */
         transform:skew(170deg) translateX(20px);
        
     }

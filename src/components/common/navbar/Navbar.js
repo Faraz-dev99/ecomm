@@ -169,7 +169,7 @@ const Navbar = () => {
     <div className=' select-none   relative z-50 bg-zinc-900 text-white flex flex-wrap  justify-between py-2 px-2 pt-4 text-lg font-semibold max-sm:flex-col gap-3' style={{zIndex:'500'}}>
       <div className=' flex gap-2'>
       <div className=' md:hidden flex items-center' onClick={()=>SetMenuToggle(!menuToggle)}>{menuToggle?<MenuIcon />:<CloseIcon />}</div>
-      <NavLink to={'/'} className='  '><span className=' '>Light</span><span className=' text-teal-800'>Store</span></NavLink>
+      <NavLink to={'/'} className='  '><span className=' '>Light</span><span className=' text-teal-500'>Store</span></NavLink>
       </div>
     
         <form className={` flex flex-wrap relative justify-center items-center gap-2 ${userloggedin?'md:min-w-[500px]':null}   max-md:w-full`} onSubmit={handleSearchSubmit}>
@@ -195,14 +195,14 @@ const Navbar = () => {
                        <img src={`${e.images[0].secure_url}`} alt='product' className=' h-12 w-10'/>
                    </div>
                    <div className=' flex flex-col gap-1 text-xs'>
-                   <div className=' text-sm font-semibold group-hover:text-teal-800'>{e.name}</div>
+                   <div className=' text-sm font-semibold group-hover:text-teal-500'>{e.name}</div>
                    <div className="truncate w-32 text-zinc-400">{e.description}</div>
                    <div className=' text-zinc-400'>₹{e.price}</div>
                    </div>
                    
                 </div>
             })}
-            <button  className=' flex gap-1 justify-center items-center py-3 px-2 bg-teal-800 text-zinc-900 text-base font-normal text-center'><span>view all results</span> <FaAngleRight/></button>
+            <button  className=' flex gap-1 justify-center items-center py-3 px-2 bg-teal-500 text-zinc-900 text-base font-normal text-center'><span>view all results</span> <FaAngleRight/></button>
            </div>:null
          }
         
@@ -226,7 +226,7 @@ const Navbar = () => {
           {
             usermenuToggle?<div  className=' absolute border min-w-[250px] border-zinc-700 top-10 right-0 flex flex-col  gap-2 font-normal bg-zinc-900/95 text-white px-3 py-2 rounded-md'>
               <div className=' flex flex-col gap-2 mb-2'>
-                <div className=' text-teal-800'>{userloggedin.username}</div>
+                <div className=' text-teal-500'>{userloggedin.username}</div>
                 <div className=' w-full overflow-hidden text-ellipsis whitespace-nowrap'>{userloggedin.email}</div>
               </div>
             <NavLink to='dashboard/profile' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-zinc-700 bg-opacity-60 rounded-2xl'  onClick={() => { SetMenuToggle(true); setUsermenuToggle(false);}}><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
@@ -249,10 +249,10 @@ const Navbar = () => {
           <div className=' flex'>
             <div   className=' cursor-pointer select-none'>Category</div><ArrowDropDownIcon className=' -ml-1 text-lg  max-md:text-xs max-md:-mt-[3px]' />
           </div>
-          {navDropDown ? <div><div className=' absolute top-5  h-4 w-4  border-l-transparent  border-r-transparent  border-b-teal-800 md:border-b-zinc-300' style={{zIndex:'80', borderRightWidth: '35px', borderLeftWidth: "35px", borderBottomWidth: "30px", right: '-20px' }}></div>
+          {navDropDown ? <div><div className=' absolute top-5  h-4 w-4  border-l-transparent  border-r-transparent  border-b-teal-500 md:border-b-zinc-300' style={{zIndex:'80', borderRightWidth: '35px', borderLeftWidth: "35px", borderBottomWidth: "30px", right: '-20px' }}></div>
           <ul
             className='flex flex-col gap-1 py-4  w-40 rounded-lg 
-                absolute top-8 -left-4   bg-teal-800
+                absolute top-8 -left-4   bg-teal-500
                 text-white opacity-0 md:bg-zinc-200 md:text-zinc-800' style={{zIndex:'80',transition:'all 2s ease',opacity:navDropDown?1:0}}>
             {categories.map((e,i)=>{
               return <NavLink key={i}  to={`/catalog/${e.name}`} className=' hover:bg-blue-200 py-2 px-4' onClick={() => {SetMenuToggle(true); setNavDropDown(false)}}><li>{e.name}</li></NavLink>
