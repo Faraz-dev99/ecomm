@@ -91,7 +91,7 @@ const ProductDetails = () => {
     }
 
     return (
-        <div className=' lg:px-6  lg:py-6 flex flex-col gap-6 text-base'>
+        <div className=' lg:px-6  lg:py-6 flex flex-col gap-6 text-base max-sm:min-h-[calc(100vh-93.6px)] h-full  max-md:min-h-[calc(100vh-53.6px)] md:min-h-[calc(100vh-117.6px)]'>
             <div className='flex max-lg:flex-col justify-center   gap-10 text-zinc-200 '>
 
                 <div className="flex justify-center gap-2 relative lg:h-96  h-full  max-lg:bg-zinc-100-100">
@@ -113,7 +113,7 @@ const ProductDetails = () => {
                         </div>
                         <div className='flex w-full gap-4 absolute max-lg:fixed  bottom-0 left-0 '>
                             <button className=' py-2 px-3 bg-zinc-900' onClick={addToCart}>Add to Cart</button>
-                            <button className=' py-2 px-3 bg-teal-800 lg:ml-8'>Buy Now</button>
+                            <button className=' py-2 px-3 bg-teal-600 lg:ml-8'>Buy Now</button>
                         </div>
                     </> : <ImageSlider slides={imageslides} /> /* <div className="flex  justify-center w-full h-full max-w-[300px] max-h-[300px] ">
                         <img src={mainImage} alt={product.name} className=" w-full h-full max-w-[300px] max-h-[300px]  " />
@@ -124,7 +124,7 @@ const ProductDetails = () => {
                     <div className=' flex flex-col gap-2'>
                         <div className=' mt-2 '>
                             <h1 className=" text-zinc-400 text-lg font-semibold mb-2 ">{product.name}</h1>
-                            <p className="text-2xl font-bold mb-2 text-teal-800">₹{product.price}</p>
+                            <p className="text-2xl font-bold mb-2 text-teal-600">₹{product.price}</p>
                         </div>
 
                         <div className=" flex flex-col gap-4 py-4 w-full max-w-[600px]">
@@ -184,7 +184,7 @@ const ProductDetails = () => {
             </div>
             <div className='flex lg:hidden fixed bottom-0 w-full justify-center items-center  '>
                 <button className=' py-2 px-3 bg-zinc-900/80 w-full' onClick={addToCart}>Add to Cart</button>
-                <button className=' py-2 px-3 bg-teal-800/80 lg:ml-8 w-full'>Buy Now</button>
+                <button className=' py-2 px-3 bg-teal-600/80 lg:ml-8 w-full'>Buy Now</button>
             </div>
 
         </div>

@@ -44,13 +44,13 @@ const SaveProductChanges = () => {
         <div className=' flex flex-col gap-2'>
             <div className=' text-base font-medium text-zinc-300'>publish this product to make available for everyone</div>
             <div className='   flex text-zinc-300 text-sm'>
-                <select className='outline-none text-zinc-600 py-2 px-2 bg-transparent border border-zinc-700 focus:border-teal-800 rounded-lg w-full' value={productStatus} onChange={(e)=>setProductStatus(e.target.value)}>
+                <select className='outline-none text-zinc-600 py-2 px-2 bg-transparent border border-zinc-700 focus:border-teal-600 rounded-lg w-full' value={productStatus} onChange={(e)=>setProductStatus(e.target.value)}>
                     <option value={"Published"}>Public</option>
                     <option value={"Draft"}>Draft</option>
                 </select>
             </div>
         </div>
-        {editProduct?<button className=' py-2 px-6 bg-teal-800 text-zinc-950  rounded-lg self-end' onClick={saveChanges}>Save Changes</button>:<button className=' py-2 px-6 bg-teal-800 text-zinc-950  rounded-lg self-end' onClick={saveProduct} >Save</button>}
+        {editProduct?<button className=' py-2 px-6 bg-teal-600 text-zinc-950  rounded-lg self-end' onClick={saveChanges}>Save Changes</button>:<button className=' py-2 px-6 bg-teal-600 text-zinc-950  rounded-lg self-end' onClick={saveProduct} >Save</button>}
       
         </div>
         

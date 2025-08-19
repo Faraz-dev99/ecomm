@@ -9,16 +9,16 @@ const HotProduct = ({ id, name, desc, price, thumbnail }) => {
         <NavLink
             to={`${applicationBaseUrl}/product/${id}`}
             className='my-2 mx-[6px] 
-  w-[calc(95%-12px)]       /* default: below md → 2 items per row (bigger) */
+  w-[calc(95%-12px)]       
   476:w-[calc(43.33%-12px)]
-  md:w-[calc(33.33%-12px)] /* md screens → 3 items per row (normal) */
-  lg:w-[calc(25%-12px)]    /* lg screens → 4 items per row */
-  xl:w-[calc(20%-12px)]    /* xl screens → 5 items per row */
-  2xl:w-[calc(16.66%-12px)]/* 2xl screens → 6 items per row */
+  md:w-[calc(33.33%-12px)] 
+  lg:w-[calc(25%-12px)]    
+  xl:w-[calc(20%-12px)]    
+  2xl:w-[calc(16.66%-12px)]
   flex flex-col hover:h-full items-center shadow-md overflow-hidden transition-all group'
         >
             <div className=' w-full  pb-3 '>
-                <div className={` pb-[120%] group relative w-full h-full  mb-2  overflow-hidden  bg-gradient-to-br from-slate-800 via-slate-950 to-sky-500 rounded-md group hover:after:absolute hover:after:top-0 `}>
+                <div className={` pb-[120%] group relative w-full h-full  mb-2  overflow-hidden  bg-gradient-to-br from-slate-800 via-slate-950 to-teal-600 rounded-md group hover:after:absolute hover:after:top-0 `}>
                     {/* <img src='https://image01.realme.net/general/20230512/1683873836923.png?width=1440&height=1440&size=544990' alt='img'
               className=' w-full'/> */}
                     <div className=' h-full w-full absolute top-1/2  left-1/2  -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center gap-3'>

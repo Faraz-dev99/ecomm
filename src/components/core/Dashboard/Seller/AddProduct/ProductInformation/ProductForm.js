@@ -317,24 +317,24 @@ if(editProduct){
 
         <div className='flex flex-wrap gap-2 items-center'>
           <div>product type:</div>
-          <select className='outline-none py-2 px-2 text-slate-600 bg-transparent  border border-slate-700 focus:border-sky-500 rounded-lg' value={productType} onChange={handleProductType}>
+          <select className='outline-none py-2 px-2 text-slate-600 bg-transparent  border border-slate-700 focus:border-teal-600 rounded-lg' value={productType} onChange={handleProductType}>
             <option value={"simple-product"}>simple product</option>
             <option value={"property-product"}>property product</option>
           </select>
         </div>
         <form className=' flex flex-col gap-3 my-2 text-sm' style={{ maxWidth: '548px' }}>
           <div className=' flex flex-col'>
-            <input placeholder='Product Name' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-sky-500  py-3 px-2 outline-none' name='name' value={productInformation.name} onChange={(e) => handleFormData(e.target)} />
+            <input placeholder='Product Name' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-teal-600  py-3 px-2 outline-none' name='name' value={productInformation.name} onChange={(e) => handleFormData(e.target)} />
             {isrequired && !productInformation.name ? <div className=' mt-1 text-red-600 text-xs'>*product name is required</div> : null}
           </div>
           <div className=' flex flex-col gap-1'>
-            <textarea placeholder='Product Description' rows='4' className=' placeholder:text-slate-600 resize-none bg-transparent border-b border-b-slate-700 focus:border-b-sky-500 overflow-hidden border-slate-400 py-3 px-2 outline-none' name='description' value={productInformation.description} onChange={(e) => handleFormData(e.target)} />
+            <textarea placeholder='Product Description' rows='4' className=' placeholder:text-slate-600 resize-none bg-transparent border-b border-b-slate-700 focus:border-b-teal-600 overflow-hidden border-slate-400 py-3 px-2 outline-none' name='description' value={productInformation.description} onChange={(e) => handleFormData(e.target)} />
             {isrequired && !productInformation.description ? <div className=' mt-1 text-red-600 text-xs'>*product description is required</div> : null}
           </div>
           <div className=' flex max-476:flex-col  gap-3'>
             <div className=' flex flex-col text-slate-600 gap-3 w-full'>
 
-              <select className=' outline-none py-2 px-2 bg-transparent border border-slate-700 focus:border-sky-500 rounded-lg w-full' name='category' value={productInformation.category} onChange={(e) => { handleFormData(e.target); handleSelectedCategory(e.target.value, categories) }}>
+              <select className=' outline-none py-2 px-2 bg-transparent border border-slate-700 focus:border-teal-600 rounded-lg w-full' name='category' value={productInformation.category} onChange={(e) => { handleFormData(e.target); handleSelectedCategory(e.target.value, categories) }}>
                 <option disabled>select category</option>
                 {categories.map((e, i) => {
                   return <option key={i} value={e._id}>{e.name}</option>
@@ -346,7 +346,7 @@ if(editProduct){
 
               <div className=' flex flex-col gap-2'>
                 <div className=' flex gap-2'>
-                  <select className=' outline-none py-2 px-2 bg-transparent border border-slate-700 focus:border-sky-500 rounded-lg w-full' value={selectedColor.name} onChange={handleSelectColor}>
+                  <select className=' outline-none py-2 px-2 bg-transparent border border-slate-700 focus:border-teal-600 rounded-lg w-full' value={selectedColor.name} onChange={handleSelectColor}>
                     <option disabled>select Color</option>
                     <option>red</option>
                     <option >yellow</option>
@@ -354,7 +354,7 @@ if(editProduct){
 
                     </option>
                   </select>
-                  <input type='button' className=' py-2 px-2 bg-sky-500 text-slate-950 rounded-md max-w-16 text-center' name="color" value="add" onClick={(e) => pushSelectedColor(selectedColor.name)} />
+                  <input type='button' className=' py-2 px-2 bg-teal-600 text-slate-950 rounded-md max-w-16 text-center' name="color" value="add" onClick={(e) => pushSelectedColor(selectedColor.name)} />
                 </div>
 
                 <div className=' flex gap-2 px-2'>
@@ -369,12 +369,12 @@ if(editProduct){
             </div>
             <div className=' flex gap-2 w-full'>
               <div>
-                <input placeholder='Brand' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-sky-500 py-3 px-2 w-full  outline-none' name='brand' value={productInformation.brand} onChange={(e) => handleFormData(e.target)} />
+                <input placeholder='Brand' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-teal-600 py-3 px-2 w-full  outline-none' name='brand' value={productInformation.brand} onChange={(e) => handleFormData(e.target)} />
                 {isrequired && !productInformation.brand ? <div className=' mt-1 text-red-600 text-xs'>*product brand is required</div> : null}
               </div>
 
               <div>
-                <input type='number' placeholder='Price' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-sky-500 py-3 px-2 w-full  outline-none' name='price' value={productInformation.price} onChange={(e) => handleFormData(e.target)} />
+                <input type='number' placeholder='Price' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-teal-600 py-3 px-2 w-full  outline-none' name='price' value={productInformation.price} onChange={(e) => handleFormData(e.target)} />
                 {isrequired && !productInformation.price ? <div className=' mt-1 text-red-600 text-xs'>*product price is required</div> : null}
               </div>
 
@@ -383,7 +383,7 @@ if(editProduct){
             </div>
             {
               (selectedCategory !== "Clothing") && <div>
-                <input type='number' placeholder='Stock' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-sky-500 max-476:col-span-2 py-3 px-2 w-full  outline-none' name='stock' value={productInformation.stock} onChange={(e) => { handleFormData(e.target) }} />
+                <input type='number' placeholder='Stock' className=' placeholder:text-slate-600 bg-transparent border-b border-b-slate-700 focus:border-b-teal-600 max-476:col-span-2 py-3 px-2 w-full  outline-none' name='stock' value={productInformation.stock} onChange={(e) => { handleFormData(e.target) }} />
                 {isrequired && !productInformation.stock ? <div className=' mt-1 text-red-600 text-xs'>*product stock is required</div> : null}
               </div>
             }
@@ -421,7 +421,7 @@ if(editProduct){
         </div>
           <div className="flex gap-2 mt-4">
           <div 
-            className=" cursor-pointer text-sm text-sky-500 px-2 py-2 rounded-md"
+            className=" cursor-pointer text-sm text-teal-600 px-2 py-2 rounded-md"
             onClick={applySizeChanges}
           >
             Apply Changes
@@ -551,7 +551,7 @@ if(editProduct){
 
           </div>
           <div className=' flex justify-end w-full my-4'>
-            <button className=' py-2 px-6 bg-sky-500 text-slate-950  rounded-lg' onClick={dispatchProduct}>Next</button>
+            <button className=' py-2 px-6 bg-teal-600 text-slate-950  rounded-lg' onClick={dispatchProduct}>Next</button>
 
           </div>
 

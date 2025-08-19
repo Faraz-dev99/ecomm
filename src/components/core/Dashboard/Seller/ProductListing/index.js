@@ -113,26 +113,26 @@ const ProductListing = () => {
                         <div className=' flex items-center'>
                             <div className=' h-16 w-28'><img className=' object-contain w-full h-full' src={e.images[0].secure_url} alt='product' /></div>
                             <div>
-                                <div className=' text-teal-800 font-medium text-base mb-1'>{e.name}</div>
+                                <div className=' text-teal-600 font-medium text-base mb-1'>{e.name}</div>
                                 <div className=' text-zinc-500 font-light text-xs'>{e.category.name}</div>
                                 <div className='flex flex-col gap-1 text-zinc-400 text-xs mt-2'>
                                     <div><span>price: </span><span className=' text-zinc-300'>{e.price}</span></div>
                                     <div><span>stock: </span><span className=' text-zinc-300'>{e.stock}</span></div>
-                                    <div className=' flex items-center gap-1 text-zinc-100 justify-center py-2 px-2 rounded-md mt-2' style={{ background: e.status === "Published" ? "rgba(34,197,94,0.7)" : "rgba(220,38,38,0.7)" }}>
+                                    <div className=' flex items-center gap-1 text-zinc-100 justify-center py-2 px-2 rounded-md mt-2' style={{ background: e.status === "Published" ? "linear-gradient( to bottom right,#1e293b,#0f172a,#0d9488 )" : "rgba(220,38,38,0.7)" }}>
                                         <div className=' '>{e.status === "Published" ? <MdOutlinePublic /> : <FaRegClock />}</div>
                                         <div>{e.status === "Published" ? "Published" : "Draft"}</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className=' flex flex-wrap max-md:flex-col items-center text-lg  bg-teal-800 text-zinc-900 rounded-md'>
+                        <div className=' flex flex-wrap max-md:flex-col items-center text-lg  bg-teal-600 text-zinc-900 rounded-md'>
                             <div className=' md:border-r max-md:border-b py-2 px-2 border-zinc-900 cursor-pointer' onClick={()=>editProductMethod(e._id)}><MdEdit /> </div>
                             <div className=' py-2 px-2 cursor-pointer' onClick={() => deleteProductMethod(e._id)}><MdDelete /></div>
                         </div>
                     </div>
                 }):<div className=' flex flex-col justify-center items-center gap-4 min-h-40'>
                     <div className=' text-lg text-zinc-500 text-center'>You doh't have any Products</div>
-                    <NavLink className=" text-teal-800 text-base font-semibold text-center" to={"/dashboard/add-product"}>create new product</NavLink>
+                    <NavLink className=" text-teal-600 text-base font-semibold text-center" to={"/dashboard/add-product"}>create new product</NavLink>
                 </div>
             }
         </div>

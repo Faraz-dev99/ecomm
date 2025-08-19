@@ -92,10 +92,14 @@ function App() {
           success: {
             duration: 4000,
             iconTheme: {
-              primary: 'rgba(12,74,110,.9)',
+              primary: '#00897b',
             },
             style: {
               color: 'rgb(15, 23, 42)'
+            },
+            iconTheme: {
+              primary: 'white',
+              secondary: 'black'
             }
           },
           error: {

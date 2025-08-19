@@ -21,7 +21,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
         <button
           key={page}
           onClick={() => onPageChange(page)}
-          className={`px-3 py-1 rounded ${currentPage === page ? 'bg-teal-800 text-white' : 'text-zinc-100'}`}
+          className={`px-3 py-1 rounded ${currentPage === page ? 'bg-teal-600 text-white' : 'text-zinc-100'}`}
         >
           {page}
         </button>
@@ -43,7 +43,7 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
         <button
           key={totalPages}
           onClick={() => onPageChange(totalPages)}
-          className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-teal-800 text-white' : 'text-zinc-100'}`}
+          className={`px-3 py-1 rounded ${currentPage === totalPages ? 'bg-teal-600 text-white' : 'text-zinc-100'}`}
         >
           {totalPages}
         </button>

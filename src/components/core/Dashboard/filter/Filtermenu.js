@@ -110,7 +110,7 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
                             <div className=' flex flex-wrap gap-1 text-xs'>
                                 {
                                     filterData.categories.map((e, i) => {
-                                        return <div key={i} onClick={() => toggleCategorySelection(e._id)} className={` rounded-xl border border-zinc-600 py-1 px-2 cursor-pointer  ${filterValues.categories.includes(e._id) ? 'bg-teal-800' : 'bg-zinc-800/95'}`}>{e.name}</div>
+                                        return <div key={i} onClick={() => toggleCategorySelection(e._id)} className={` rounded-xl border border-zinc-600 py-1 px-2 cursor-pointer  ${filterValues.categories.includes(e._id) ? 'bg-teal-600' : 'bg-zinc-800/95'}`}>{e.name}</div>
                                     })
                                 }
                             </div>
@@ -157,19 +157,19 @@ const Filtermenu = ({ onFilterChange, onClearFilters }) => {
 
                                 <button
                                     onClick={() => handleFilterChange('sortBy', 'lowToHigh')}
-                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'lowToHigh' ? 'bg-teal-800' : 'bg-zinc-800/95'} `}
+                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'lowToHigh' ? 'bg-teal-600' : 'bg-zinc-800/95'} `}
                                 >
                                     Ascending
                                 </button>
                                 <button
                                     onClick={() => handleFilterChange('sortBy', 'highToLow')}
-                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'highToLow' ? 'bg-teal-800' : 'bg-zinc-800/95'} `}
+                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'highToLow' ? 'bg-teal-600' : 'bg-zinc-800/95'} `}
                                 >
                                     Descending
                                 </button>
                                 <button
                                     onClick={() => handleFilterChange('sortBy', 'newest')}
-                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'newest' ? 'bg-teal-800' : 'bg-zinc-800/95'} `}
+                                    className={`px-3 py-1 rounded-lg ${filterValues.sortBy === 'newest' ? 'bg-teal-600' : 'bg-zinc-800/95'} `}
                                 >
                                     Newest
                                 </button>

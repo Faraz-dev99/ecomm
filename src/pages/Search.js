@@ -17,7 +17,7 @@ const Search = () => {
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3; 
+  const itemsPerPage = 20; 
 
   useEffect(() => {
     const getSearchedProduct = async () => {
@@ -97,7 +97,7 @@ const Search = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center relative my-10 px-4'>
+    <div className='flex flex-col justify-center relative my-10 px-4 '>
       <Filtermenu onFilterChange={handleFilterChange} onClearFilters={clearFilters} />
       <h1 className='text-sky-500 font-bold md:text-2xl max-md:text-xl mb-6'>
         search results for: {key}

@@ -81,14 +81,14 @@ const Home = () => {
         />
       </div> */}
 
-      <div className=' mx-2 lg:mx-14'>
+      <div className=' '>
 
-        <section className='flex flex-col justify-center items-center  my-10 mt-28 px-4'>
+        <section className='flex flex-col justify-center items-center  my-10 mt-28'>
        
 <h1 className='  text-slate-200 font-semibold md:text-3xl mb-10 lg:text-4xl max-md:text-2xl'>What's Hot</h1>
       
         
-        <div className=' flex justify-center gap-5 max-lg:flex-wrap w-full'>
+        <div className=' flex justify-center md:gap-5 max-lg:flex-wrap w-full '>
           {
             products?.map((e,i)=>{
               return (e.status==="Published" && i<4 )&&<HotProduct key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url } />
@@ -101,7 +101,7 @@ const Home = () => {
       <section className='flex flex-col justify-center my-10 mt-20 px-4'>
         <div className=' flex justify-between items-center mb-6'>
 <h1 className='  text-slate-200 font-bold md:text-2xl lg:text-3xl max-md:text-xl'>All Products</h1>
-<div className=' cursor-pointer py-0 hover:border-b-[2px] hover:border-b-teal-800 text-teal-800 flex items-center gap-2'>View All <FaAngleRight/></div>
+<div className=' cursor-pointer py-0 hover:border-b-[2px] hover:border-b-teal-600 text-teal-600 flex items-center gap-2'>View All <FaAngleRight/></div>
         </div>
         
         <div className=' flex max-lg:flex-wrap w-full'>
