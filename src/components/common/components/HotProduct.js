@@ -9,7 +9,7 @@ const HotProduct = ({ id, name, desc, price, thumbnail }) => {
         <NavLink
             to={`${applicationBaseUrl}/product/${id}`}
             className='my-2 mx-[6px] 
-  w-[calc(95%-12px)]       
+  w-[calc(75%-12px)]       
   476:w-[calc(43.33%-12px)]
   md:w-[calc(33.33%-12px)] 
   lg:w-[calc(25%-12px)]    
@@ -21,12 +21,15 @@ const HotProduct = ({ id, name, desc, price, thumbnail }) => {
                 <div className={` pb-[120%] group relative w-full h-full  mb-2  overflow-hidden  bg-gradient-to-br from-slate-800 via-slate-950 to-teal-600 rounded-md group hover:after:absolute hover:after:top-0 `}>
                     {/* <img src='https://image01.realme.net/general/20230512/1683873836923.png?width=1440&height=1440&size=544990' alt='img'
               className=' w-full'/> */}
-                    <div className=' h-full w-full absolute top-1/2  left-1/2  -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center gap-3'>
-                        <h2 className=' group-hover:hidden drop-shadow-sm text-center  text-2xl  font-bold text-white max-md:text-xl w-full'>{name}</h2>
+                    <div className=' h-full w-full absolute top-1/2  left-1/2  -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center gap-4 max-md:scale-90 '>
+                        <h2 className=' group-hover:hidden drop-shadow-sm text-center  text-xl  font-semibold text-white max-md:text-lg w-full'>{name}</h2>
                         <img src={thumbnail} alt='img'
-                            className=' w-4/5     object-contain opacity-100 transition-all group-hover:w-full group-hover:h-full group-hover:object-cover' />
-                             
-                    <p className='flex group-hover:hidden  text-center justify-center w-full items-center text-base text-zinc-100 font-semibold max-md:text-sm'>Starting at <span className=' ml-1 font-bold text-xl max-md:text-lg'>₹{price}</span></p>
+                            className=' w-[65%]     object-contain opacity-100 transition-all group-hover:w-full group-hover:h-full group-hover:object-cover' />
+                          <div className=' flex flex-col justify-center items-center gap-2 group-hover:hidden'>
+                            <p className='flex flex-wrap   text-center justify-center w-full items-center text-base text-zinc-100 font-semibold max-md:text-sm'>Starting at<span className=' ml-2 font-bold text-xl max-md:text-xl'>₹{price}</span></p>
+                    <button className='  py-2 px-4 rounded-md bg-white text-teal-500 font-semibold text-sm'>Shop Now</button>
+                            </div>   
+                    
                     </div>
 
                    

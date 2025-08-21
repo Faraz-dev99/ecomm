@@ -83,7 +83,7 @@ const Home = () => {
 
       <div className=' '>
 
-        <section className='flex flex-col justify-center items-center  my-10 mt-28'>
+        <section className='flex flex-col justify-center items-center  my-10 md:mt-28'>
        
 <h1 className='  text-slate-200 font-semibold md:text-3xl mb-10 lg:text-4xl max-md:text-2xl'>What's Hot</h1>
       

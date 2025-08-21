@@ -19,6 +19,7 @@ import ProductListing from './components/core/Dashboard/Seller/ProductListing';
 import Search from './pages/Search.js';
 import { setToken } from './slices/authSlice.js';
 import Catalog from './pages/Catalog.js';
+import ScrollToTop from './utils/ScrollToTop.js';
 
 
 
@@ -44,6 +45,7 @@ function App() {
    <>
       <div className=' bg-zinc-950'>
         <Header />
+        <ScrollToTop />
         <Routes>
 
           <Route path='/' element={<Home />} />
