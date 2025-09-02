@@ -310,8 +310,8 @@ if(editProduct){
   }, [productType])
 
   return (
-    <div>
-      <div>
+    <div className=' grid place-items-center'>
+      <div className=''>
 
         <h2 className=' text-slate-300 text-lg font-semibold mb-6'>Product Information</h2>
 

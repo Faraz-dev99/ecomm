@@ -48,18 +48,18 @@ const Dashboard = () => {
 
 
       <div
-  className="
+        className="
     relative w-full h-screen
     max-sm:max-h-[calc(100vh-101.6px)]
     max-md:max-h-[calc(100vh-101.6px)]
     md:max-h-[calc(100vh-118.6px)]
-    overflow-auto  py-6 px-4 
+    overflow-auto  py-6  
   "
->
-  <div className="py-6 px-4 mt-6">
-    <Outlet />
-  </div>
-</div>
+      >
+        <div className="py-6 px-4">
+          <Outlet />
+        </div>
+      </div>
 
 
     </div>

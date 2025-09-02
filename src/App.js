@@ -88,7 +88,7 @@ function App() {
         position={width > 600 ? 'bottom-right' : 'bottom-right'}
         toastOptions={{
           style: {
-            background: ' rgba(14,165,233,.7)',
+            background: '#00897B',
 
           },
           success: {

@@ -24,7 +24,7 @@ body {
 
 /* Visible scrollbar thumb */
 ::-webkit-scrollbar-thumb {
-  background-color: #0ea5e9; /* Visible thumb color */
+  background-color: #00897B; /* Visible thumb color */
   border-radius: 5px; /* Rounded corners */
 }
 

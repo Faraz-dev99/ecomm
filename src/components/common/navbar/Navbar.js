@@ -24,6 +24,7 @@ const Navbar = () => {
   const [searchValue,setSearchValue]=useState('');
   const [userpfpdefault,setUserPfpDefault]=useState('p');
   const userloggedin=JSON.parse(sessionStorage.getItem('user'));
+  const [userProfilePicture,setUserProfilePicture]=useState();
   const {userDetails}=useSelector((state)=>state.user);
   const {cart,totalCartItems}=useSelector((state)=>state.cart)
   const [searchedList,setSearchedList]=useState([]);
@@ -31,6 +32,12 @@ const Navbar = () => {
   const abortControllerRef = useRef(null);
   const {token}=useSelector((state)=>state.auth)
   const [categories,setCategories]=useState([])
+
+  const [userInfo,setUserInfo]=useState({
+    userPfp:"",
+    username:"",
+    email:""
+})
 
   
  
@@ -77,15 +84,28 @@ const Navbar = () => {
 
     if(userloggedin){
      
-        let pfptext=userloggedin.username.slice(0, 1).toUpperCase();
+      
+        let pfptext=userDetails?.username?.slice(0, 1).toUpperCase();
         setUserPfpDefault(pfptext);
-        
-       
+       setUserInfo((prev)=>{
+        if (
+        prev.userPfp !== userDetails?.profilePicture?.secure_url ||
+        prev.username !== userDetails?.username ||
+        prev.email !== userDetails?.email
+      ) {
+        return {
+          userPfp: userDetails?.profilePicture?.secure_url,
+          username: userDetails?.username,
+          email: userDetails?.email
+        };
+      }
+      return prev;
+       })
     }
     
     
 
-  },[userloggedin])
+  },[userloggedin,userDetails])
   
   const dropdown = () => {
     navDropDown ? setNavDropDown(false) : setNavDropDown(true);
@@ -219,15 +239,17 @@ const Navbar = () => {
       {
         userloggedin?<div ref={usermenuRef} className=' flex justify-center text-sm items-center relative max-md:absolute max-md:top-4 max-md:right-2' style={{zIndex:'1'}}>
         <div   className='flex cursor-pointer' onClick={()=>{setUsermenuToggle(!usermenuToggle)}}>
-        <div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
-          >{userpfpdefault}</div>{/* <ArrowDropDownIcon className=' -ml-1' style={{ fontSize: "30px", fontWeight: 'bold' }} /> */}
+          {userDetails?.profilePicture?.secure_url?<div  className=' cursor-pointer flex justify-center items-center overflow-hidden text-white bg-zinc-600 rounded-full h-7 w-7 text-xl'
+          ><img src={userInfo.userPfp} alt="pfp" className=' w-full h-full ' /></div>:<div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
+          >{userpfpdefault}</div>}
+        {/* <ArrowDropDownIcon className=' -ml-1' style={{ fontSize: "30px", fontWeight: 'bold' }} /> */}
         </div>
           
           {
             usermenuToggle?<div  className=' absolute border min-w-[250px] border-zinc-700 top-10 right-0 flex flex-col  gap-2 font-normal bg-zinc-900/95 text-white px-3 py-2 rounded-md'>
               <div className=' flex flex-col gap-2 mb-2'>
-                <div className=' text-teal-600'>{userloggedin.username}</div>
-                <div className=' w-full overflow-hidden text-ellipsis whitespace-nowrap'>{userloggedin.email}</div>
+                <div className=' text-teal-600'>{userInfo?.username}</div>
+                <div className=' w-full overflow-hidden text-ellipsis whitespace-nowrap'>{userDetails?.email}</div>
               </div>
             <NavLink to='dashboard/profile' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-zinc-700 bg-opacity-60 rounded-2xl'  onClick={() => { SetMenuToggle(true); setUsermenuToggle(false);}}><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
             <div className='flex ml-40 my-2 items-center gap-1 cursor-pointer' onClick={logout}><LogoutIcon style={{fontSize:"16px"}}/>Logout</div>

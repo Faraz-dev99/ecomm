@@ -7,7 +7,7 @@ import { applicationBaseUrl } from '../../../data/applicationUrls';
 const Product = ({id,name,desc,price,thumbnail}) => {
  
   return (
-    <NavLink to={`${applicationBaseUrl}/product/${id}`} className='my-2 mx-[6px] w-[calc(16.66%-12px)] max-476:w-[calc(50%-12px)] max-md:w-[calc(33.33%-12px)] max-xl:w-[calc(20%-12px)] max-2xl:w-[calc(16.66%-12px)]   flex flex-col hover:h-full items-center shadow-md overflow-hidden   transition-all group' >
+    <NavLink to={`${applicationBaseUrl}/product/${id}`} className='my-2 mx-[18px] max-476:mx-[12px] w-[calc(16.66%-36px)] max-476:w-[calc(50%-24px)] max-md:w-[calc(33.33%-36px)] max-xl:w-[calc(20%-36px)] max-2xl:w-[calc(16.66%-36px)]   flex flex-col hover:h-full items-center shadow-md overflow-hidden   transition-all group' >
       <div className=' w-full  pb-3 '>
       <div className={` pb-[120%] group relative w-full  mb-2  overflow-hidden bg-white rounded-md hover:after:absolute hover:after:top-0 `}>
         {/* <img src='https://image01.realme.net/general/20230512/1683873836923.png?width=1440&height=1440&size=544990' alt='img'
