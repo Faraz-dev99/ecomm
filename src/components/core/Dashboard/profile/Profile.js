@@ -55,7 +55,6 @@ const Profile = () => {
         setShowCropper(true);
       };
       reader.readAsDataURL(file);
-      setPfpFile(file);
     }
   }
 
@@ -82,8 +81,18 @@ const Profile = () => {
       croppedAreaPixels.height
     );
 
+    // ✅ set preview for UI
     const base64 = canvas.toDataURL("image/jpeg");
     setPreview(base64);
+
+    // ✅ convert to File for upload
+    canvas.toBlob((blob) => {
+      if (blob) {
+        const croppedFile = new File([blob], "profile.jpg", { type: "image/jpeg" });
+        setPfpFile(croppedFile); // <--- this ensures backend gets cropped version
+      }
+    }, "image/jpeg");
+
     setShowCropper(false);
   };
 
@@ -138,26 +147,16 @@ const Profile = () => {
 
       setErrors({});
 
-      if (isChangePassword) {
-        await updateProfilePicture(
-          token,
-          dispatch,
-          pfpFile,
-          username,
-          passwordFields,
-          userDetails
-        );
-        return;
-      }
-
+      // ✅ upload cropped file if available
       await updateProfilePicture(
         token,
         dispatch,
         pfpFile,
         username,
-        false,
+        isChangePassword ? passwordFields : false,
         userDetails
       );
+
     } catch (err) {
       console.error("Failed to update profile:", err);
     }
@@ -169,14 +168,15 @@ const Profile = () => {
         Hi, <span className='text-teal-600 font-bold'>{userDetails?.username}</span>
       </h1>
       <div className='flex max-md:flex-col justify-center items-center gap-10 py-10 px-5 md:px-10 bg-zinc-900 w-full max-w-[500px]'>
+
         {/* Profile Picture */}
         <div className='self-start md:order-2 mx-auto'>
-          <div className='grid place-items-center h-[100px] w-[100px] rounded-full bg-zinc-800 relative'>
+          <div className='grid place-items-center h-[100px] w-[100px] rounded-full bg-zinc-800 relative '>
             {(preview || userDetails?.profilePicture) ? (
               <img
                 src={preview || userDetails?.profilePicture.secure_url}
                 alt="pfp"
-                className='h-full w-full max-w-[100px] max-h-[100px] object-cover object-center rounded-full'
+                className='h-full w-full max-h-[100px] max-w-[100px] object-cover object-center rounded-full'
               />
             ) : (
               <p className='grid place-items-center rounded-full bg-red-600 w-full h-full text-6xl font-bold'>

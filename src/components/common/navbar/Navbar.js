@@ -240,7 +240,7 @@ const Navbar = () => {
         userloggedin?<div ref={usermenuRef} className=' flex justify-center text-sm items-center relative max-md:absolute max-md:top-4 max-md:right-2' style={{zIndex:'1'}}>
         <div   className='flex cursor-pointer' onClick={()=>{setUsermenuToggle(!usermenuToggle)}}>
           {userDetails?.profilePicture?.secure_url?<div  className=' cursor-pointer flex justify-center items-center overflow-hidden text-white bg-zinc-600 rounded-full h-7 w-7 text-xl'
-          ><img src={userInfo.userPfp} alt="pfp" className=' w-full h-full ' /></div>:<div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
+          ><img src={userInfo.userPfp} alt="pfp" className=' w-full h-full object-cover object-center ' /></div>:<div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
           >{userpfpdefault}</div>}
         {/* <ArrowDropDownIcon className=' -ml-1' style={{ fontSize: "30px", fontWeight: 'bold' }} /> */}
         </div>

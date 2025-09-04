@@ -147,7 +147,7 @@ const ProductDetails = () => {
                                 <div className=' flex gap-2 items-center'>
                                     {
                                         product.seller.profilePicture?<div  className=' cursor-pointer flex justify-center items-center overflow-hidden text-white bg-zinc-600 rounded-full h-7 w-7 text-xl'
-          ><img src={product.seller.profilePicture?.secure_url} alt="pfp" className=' w-full h-full ' /></div>:<div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
+          ><img src={product.seller.profilePicture?.secure_url} alt="pfp" className=' w-full h-full object-cover object-center' /></div>:<div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
           >{product.seller.username.slice(0, 1).toUpperCase()}</div>
                                     }
                                     <p className=' text-sm font-medium text-zinc-300'>{product.seller?.username}</p>
