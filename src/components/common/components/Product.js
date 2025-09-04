@@ -23,7 +23,7 @@ const Product = ({id,name,desc,price,thumbnail}) => {
       <div className='flex justify-center gap-1  flex-col '>
         
         <p className='flex items-center text-lg text-zinc-100 font-medium max-md:text-base'>₹{price}</p>
-        <h2 className=' text-sm font-normal text-zinc-400 max-md:text-xs'>{name}</h2>
+        <h2 className=' text-sm font-normal text-zinc-400 max-md:text-xs line-clamp-2'>{name}</h2>
        
       </div>
       </div>

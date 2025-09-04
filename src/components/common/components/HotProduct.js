@@ -22,9 +22,9 @@ const HotProduct = ({ id, name, desc, price, thumbnail }) => {
                     {/* <img src='https://image01.realme.net/general/20230512/1683873836923.png?width=1440&height=1440&size=544990' alt='img'
               className=' w-full'/> */}
                     <div className=' h-full w-full absolute top-1/2  left-1/2  -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center gap-4 max-md:scale-90 '>
-                        <h2 className='  drop-shadow-sm text-center  text-xl  font-semibold text-white max-md:text-lg w-full'>{name}</h2>
+                        <h2 className='  drop-shadow-sm text-center  text-xl  font-semibold text-white max-md:text-lg w-full break-words truncate max-w-[200px]'>{name}</h2>
                         <img src={thumbnail} alt='img'
-                            className=' w-[65%]     object-contain opacity-100 transition-all  ' />
+                            className=' w-[65%] max-h-[120px]    object-contain opacity-100 transition-all  ' />
                           <div className=' flex flex-col justify-center items-center gap-2 '>
                             <p className='flex flex-wrap   text-center justify-center w-full items-center text-base text-zinc-100 font-semibold max-md:text-sm'>Starting at<span className=' ml-2 font-bold text-xl max-md:text-xl'>₹{price}</span></p>
                     <button className='  py-2 px-4 rounded-md bg-white text-teal-500 font-semibold text-sm'>Shop Now</button>

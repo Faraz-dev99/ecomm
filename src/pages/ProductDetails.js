@@ -46,7 +46,7 @@ const ProductDetails = () => {
                     })
                     setImageslides(slides)
                     setLoading(false);
-                    
+                    console.log("product",response?.data?.product)
 
                 }
             } catch (err) {
@@ -127,7 +127,7 @@ const ProductDetails = () => {
                             <p className="text-2xl font-bold mb-2 text-teal-600">₹{product.price}</p>
                         </div>
 
-                        <div className=" flex flex-col gap-4 py-4 w-full max-w-[600px]">
+                        <div className=" flex flex-col gap-5 py-4 w-full max-w-[600px]">
 
                             <div className='flex items-center gap-2'>
                                 <h3 className=' text-zinc-500'>Brand:</h3>
@@ -142,6 +142,18 @@ const ProductDetails = () => {
                                 </div>
 
                             </div>
+                            <div className='flex items-center gap-4'>
+                                <h3 className=' text-zinc-500'>Seller:</h3>
+                                <div className=' flex gap-2 items-center'>
+                                    {
+                                        product.seller.profilePicture?<div  className=' cursor-pointer flex justify-center items-center overflow-hidden text-white bg-zinc-600 rounded-full h-7 w-7 text-xl'
+          ><img src={product.seller.profilePicture?.secure_url} alt="pfp" className=' w-full h-full ' /></div>:<div  className=' cursor-pointer flex justify-center items-center text-white bg-red-600 rounded-full h-7 w-7 text-xl'
+          >{product.seller.username.slice(0, 1).toUpperCase()}</div>
+                                    }
+                                    <p className=' text-sm font-medium text-zinc-300'>{product.seller?.username}</p>
+                                </div>
+                            </div>
+                            
                             {
                                 product.sizes.length > 0 ? <div className=' flex items-center gap-2 '>
                                     <div  className=' text-zinc-500'>sizes:</div>
@@ -158,19 +170,19 @@ const ProductDetails = () => {
 
 
                             <div>
-                                <h3 className=' text-zinc-500 mb-4'>Description:</h3>
-                                <p className=' py-3 px-3 text-sm text-zinc-200-200 bg-zinc-900'>{product.description}</p>
+                                <h3 className=' text-zinc-500 mb-2'>Description:</h3>
+                                <p className=' py-3  text-sm md:text-base font-light tracking-wider leading-relaxed text-zinc-200-200 ' style={{wordSpacing:"2px"}}>{product.description}</p>
                             </div>
 
                         </div>
 
                         {product.attributes?.type.length>0 ? <div className=' flex-col gap-4 mt-8 mb-4 '>
-                            <div className=' text-2xl font-semibold'> Additional Details</div>
+                            <div className=' text-2xl font-semibold'> Specifications</div>
                             <div className=' flex flex-col gap-6 mt-4 border border-zinc-800 py-6 px-3 max-w-[600px] text-zinc-300 '>{product.attributes.type.map((e, id) => {
-                                return <div key={id} className='flex items-center gap-4 text-sm'>
-                                    <div className=' text-zinc-400'>{e.name}:</div>
-                                    <div className=' flex flex-wrap gap-2'>{e.values.map((value, i) => {
-                                        return <div key={i} className=' py-2 px-2 bg-zinc-800-800 border border-zinc-800'>{value}</div>
+                                return <div key={id} className={`flex   justify-between ${e.values.length>1?"flex-col":""} gap-4 text-sm`}>
+                                    <div className=' text-zinc-400 self-start '>{e.name}:</div>
+                                    <div className={` flex flex-col gap-2  ${e.values.length==1?"w-[50%]":""}`}>{e.values.map((value, i,arr) => {
+                                        return <div key={i} className=' flex items-center gap-2  px-2 bg-zinc-800-800 '>{arr.length>1&&<span className=' text-lg '>• </span>}{value}</div>
                                     })}</div>
                                 </div>
 

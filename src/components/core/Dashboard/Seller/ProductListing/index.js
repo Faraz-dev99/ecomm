@@ -118,7 +118,7 @@ const ProductListing = () => {
                                 <div className='flex flex-col gap-1 text-zinc-400 text-xs mt-2'>
                                     <div><span>price: </span><span className=' text-zinc-300'>{e.price}</span></div>
                                     <div><span>stock: </span><span className=' text-zinc-300'>{e.stock}</span></div>
-                                    <div className=' flex items-center gap-1 text-zinc-100 justify-center py-2 px-2 rounded-md mt-2' style={{ background: e.status === "Published" ? "linear-gradient( to bottom right,#1e293b,#0f172a,#0d9488 )" : "rgba(220,38,38,0.7)" }}>
+                                    <div className=' flex items-center max-w-[150px] gap-1 text-zinc-100 justify-center py-2 px-2 rounded-md mt-2' style={{ background: e.status === "Published" ? "linear-gradient( to bottom right,#1e293b,#0f172a,#0d9488 )" : "rgba(220,38,38,0.7)" }}>
                                         <div className=' '>{e.status === "Published" ? <MdOutlinePublic /> : <FaRegClock />}</div>
                                         <div>{e.status === "Published" ? "Published" : "Draft"}</div>
                                     </div>
