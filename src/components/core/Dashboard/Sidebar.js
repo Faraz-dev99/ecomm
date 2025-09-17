@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../../../App.css';
 import AdminPanelSettings from '@mui/icons-material/AdminPanelSettings';
 import { setEditProduct } from '../../../slices/productSlice';
+import { FaBoxOpen } from "react-icons/fa";
 const Sidebar = () => {
   const { userDetails } = useSelector((state) => state.user);
 
@@ -21,7 +22,7 @@ const Sidebar = () => {
   }
 
   return (
-    <div className=' flex flex-col gap-3  bg-zinc-900 border border-zinc-800 max-sm:min-h-[calc(100vh-93.6px)] h-full  max-md:max-h-[calc(100vh-53.6px)] md:max-h-[calc(100vh-117.6px)]  text-zinc-400 px-3 pr-5 py-4 w-80 max-md:max-w-56 md:max-w-80 overflow-auto max-lg:relative ' style={{ zIndex: '20' }}>
+    <div className=' flex flex-col gap-3  bg-zinc-900 border border-zinc-800  h-full  max-md:min-h-[calc(100vh-53.6px)] md:max-h-[calc(100vh-117.6px)]  text-zinc-400 px-3 pr-5 py-4 w-80 max-md:max-w-56 md:max-w-80 overflow-auto max-lg:relative ' style={{ zIndex: '20' }}>
       {/* <div className=' text-lg font-semibold'>E-bazar</div> */}
       <div className=' flex flex-col gap-3'>
         <h3 className=' font-semibold text-xs text-zinc-700'>MENU</h3>
@@ -32,11 +33,15 @@ const Sidebar = () => {
             }} className='flex items-center justify-between text-sm px-2 py-2 hover:text-teal-600 hover:bg-zinc-800 cursor-pointer'><span><AccountCircleIcon className=' mr-2' style={{ fontSize: '17px' }} />Profile</span></NavLink>
           </li>
 
-          {userDetails.role==="Seller" || userDetails.role==="Visitor"?<li>
+          {userDetails.role==="Seller" || userDetails.role==="Visitor"?<><li>
             <NavLink to='/dashboard/cart' style={({ isActive }) => {
               return isActive ? { background: 'rgb(39, 39, 42)' } : {};
             }} className='flex items-center justify-between text-sm px-2 py-2 hover:text-teal-600 hover:bg-zinc-800 cursor-pointer'><span><ShoppingCartIcon className=' mr-2' style={{ fontSize: '17px' }} />Cart</span></NavLink>
-          </li>:null}
+          </li><li>
+            <NavLink to='/dashboard/my-order' style={({ isActive }) => {
+              return isActive ? { background: 'rgb(39, 39, 42)' } : {};
+            }} className='flex items-center  text-sm px-2 py-2 hover:text-teal-600 hover:bg-zinc-800 cursor-pointer'><FaBoxOpen className=' mr-2' style={{ fontSize: '14px' }} /><span>My Orders</span></NavLink>
+          </li></>:null}
 
           {userDetails.role === 'Admin' ?   <li>
             <button className='flex w-full items-center justify-between text-sm px-2 py-2 hover:text-teal-600 hover:bg-sky-100 cursor-pointer'style={{background:'rgba(0,0,0,.1)'}} onClick={()=>isToggleSubmenu(1)}>
@@ -62,7 +67,7 @@ const Sidebar = () => {
               <span><StorefrontIcon className=' mr-2' style={{ fontSize: '17px' }} />Seller</span><FaAngleRight className={` transition-all ${toggleSubmenu===2?'rotate-90':null}`} />
             </button>
             <div className={`overflow-hidden`}
-            style={{transition:'all .2s ease-out',height:toggleSubmenu===2?'75px':'0px'}}>
+            style={{transition:'all .2s ease-out',maxHeight:toggleSubmenu===2?'300px':'0px'}}>
             <ul className={` py-3 border-zinc-800 border-l list-none mx-4 flex flex-col justify-center gap-3  font-light`} style={{ fontSize: '11px' }}>
               <li className=' cursor-pointer px-4 hover:text-teal-600 hover:border-l hover:border-l-teal-500'>
                 <NavLink to='/dashboard/add-product' style={({ isActive }) => {
@@ -73,6 +78,10 @@ const Sidebar = () => {
                 <NavLink to='/dashboard/product-listing' style={({ isActive }) => {
                   return isActive ? { color:'#00695C' } : {};
                 }}>Product List</NavLink></li>
+                <li className=' cursor-pointer px-4 hover:text-teal-600 hover:border-l hover:border-l-teal-500'>
+                <NavLink to='/dashboard/order' style={({ isActive }) => {
+                  return isActive ? { color:'#00695C' } : {};
+                }}>Orders</NavLink></li>
             </ul>
             </div>
             

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import './App.css';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
-import { Home, Header,Footer, PrivateComponents, About, Contact, Login, Signup, Otp, Dashboard, OpenRoute } from './filespath'
+import { Home, Header, Footer, PrivateComponents, About, Contact, Login, Signup, Otp, Dashboard, OpenRoute } from './filespath'
 import Profile from './components/core/Dashboard/profile/Profile.js';
 import Cart from './components/core/Dashboard/cart/Cart';
 import Settings from './components/core/Dashboard/settings/Settings';
@@ -20,29 +20,32 @@ import Search from './pages/Search.js';
 import { setToken } from './slices/authSlice.js';
 import Catalog from './pages/Catalog.js';
 import ScrollToTop from './utils/ScrollToTop.js';
+import Checkout from './pages/Checkout.js';
+import MyOrder from './components/core/Dashboard/order/MyOrder.js';
+import Order from './components/core/Dashboard/order/Order.js';
 
 
 
 function App() {
   const [width, setWidth] = useState(window.innerWidth);
-  const {userDetails}=useSelector((state)=>state.user)
-  const dispatch=useDispatch();
-   const location = useLocation();
+  const { userDetails } = useSelector((state) => state.user)
+  const dispatch = useDispatch();
+  const location = useLocation();
   const hideFooter = location.pathname.startsWith("/dashboard");
-  
- 
-  useEffect(()=>{
-    let token=sessionStorage.getItem("token");
-    
-     if (token) {
+
+
+  useEffect(() => {
+    let token = sessionStorage.getItem("token");
+
+    if (token) {
       const token = JSON.parse(sessionStorage.getItem("token"));
       dispatch(setToken(token))
       dispatch(getUserDetails(token, dispatch));
-    } 
-  },[])
+    }
+  }, [])
 
   return (
-   <>
+    <>
       <div className=' bg-zinc-950'>
         <Header />
         <ScrollToTop />
@@ -50,6 +53,7 @@ function App() {
 
           <Route path='/' element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
+          <Route path='/checkout' element={<Checkout />} />
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/search/:key' element={<Search />} />
@@ -57,20 +61,23 @@ function App() {
 
           <Route element={<PrivateComponents />}>
             <Route path='/dashboard' element={<Dashboard />} >
-            
-            {userDetails.role==="Admin"||userDetails.role==="Seller"?
-            <>
-            <Route path='/dashboard/add-product' element={<AddProduct/>}/>
-            <Route path='/dashboard/edit-product/:id' element={<AddProduct/>}/>
-            <Route path='/dashboard/product-listing' element={<ProductListing/>}/>
-            </>
-            :null}
-              
-             {userDetails.role==="Admin"?<Route path='/dashboard/admin' element={<AdminDashboard/>}/>:null} 
+
+              {userDetails.role === "Admin" || userDetails.role === "Seller" ?
+                <>
+                  <Route path='/dashboard/add-product' element={<AddProduct />} />
+                  <Route path='/dashboard/edit-product/:id' element={<AddProduct />} />
+                  <Route path='/dashboard/product-listing' element={<ProductListing />} />
+                </>
+                : null}
+
+              {userDetails.role === "Admin" ? <Route path='/dashboard/admin' element={<AdminDashboard />} /> : null}
               <Route path='/dashboard/profile' element={<Profile />} />
               <Route path='/dashboard/settings' element={<Settings />} />
-              {userDetails.role==='Seller' || userDetails.role==='Visitor'?<Route path='/dashboard/cart' element={<Cart />} />:null}
+              <Route path='/dashboard/order' element={<Order />} />
               
+
+              {userDetails.role === 'Seller' || userDetails.role === 'Visitor' ? <><Route path='/dashboard/cart' element={<Cart />} /><Route path='/dashboard/my-order' element={<MyOrder />} /> </> : null}
+
             </Route>
 
           </Route>
@@ -82,7 +89,7 @@ function App() {
           </Route>
           <Route path='*' element={'page not found'} />
         </Routes>
-         {!hideFooter && <Footer />}
+        {!hideFooter && <Footer />}
       </div>
       <Toaster
         position={width > 600 ? 'bottom-right' : 'bottom-right'}
@@ -109,9 +116,9 @@ function App() {
             style: {
               background: 'white',
               color: 'black',
-              fontSize:'14px'
+              fontSize: '14px'
             },
-            icon: <WarningIcon className=' text-red-600'/>,
+            icon: <WarningIcon className=' text-red-600' />,
             iconTheme: {
               primary: 'rgba(248, 248, 248, 0.5)',
               secondary: 'black'
@@ -135,7 +142,7 @@ function App() {
 
 
       />
-</>
+    </>
   );
 }
 

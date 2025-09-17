@@ -81,11 +81,11 @@ const Profile = () => {
       croppedAreaPixels.height
     );
 
-    // ✅ set preview for UI
+    //  set preview for UI
     const base64 = canvas.toDataURL("image/jpeg");
     setPreview(base64);
 
-    // ✅ convert to File for upload
+    //  convert to File for upload
     canvas.toBlob((blob) => {
       if (blob) {
         const croppedFile = new File([blob], "profile.jpg", { type: "image/jpeg" });
@@ -147,7 +147,7 @@ const Profile = () => {
 
       setErrors({});
 
-      // ✅ upload cropped file if available
+      // upload cropped file if available
       await updateProfilePicture(
         token,
         dispatch,
@@ -265,7 +265,7 @@ const Profile = () => {
       {/* Cropper Modal */}
       {showCropper && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center z-50">
-          <div className="relative w-[300px] h-[300px] bg-black">
+          <div className="relative w-[300px] h-[300px] bg-zinc-800">
             <Cropper
               image={imageSrc}
               crop={crop}
