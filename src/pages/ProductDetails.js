@@ -79,39 +79,48 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
     }, [product]);
 
     // Add to cart
-    const addToCart = () => {
-        if (userDetails.role !== "Admin" && userloggedin) {
-            if (product.sizes.length > 0 && !selectedSize) {
-                toast.error("Please select a size");
-                return;
-            }
-            if (!selectedColor) {
-                toast.error("Please select a color");
-                return;
-            }
-            const cartProductExist = cart.some(
-                (e) => e._id === product._id && e.size === selectedSize?.size && e.color === selectedColor
-            );
-            if (cartProductExist) {
-                toast.error("This variation is already in the cart!");
-                return;
-            }
-            const productWithOptions = {
-                ...product,
-                size: selectedSize?.size || null,
-                color: selectedColor,
-                quantity: Number(selectedQuantity),
-            };
-            const updatedCart = [...cart, productWithOptions];
-            dispatch(setCart(updatedCart));
-            localStorage.setItem("cart", JSON.stringify(updatedCart));
-            toast.success("Product added successfully");
-        } else if (!userloggedin) {
-            toast.error("You're not logged in");
-        } else {
-            toast.error("Admins cannot add to cart");
+   const addToCart = () => {
+    if (userDetails.role !== "Admin" && userloggedin) {
+        if (product.sizes.length > 0 && !selectedSize) {
+            toast.error("Please select a size");
+            return;
         }
-    };
+        if (!selectedColor) {
+            toast.error("Please select a color");
+            return;
+        }
+
+        const cartProductExist = cart.some(
+            (e) => e.productId === product._id && e.size === selectedSize?.size && e.color === selectedColor
+        );
+        if (cartProductExist) {
+            toast.error("This variation is already in the cart!");
+            return;
+        }
+
+        // 🚀 Only save the minimal fields
+        const productWithOptions = {
+            productId: product._id,
+            name: product.name,
+            brand: product.brand,
+            price: product.price,
+            images: product.images,  // so cart can display first image
+            size: selectedSize?.size || null,
+            color: selectedColor,
+            quantity: Number(selectedQuantity),
+        };
+
+        const updatedCart = [...cart, productWithOptions];
+        dispatch(setCart(updatedCart));
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+        toast.success("Product added successfully");
+    } else if (!userloggedin) {
+        toast.error("You're not logged in");
+    } else {
+        toast.error("Admins cannot add to cart");
+    }
+};
+
 
     // Handle Buy Now
     const handleOrder = () => {
