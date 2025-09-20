@@ -9,6 +9,7 @@ const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  console.log("cart item",cart)
 
   const handleCheckout = () => {
     if (cart.length === 0) {
