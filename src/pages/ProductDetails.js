@@ -25,6 +25,7 @@ const ProductDetails = () => {
 
     const [reviews, setReviews] = useState([]);
     const [rating, setRating] = useState(0);
+    const [hoverRating, setHoverRating] = useState(0);
     const [comment, setComment] = useState("");
     const [averageRating, setAverageRating] = useState(0);
 const [distribution, setDistribution] = useState([0,0,0,0,0]);
@@ -175,7 +176,7 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
                     ) : <ImageSlider slides={imageslides} />}
                 </div>
 
-                <div className='max-lg:px-4 md:min-w-96'>
+                <div className='max-lg:px-4 md:min-w-96 max-w-[600px] '>
                     <div className='flex flex-col gap-2'>
                         <div className='mt-2'>
                             <h1 className="text-zinc-400 text-lg font-semibold mb-2">{product.name}</h1>
@@ -273,12 +274,12 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
 
                         {/* Reviews Section */}
 {/* Reviews Section */}
-<div className="mt-10 border-t border-zinc-800 pt-6">
+<div className="my-16 border-t border-zinc-800 py-10">
   <h2 className="text-xl font-semibold mb-4">Customer Reviews</h2>
 
-  {/* ✅ Overall Rating */}
+  {/* Overall Rating */}
   {reviews.length > 0 && (
-    <div className="mb-6">
+    <div className="mb-10 ">
       <div className="flex items-center gap-3">
         <span className="text-4xl font-bold text-teal-500">
           {averageRating.toFixed(1)}
@@ -299,7 +300,7 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
         </div>
       </div>
 
-      {/* ✅ Star Breakdown */}
+      {/* Star Breakdown */}
       <div className="mt-4 space-y-1">
         {[5, 4, 3, 2, 1].map((star) => {
   const count = distribution[star - 1];
@@ -324,9 +325,9 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
   )}
 
 
-  {/* ✅ Review Form */}
+  {/* Review Form */}
   {userloggedin && (
-    <div className=" my-10 mt-20">
+    <div className=" my-20">
       <h3 className="text-lg font-medium mb-2">Leave a Review</h3>
       <div className="flex flex-col gap-3">
         {/* ⭐ Star Selection */}
@@ -334,10 +335,12 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
           {[1, 2, 3, 4, 5].map((s) => (
             <span
               key={s}
-              className={`cursor-pointer text-2xl ${
-                s <= rating ? "text-yellow-400" : "text-zinc-500"
+              className={`cursor-pointer text-2xl transition-colors duration-200 ${
+                s <= (hoverRating || rating) ? "text-yellow-400" : "text-zinc-500"
               }`}
               onClick={() => setRating(s)}
+              onMouseEnter={() => setHoverRating(s)}
+          onMouseLeave={() => setHoverRating(0)}
             >
               ★
             </span>
@@ -349,7 +352,7 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="Write your review..."
-          className="bg-zinc-800 border border-zinc-600 p-2 rounded"
+          className="bg-zinc-800 border outline-none border-zinc-600 p-2 rounded"
         />
 
         {/* Submit */}

@@ -16,6 +16,8 @@ import DotLoader from '../DotLoader';
 import { FaAngleRight } from "react-icons/fa";
 import { applicationBaseUrl } from '../../../data/applicationUrls';
 import { fetchCategory } from '../../../oprations/productApi';
+import { FaBoxOpen } from "react-icons/fa";
+import StorefrontIcon from '@mui/icons-material/Storefront';
 
 const Navbar = () => {
   const [navDropDown, setNavDropDown] = useState(false)
@@ -251,7 +253,10 @@ const Navbar = () => {
                 <div className=' text-teal-600'>{userInfo?.username}</div>
                 <div className=' w-full overflow-hidden text-ellipsis whitespace-nowrap'>{userDetails?.email}</div>
               </div>
-            <NavLink to='dashboard/profile' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-zinc-700 bg-opacity-60 rounded-2xl'  onClick={() => { SetMenuToggle(true); setUsermenuToggle(false);}}><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
+            <NavLink to='dashboard/profile' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-zinc-700 bg-opacity-60 rounded-2xl hover:bg-zinc-600'  onClick={() => { SetMenuToggle(true); setUsermenuToggle(false);}}><DashboardIcon style={{fontSize:"16px"}}/>Dashboard</NavLink>
+            {userDetails.role!=="Admin"&&<NavLink to='dashboard/my-order' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-zinc-700 bg-opacity-60 rounded-2xl hover:bg-zinc-600'  onClick={() => { SetMenuToggle(true); setUsermenuToggle(false);}}><FaBoxOpen style={{fontSize:"16px"}}/>My Orders</NavLink>}
+            {userDetails.role!=="Admin"&&<NavLink to='dashboard/cart' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-zinc-700 bg-opacity-60 rounded-2xl hover:bg-zinc-600'  onClick={() => { SetMenuToggle(true); setUsermenuToggle(false);}}><FaShoppingCart style={{fontSize:"16px"}}/>Cart</NavLink>}
+            {userDetails.role!=="Visitor"&&<NavLink to='dashboard/add-product' className='flex items-center gap-2 cursor-pointer py-2 px-4 bg-zinc-700 bg-opacity-60 rounded-2xl hover:bg-zinc-600'  onClick={() => { SetMenuToggle(true); setUsermenuToggle(false);}}><StorefrontIcon style={{fontSize:"16px"}}/>Seller</NavLink>}
             <div className='flex ml-40 my-2 items-center gap-1 cursor-pointer' onClick={logout}><LogoutIcon style={{fontSize:"16px"}}/>Logout</div>
          </div>:null
           }

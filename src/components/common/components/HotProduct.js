@@ -4,7 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { PiShoppingCartSimpleFill } from "react-icons/pi";
 import { applicationBaseUrl } from '../../../data/applicationUrls';
 
-const HotProduct = ({ id, name, desc, price, thumbnail }) => {
+const HotProduct = ({ id, name, desc, price, thumbnail,averageRating,totalReviews }) => {
+    const stars = Array(5).fill(0);
+
     return (
         <NavLink
             to={`${applicationBaseUrl}/product/${id}`}
@@ -15,8 +17,21 @@ const HotProduct = ({ id, name, desc, price, thumbnail }) => {
   lg:w-[calc(25%-12px)]    
   xl:w-[calc(20%-12px)]    
   2xl:w-[calc(16.66%-12px)]
-  flex flex-col hover:h-full items-center shadow-md overflow-hidden transition-all group'
+  flex flex-col hover:h-full items-center shadow-md  transition-all group relative'
         >
+            {/* Rating Stars */}
+      <div className='absolute flex gap-1 text-2xl -top-[40px] left-1/2 -translate-x-1/2'>
+        {stars.map((_, i) => (
+          <span
+            key={i}
+            className={
+              i < Math.round(averageRating) ? "text-yellow-400" : "text-gray-400"
+            }
+          >
+            ★
+          </span>
+        ))}
+      </div>
             <div className=' w-full  pb-3 '>
                 <div className={` pb-[130%] group relative w-full h-full  mb-2  overflow-hidden  bg-gradient-to-br from-slate-800 via-slate-950 to-teal-600 rounded-md group hover:after:absolute hover:after:top-0 `}>
                     {/* <img src='https://image01.realme.net/general/20230512/1683873836923.png?width=1440&height=1440&size=544990' alt='img'

@@ -17,6 +17,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [randomProducts, setRandomProducts] = useState([]);
+  const [populerProducts, setPopulerProducts] = useState([]);
   const dispatch = useDispatch();
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +27,7 @@ const Home = () => {
   const indexOfLastProduct = currentPage * itemsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - itemsPerPage;
   const currentProducts = products?.slice(indexOfFirstProduct, indexOfLastProduct);
+
 
   useEffect(() => {
     const getProducts = async () => {
@@ -39,8 +41,24 @@ const Home = () => {
           setProducts(productVar)
           setLoading(false);
           setProduct(productVar)
+          // products = array of products with averageRating + totalReviews
+          const popularProductsarr = [...productVar].sort((a, b) => {
+            // higher avg rating first
+            if (b.averageRating === a.averageRating) {
+              // if same rating, use number of reviews
+              return b.totalReviews - a.totalReviews;
+            }
+            return b.averageRating - a.averageRating;
+          });
+
+          console.log("populer",popularProductsarr)
+
+          setPopulerProducts(popularProductsarr)
+          
+
         }
-        console.log(response)
+        
+       // console.log(response)
       }
       catch (err) {
         console.log(err)
@@ -91,7 +109,7 @@ const Home = () => {
         <section className='flex flex-col justify-center my-10 mt-20 px-4'>
           <div className=' flex justify-between items-center mb-6'>
             <h1 className='  text-slate-200 font-bold md:text-2xl lg:text-3xl max-md:text-xl'>Latest Products</h1>
-            <NavLink to={'/catalog/mobile'} className=' cursor-pointer py-0 hover:border-b-[2px] hover:border-b-teal-600 text-teal-600 flex items-center gap-2'>View All <FaAngleRight /></NavLink>
+            <NavLink to={'/latest'} className=' cursor-pointer py-0 hover:border-b-[2px] hover:border-b-teal-600 text-sm text-teal-600 flex items-center'>View All <FaAngleRight /></NavLink>
           </div>
 
 
@@ -104,7 +122,7 @@ const Home = () => {
                 .map((e, i) => (
                   <div
                     key={i}
-                    className="flex-shrink-0 w-full max-w-[200px]  md:max-w-[300px]" 
+                    className="flex-shrink-0 w-full max-w-[200px]  md:max-w-[300px]"
                   >
                     <LatestProductCard
                       id={e._id}
@@ -124,13 +142,13 @@ const Home = () => {
 
         <section className='flex flex-col justify-center items-center  my-28'>
 
-          <h1 className='  text-slate-200 font-semibold md:text-3xl mb-10 lg:text-4xl max-md:text-2xl'>What's Hot</h1>
+          <h1 className='  text-slate-200 font-semibold md:text-3xl max-md:mb-16 mb-24 lg:text-4xl max-md:text-2xl'>What's Hot</h1>
 
 
-          <div className=' flex justify-center md:gap-5 max-lg:flex-wrap w-full '>
+          <div className=' flex justify-center max-md:gap-10 md:gap-5 max-lg:flex-wrap w-full '>
             {
-              products?.map((e, i) => {
-                return (e.status === "Published" && i < 4) && <HotProduct key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url} />
+              populerProducts?.map((e, i) => {
+                return (e.status === "Published" && i < 4) && <HotProduct key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url} averageRating={e.averageRating} totalReviews={e.totalReviews} />
               })
             }
           </div>
@@ -141,14 +159,14 @@ const Home = () => {
 
         <section className='flex flex-col justify-center my-10 mt-20 px-4'>
           <div className=' flex justify-between items-center mb-6'>
-            <h1 className='  text-slate-200 font-bold md:text-2xl lg:text-3xl max-md:text-xl'>All Products</h1>
-            <NavLink to={'/catalog/mobile'} className=' cursor-pointer py-0 hover:border-b-[2px] hover:border-b-teal-600 text-teal-600 flex items-center gap-2'>View All <FaAngleRight /></NavLink>
+            <h1 className='  text-slate-200 font-bold md:text-2xl lg:text-3xl max-md:text-xl'>Best Deals</h1>
+            <NavLink to={'/populer'} className=' cursor-pointer py-0 hover:border-b-[2px] hover:border-b-teal-600 text-teal-600 text-sm flex items-center'>View All <FaAngleRight /></NavLink>
           </div>
 
           <div className=' flex flex-wrap w-full'>
             {
-              products?.map((e, i) => {
-                return (e.status === "Published" && i < 12) && <Product key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url} />
+              populerProducts?.map((e, i) => {
+                return (e.status === "Published" && i < 12) && <Product key={i} id={e._id} name={e.name} desc={e.description} price={e.price} thumbnail={e.images[0].secure_url} averageRating={e.averageRating} totalReviews={e.totalReviews} />
               })
             }
           </div>
@@ -165,34 +183,34 @@ const Home = () => {
 
           <div className=' flex max-md:flex-col justify-center items-center gap-10 mt-20'>
             <div className=' flex flex-col py-6 px-5 max-md:max-w-[300px] rounded-lg justify-center items-center bg-gradient-to-br from-slate-800 via-teal-600 via-sla to-indigo-600'>
-              <FaShopify className=' text-[50px]'/>
+              <FaShopify className=' text-[50px]' />
               <h2 className=' font-bold text-xl mt-5 mb-2 text-center'>All-in-One Shopping</h2>
               <p className=' text-zinc-300  text-center'>Fashion, electronics, home essentials & more — all in one place.</p>
             </div>
-            
+
             <div className=' flex flex-col py-6 px-5 max-md:max-w-[300px] rounded-lg justify-center items-center bg-gradient-to-br from-slate-800 via-teal-600 via-sla to-indigo-600'>
-              <FaSackDollar className=' text-[50px]'/>
+              <FaSackDollar className=' text-[50px]' />
               <h2 className=' font-bold text-xl mt-5 mb-2 text-center'>Best Prices & Deals</h2>
               <p className=' text-zinc-300  text-center'>Affordable rates with exclusive offers and discounts.</p>
             </div>
 
             <div className=' flex flex-col py-6 px-5 max-md:max-w-[300px] rounded-lg justify-center items-center bg-gradient-to-br from-slate-800 via-teal-600 via-sla to-indigo-600'>
-              <MdDeliveryDining className=' text-[50px]'/>
+              <MdDeliveryDining className=' text-[50px]' />
               <h2 className=' font-bold text-xl mt-5 mb-2 text-center'>Fast & Secure Delivery</h2>
               <p className=' text-zinc-300  text-center'>Quick shipping with safe and reliable payment options.</p>
             </div>
-            
+
           </div>
 
         </section>
 
-        
+
       </div>
-<section className=' mt-20   px-4 bg-teal-600 flex flex-col gap-5 justify-center items-center py-20'>
-          <h2 className=' font-bold text-4xl max-md:text-3xl mt-5 mb-2 text-center'>Ready to Start Shopping?</h2>
-              <p className=' text-zinc-300 text-xl max-md:text-lg max-w-[600px]  text-center'>Join thousands of happy customers who trust Light Store for quality products and unbeatable deals.</p>
-              <NavLink className=' bg-teal-100 hover:bg-white text-teal-600 py-2 px-3 rounded-md'>Get Started Now →</NavLink>
-        </section>
+      <section className=' mt-20   px-4 bg-teal-600 flex flex-col gap-5 justify-center items-center py-20'>
+        <h2 className=' font-bold text-4xl max-md:text-3xl mt-5 mb-2 text-center'>Ready to Start Shopping?</h2>
+        <p className=' text-zinc-300 text-xl max-md:text-lg max-w-[600px]  text-center'>Join thousands of happy customers who trust Light Store for quality products and unbeatable deals.</p>
+        <NavLink className=' bg-teal-100 hover:bg-white text-teal-600 py-2 px-3 rounded-md'>Get Started Now →</NavLink>
+      </section>
 
 
     </div>

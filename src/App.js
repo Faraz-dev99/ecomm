@@ -23,6 +23,8 @@ import ScrollToTop from './utils/ScrollToTop.js';
 import Checkout from './pages/Checkout.js';
 import MyOrder from './components/core/Dashboard/order/MyOrder.js';
 import Order from './components/core/Dashboard/order/Order.js';
+import PopulerProduct from './pages/PopulerProduct.js';
+import LatestProduct from './pages/LatestProduct.js';
 
 
 
@@ -57,6 +59,8 @@ function App() {
           <Route path='/about' element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/search/:key' element={<Search />} />
+          <Route path='/populer' element={<PopulerProduct />} />
+          <Route path='/latest' element={<LatestProduct />} />
           <Route path='/catalog/:key' element={<Catalog />} />
 
           <Route element={<PrivateComponents />}>
