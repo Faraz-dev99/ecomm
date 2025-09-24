@@ -17,7 +17,7 @@ const cartSlice=createSlice({
         },
         removeItem:(state,action)=>{
             const itemId = action.payload; // Assuming payload contains the _id of the product to remove
-            state.cart = state.cart.filter(item => item._id !== itemId);
+            state.cart = state.cart.filter(item => item.productId !== itemId);
             state.totalCartItems = state.cart.length; // Update totalCartItems after removal
             localStorage.setItem("cart", JSON.stringify(state.cart));
         }

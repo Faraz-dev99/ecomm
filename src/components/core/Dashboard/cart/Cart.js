@@ -4,32 +4,33 @@ import { BsCart2 } from "react-icons/bs";
 import { NavLink, useNavigate } from 'react-router-dom';
 import { removeItem } from '../../../../slices/cartSlice';
 import { toast } from 'react-hot-toast';
+import { cardActionsClasses } from '@mui/material';
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log("cart item",cart)
 
   const handleCheckout = () => {
     if (cart.length === 0) {
-        toast.error("Cart is empty");
-        return;
+      toast.error("Cart is empty");
+      return;
     }
 
     // transform cart → minimal checkout items
+
     const checkoutItems = cart.map(item => ({
-        productId: item._id,
-        name: item.name,
-        price:item.price,
-        size: item.size,
-        color: item.color,
-        quantity: item.quantity,
+      productId: item.productId,
+      name: item.name,
+      price: item.price,
+      size: item.size,
+      color: item.color,
+      quantity: item.quantity,
     }));
 
     sessionStorage.setItem("checkoutProducts", JSON.stringify(checkoutItems));
     navigate("/checkout");
-};
+  };
 
 
   // Remove single item
@@ -50,13 +51,14 @@ const Cart = () => {
       >
         <div className="text-xl font-medium absolute top-0 left-0">YOUR CART</div>
 
-        {cart.length > 0 ? (
+        {cart.length > 0 ?
           <div className="flex flex-wrap gap-8 mt-12">
             {/* Items */}
             <div className="flex flex-col gap-8 py-4 px-[1.5px] max-lg:w-full md:min-w-[600px]">
-              {cart.map((item) => (
-                <div
-                  key={item?._id}
+              {cart.map((item, i) => {
+                console.log("product id is : ", item.productId);
+                return <div
+                  key={item?.productId}
                   className="flex pb-10 border-b border-b-teal-800 gap-6 max-476:gap-3 w-full relative"
                 >
                   <div className="h-full flex justify-center items-center">
@@ -78,7 +80,7 @@ const Cart = () => {
 
                     {/* Remove button */}
                     <button
-                      onClick={() => removeItemCart(item?._id)}
+                      onClick={() => removeItemCart(item?.productId)}
                       className="mt-2 px-3 py-[2px] rounded-md border border-teal-800 text-teal-800 text-xs font-extralight max-476:text-[9px]"
                     >
                       Remove
@@ -89,7 +91,7 @@ const Cart = () => {
                     <div className="text-xl font-semibold text-teal-800">₹{item?.price}</div>
                   </div>
                 </div>
-              ))}
+              })}
             </div>
 
             {/* Summary */}
@@ -108,8 +110,7 @@ const Cart = () => {
                 Checkout
               </button>
             </div>
-          </div>
-        ) : (
+          </div> :
           <div className="grid place-items-center gap-4">
             <div>
               <BsCart2 className="text-9xl text-zinc-700" />
@@ -119,7 +120,7 @@ const Cart = () => {
               continue shopping
             </NavLink>
           </div>
-        )}
+        }
       </div>
     </div>
   );

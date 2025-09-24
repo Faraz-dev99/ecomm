@@ -91,20 +91,21 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
         }
 
         const cartProductExist = cart.some(
-            (e) => e.productId === product._id && e.size === selectedSize?.size && e.color === selectedColor
+            (e) => e.productId === product._id
         );
         if (cartProductExist) {
             toast.error("This variation is already in the cart!");
             return;
         }
+        console.log("product is this is what ",product._id)
 
-        // 🚀 Only save the minimal fields
+        // Only save the minimal fields
         const productWithOptions = {
             productId: product._id,
             name: product.name,
             brand: product.brand,
             price: product.price,
-            images: product.images,  // so cart can display first image
+            images: product.images, 
             size: selectedSize?.size || null,
             color: selectedColor,
             quantity: Number(selectedQuantity),
@@ -411,8 +412,6 @@ const [distribution, setDistribution] = useState([0,0,0,0,0]);
 
   
 </div>
-
-
                     </div>
                 </div>
             </div>
